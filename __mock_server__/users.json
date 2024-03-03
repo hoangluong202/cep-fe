@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "username": "luong.ho",
+      "password": "password"
+    },
+    {
+      "id": 1,
+      "username": "huy.tran",
+      "password": "password"
+    },
+    {
+      "id": 2,
+      "username": "phuTechie",
+      "password": "techie"
+    },
+    {
+      "id": 3,
+      "username": "phuNilson",
+      "password": "nilson"
+    },
+    {
+      "id": 4,
+      "username": "phuNilson1",
+      "password": "nilson"
+    },
+    {
+      "id": 5,
+      "username": "phuNilson2",
+      "password": "nilson"
+    },
+    {
+      "id": 6,
+      "username": "phuNilson3",
+      "password": "nilson"
+    },
+    {
+      "id": 7,
+      "username": "phuNilson4",
+      "password": "nilson"
+    },
+    {
+      "id": 8,
+      "username": "phuNilson7",
+      "password": "nilson"
+    },
+    {
+      "id": 9,
+      "username": "phuNilson8",
+      "password": "nilson"
+    }
+  ]
+}
