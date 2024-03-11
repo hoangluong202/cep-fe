@@ -12,6 +12,14 @@ const HCMUT_CORNERS = [
   { lat: 10.77336083948916, lng: 106.66028359590184 }
 ];
 
+const defaultProps = {
+  center: {
+    lat: 10.77404592132156,
+    lng: 106.65984371362426
+  },
+  zoom: 16
+};
+
 interface MarkerWithInfoProps {
   position: { lat: number; lng: number };
   key: number;
@@ -27,7 +35,7 @@ const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ position }) => {
         position={position}
         icon={{
           url: yellowLightBubIcon,
-          scaledSize: { width: 25, height: 25, equals: () => true }
+          scaledSize: { width: 20, height: 20, equals: () => true }
         }}
         onMouseOver={() => setInfowindowOpen(true)}
         onMouseOut={() => setInfowindowOpen(false)}
@@ -43,14 +51,6 @@ const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ position }) => {
 };
 
 export function SimpleMap() {
-  const defaultProps = {
-    center: {
-      lat: 10.77404592132156,
-      lng: 106.65984371362426
-    },
-    zoom: 16
-  };
-
   return (
     // Important! Always set the container height explicitly
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY}>
