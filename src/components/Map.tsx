@@ -56,9 +56,10 @@ export function SimpleMap() {
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY}>
       <Map
         style={{ width: '100%', height: '100vh' }}
-        zoom={defaultProps.zoom}
-        center={defaultProps.center}
+        defaultZoom={defaultProps.zoom}
+        defaultCenter={defaultProps.center}
         mapId={'key'}
+        mapTypeId='terrain'
       >
         {HCMUT_CORNERS.map((corner, index) => (
           <MarkerWithInfo key={index} position={corner} />
