@@ -78,7 +78,11 @@ const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ position }) => {
         position={position}
         icon={{
           url: yellowLightBubIcon,
-          scaledSize: { width: 20, height: 20, equals: () => true }
+          scaledSize: {
+            width: infowindowOpen ? 60 : 20,
+            height: infowindowOpen ? 60 : 20,
+            equals: () => true
+          }
         }}
         onMouseOver={() => setInfowindowOpen(true)}
         onMouseOut={() => setInfowindowOpen(false)}
