@@ -1,13 +1,15 @@
 import { APIProvider, Map, InfoWindow, useMarkerRef, Marker } from '@vis.gl/react-google-maps';
 import { useState } from 'react';
-import { Card, CardBody, CardFooter, Typography, Button } from '@material-tailwind/react';
+import yellowLightBubIcon from '@assets/yellowLightBub.svg';
+import { PoleCard } from '@components';
 
 const HCMUT_CORNERS = [
   { lat: 10.770692797316515, lng: 106.65826141343352 },
   { lat: 10.774569690082894, lng: 106.6620894625359 },
   { lat: 10.77634012117674, lng: 106.66002415769374 },
   { lat: 10.772852090456192, lng: 106.6575775799744 },
-  { lat: 10.77404592132156, lng: 106.65984371362426 }
+  { lat: 10.77404592132156, lng: 106.65984371362426 },
+  { lat: 10.77336083948916, lng: 106.66028359590184 }
 ];
 
 interface MarkerWithInfoProps {
@@ -15,7 +17,7 @@ interface MarkerWithInfoProps {
   key: number;
 }
 
-const MarkerWithInfo: React.FC<MarkerWithInfoProps> = ({ position }) => {
+const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ position }) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useMarkerRef();
   return (
@@ -24,7 +26,7 @@ const MarkerWithInfo: React.FC<MarkerWithInfoProps> = ({ position }) => {
         ref={markerRef}
         position={position}
         icon={{
-          url: 'https://pic.onlinewebfonts.com/thumbnails/icons_709501.svg',
+          url: yellowLightBubIcon,
           scaledSize: { width: 25, height: 25, equals: () => true }
         }}
         onMouseOver={() => setInfowindowOpen(true)}
@@ -33,20 +35,7 @@ const MarkerWithInfo: React.FC<MarkerWithInfoProps> = ({ position }) => {
 
       {infowindowOpen && (
         <InfoWindow anchor={marker}>
-          <Card className='mt-6 w-96'>
-            <CardBody>
-              <Typography variant='h5' color='blue-gray' className='mb-2'>
-                UI/UX Review Check
-              </Typography>
-              <Typography>
-                The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to
-                &quot;Naviglio&quot; where you can enjoy the main night life in Barcelona.
-              </Typography>
-            </CardBody>
-            <CardFooter className='pt-0'>
-              <Button>Read More</Button>
-            </CardFooter>
-          </Card>
+          <PoleCard />
         </InfoWindow>
       )}
     </>
