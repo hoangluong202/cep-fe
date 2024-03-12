@@ -17,7 +17,7 @@ export function AuthPage() {
     try {
       await authService.login(data);
       await getUserData();
-      navigate('/home');
+      navigate('/view-map');
     } catch (err) {
       const errorMessage = (err as ResponseError).message;
       toast.error(errorMessage);
