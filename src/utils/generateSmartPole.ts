@@ -86,16 +86,5 @@ export const generateSmartPole = (
     };
     smartPoles.push(item);
   }
-  const itemEnd: SmartPole = {
-    id: n.toString(),
-    area: area,
-    road: road,
-    position: end,
-    status: faker.datatype.boolean(),
-    level: faker.number.int({ min: 0, max: 100 }),
-    burningHours: faker.number.float({ min: 10, max: 300, multipleOf: 0.02 }),
-    frequency: faker.number.int({ min: 0, max: 100 })
-  };
-  smartPoles.push(itemEnd);
   return smartPoles;
 };

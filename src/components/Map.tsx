@@ -5,52 +5,11 @@ import redLightBubIcon from '@assets/redLightBub.svg';
 import { PoleCard } from '@components';
 import { generateSmartPole } from '@utils';
 
-const SmartPolePosition: Position[] = [];
-
 type Position = {
   lat: number;
   lng: number;
 };
 
-/**
- * Using Haversine formula to calculate the distance between two points
- */
-const calculateDistance = (point1: Position, point2: Position) => {
-  const R = 6371 * 1000; // Radius of the earth in m
-  const dLat = deg2rad(point2.lat - point1.lat); // deg2rad below
-  const dLng = deg2rad(point2.lng - point1.lng);
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(point1.lat)) *
-      Math.cos(deg2rad(point2.lat)) *
-      Math.sin(dLng / 2) *
-      Math.sin(dLng / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = R * c; // Distance in m
-  return Math.round(distance);
-};
-const deg2rad = (deg: number) => {
-  return deg * (Math.PI / 180);
-};
-
-const generatePositonInRoad = (start: Position, end: Position, distance: number) => {
-  const lengthRoad = calculateDistance(start, end);
-  const n = Math.floor(lengthRoad / distance);
-
-  for (let i = 1; i < n; i++) {
-    const lat = ((n - i) * start.lat + i * end.lat) / n;
-    const lng = ((n - i) * start.lng + i * end.lng) / n;
-    SmartPolePosition.push({ lat, lng });
-  }
-  SmartPolePosition.push(start);
-  SmartPolePosition.push(end);
-};
-
-const point1 = { lat: 10.77215316412856, lng: 106.65799003519278 };
-const point2 = { lat: 10.773974974999247, lng: 106.66141726168081 };
-generatePositonInRoad(point1, point2, 25);
-
-//test gen smartpole
 type SmartPole = {
   id: string;
   area: string;
@@ -61,7 +20,50 @@ type SmartPole = {
   burningHours: number;
   frequency: number;
 };
-const smartPoles: SmartPole[] = generateSmartPole(point1, point2, 25, 'HCMUT CS1', 'Đường 1');
+
+const smartPoles: SmartPole[] = [];
+const smartPolesRoad1 = generateSmartPole(
+  { lat: 10.77215316412856, lng: 106.65799003519278 },
+  { lat: 10.773974974999247, lng: 106.66141726168081 },
+  25,
+  'HCMUT CS1',
+  'Đường 1'
+);
+const smartPolesRoad2 = generateSmartPole(
+  { lat: 10.773974974999247, lng: 106.66141726168081 },
+  { lat: 10.775679455221816, lng: 106.6604880783368 },
+  25,
+  'HCMUT CS1',
+  'Đường 2'
+);
+const smartPolesRoad3 = generateSmartPole(
+  { lat: 10.772883143628613, lng: 106.66058715774557 },
+  { lat: 10.774613743655923, lng: 106.65961387490945 },
+  25,
+  'HCMUT CS1',
+  'Đường 3'
+);
+const smartPolesRoad4 = generateSmartPole(
+  { lat: 10.774240810012396, lng: 106.66022957877695 },
+  { lat: 10.773513318242129, lng: 106.65884960121063 },
+  25,
+  'HCMUT CS1',
+  'Đường 4'
+);
+const smartPolesRoad5 = generateSmartPole(
+  { lat: 10.772510479403829, lng: 106.6598805608222 },
+  { lat: 10.773360899892282, lng: 106.6593498886552 },
+  25,
+  'HCMUT CS1',
+  'Đường 5'
+);
+smartPoles.push(
+  ...smartPolesRoad1,
+  ...smartPolesRoad2,
+  ...smartPolesRoad3,
+  ...smartPolesRoad4,
+  ...smartPolesRoad5
+);
 
 const defaultProps = {
   center: {

@@ -10,18 +10,13 @@ const SelectRoad = () => {
           unmount: { y: 25 }
         }}
       >
-        <Option>Đường A3</Option>
-        <Option>Đường A4</Option>
-        <Option>Đường A5</Option>
-        <Option>Đường A10</Option>
-        <Option>Đường A11</Option>
-        <Option>Đường B1</Option>
-        <Option>Đường B2</Option>
-        <Option>Đường B3</Option>
-        <Option>Đường B4</Option>
-        <Option>Đường B6</Option>
-        <Option>Đường B8</Option>
-        <Option>Đường B10</Option>
+        <Option>Đường 1</Option>
+        <Option>Đường 2</Option>
+        <Option>Đường 3</Option>
+        <Option>Đường 4</Option>
+        <Option>Đường 5</Option>
+        <Option>Đường 6</Option>
+        <Option>Đường 7</Option>
       </Select>
     </div>
   );
@@ -64,9 +59,9 @@ const BreadcrumbsWithIcon = () => {
         <span>View Map</span>
       </a>
       <a href='#' className='opacity-60'>
-        <span>Area</span>
+        <span>HCMUT CS1</span>
       </a>
-      <a href='#'>Road</a>
+      <a href='#'>Đường 1</a>
     </Breadcrumbs>
   );
 };
