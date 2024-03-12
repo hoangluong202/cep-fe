@@ -1,16 +1,67 @@
 import { APIProvider, Map, InfoWindow, useMarkerRef, Marker } from '@vis.gl/react-google-maps';
 import { useState } from 'react';
 import yellowLightBubIcon from '@assets/yellowLightBub.svg';
+import redLightBubIcon from '@assets/redLightBub.svg';
 import { PoleCard } from '@components';
+import { generateSmartPole } from '@utils';
 
-const HCMUT_CORNERS = [
-  { lat: 10.770692797316515, lng: 106.65826141343352 },
-  { lat: 10.774569690082894, lng: 106.6620894625359 },
-  { lat: 10.77634012117674, lng: 106.66002415769374 },
-  { lat: 10.772852090456192, lng: 106.6575775799744 },
-  { lat: 10.77404592132156, lng: 106.65984371362426 },
-  { lat: 10.77336083948916, lng: 106.66028359590184 }
-];
+const SmartPolePosition: Position[] = [];
+
+type Position = {
+  lat: number;
+  lng: number;
+};
+
+/**
+ * Using Haversine formula to calculate the distance between two points
+ */
+const calculateDistance = (point1: Position, point2: Position) => {
+  const R = 6371 * 1000; // Radius of the earth in m
+  const dLat = deg2rad(point2.lat - point1.lat); // deg2rad below
+  const dLng = deg2rad(point2.lng - point1.lng);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(point1.lat)) *
+      Math.cos(deg2rad(point2.lat)) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c; // Distance in m
+  return Math.round(distance);
+};
+const deg2rad = (deg: number) => {
+  return deg * (Math.PI / 180);
+};
+
+const generatePositonInRoad = (start: Position, end: Position, distance: number) => {
+  const lengthRoad = calculateDistance(start, end);
+  const n = Math.floor(lengthRoad / distance);
+
+  for (let i = 1; i < n; i++) {
+    const lat = ((n - i) * start.lat + i * end.lat) / n;
+    const lng = ((n - i) * start.lng + i * end.lng) / n;
+    SmartPolePosition.push({ lat, lng });
+  }
+  SmartPolePosition.push(start);
+  SmartPolePosition.push(end);
+};
+
+const point1 = { lat: 10.77215316412856, lng: 106.65799003519278 };
+const point2 = { lat: 10.773974974999247, lng: 106.66141726168081 };
+generatePositonInRoad(point1, point2, 25);
+
+//test gen smartpole
+type SmartPole = {
+  id: string;
+  area: string;
+  road: string;
+  position: Position;
+  status: boolean;
+  level: number;
+  burningHours: number;
+  frequency: number;
+};
+const smartPoles: SmartPole[] = generateSmartPole(point1, point2, 25, 'HCMUT CS1', 'Đường 1');
 
 const defaultProps = {
   center: {
@@ -64,20 +115,19 @@ const defaultStyle = [
 ] as google.maps.MapTypeStyle[];
 
 interface MarkerWithInfoProps {
-  position: { lat: number; lng: number };
-  key: number;
+  smartPole: SmartPole;
 }
 
-const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ position }) => {
+const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ smartPole }) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useMarkerRef();
   return (
     <>
       <Marker
         ref={markerRef}
-        position={position}
+        position={smartPole.position}
         icon={{
-          url: yellowLightBubIcon,
+          url: smartPole.status ? yellowLightBubIcon : redLightBubIcon,
           scaledSize: {
             width: infowindowOpen ? 60 : 20,
             height: infowindowOpen ? 60 : 20,
@@ -90,7 +140,7 @@ const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ position }) => {
 
       {infowindowOpen && (
         <InfoWindow anchor={marker}>
-          <PoleCard />
+          <PoleCard smartPole={smartPole} />
         </InfoWindow>
       )}
     </>
@@ -113,8 +163,8 @@ export function SimpleMap() {
         mapTypeId='terrain'
         styles={defaultStyle}
       >
-        {HCMUT_CORNERS.map((corner, index) => (
-          <MarkerWithInfo key={index} position={corner} />
+        {smartPoles.map((smartPole, index) => (
+          <MarkerWithInfo key={index} smartPole={smartPole} />
         ))}
       </Map>
     </APIProvider>

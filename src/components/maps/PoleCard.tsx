@@ -81,11 +81,30 @@ const MapIcon = () => {
   );
 };
 
-export const PoleCard = () => (
+type Position = {
+  lat: number;
+  lng: number;
+};
+
+type SmartPole = {
+  id: string;
+  area: string;
+  road: string;
+  position: Position;
+  status: boolean;
+  level: number;
+  burningHours: number;
+  frequency: number;
+};
+interface PoleCardProps {
+  smartPole: SmartPole;
+}
+
+export const PoleCard: Component<PoleCardProps> = (smartPole) => (
   <Card className='w-56 p-0 m-0'>
     <CardBody className='p-0 m-0'>
       <Typography variant='h6' color='blue-gray' className='pl-2 text-center p-0 font-medium mb-2'>
-        Pole-10032024
+        Pole-{smartPole.smartPole.id}
       </Typography>
       <ul className='flex flex-col gap-1 pl-2 mb-2'>
         <li className='flex flex-row gap-3'>
@@ -93,7 +112,7 @@ export const PoleCard = () => (
             <MapIcon />
           </span>
           <span className='text-xs text-gray-500 flex items-center justify-center'>
-            Đường B1, Bách Khoa CS2
+            {smartPole.smartPole.road}, {smartPole.smartPole.area}
           </span>
         </li>
         <li className='flex flex-row gap-3'>
@@ -101,7 +120,7 @@ export const PoleCard = () => (
             <StatusIcon />
           </span>
           <span className='text-xs text-gray-500 flex items-center justify-center'>
-            Trạng thái: Bật
+            Trạng thái: {smartPole.smartPole.status ? 'Bật' : 'Tắt'}
           </span>
         </li>
         <li className='flex flex-row gap-3'>
@@ -109,7 +128,7 @@ export const PoleCard = () => (
             <LightLevelIcon />
           </span>
           <span className='text-xs text-gray-500 flex items-center justify-center'>
-            Độ sáng: 70(%)
+            Độ sáng: {smartPole.smartPole.level}(%)
           </span>
         </li>
         <li className='flex flex-row gap-3'>
@@ -117,7 +136,7 @@ export const PoleCard = () => (
             <TimeIcon />
           </span>
           <span className='text-xs text-gray-500 flex items-center justify-center'>
-            Thời gian hoạt động: 156(giờ)
+            Thời gian hoạt động: {smartPole.smartPole.burningHours}(giờ)
           </span>
         </li>
       </ul>
