@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '@states';
-import { SimpleNavbar, SimpleMap } from '@components';
+import { SimpleNavbar, SimpleMap, Filter } from '@components';
 
 export function ViewMapPage() {
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ export function ViewMapPage() {
   return (
     <div className='flex flex-col h-full gap-y-2'>
       <SimpleNavbar />
+      <Filter />
       <SimpleMap />
     </div>
   );

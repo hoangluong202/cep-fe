@@ -94,7 +94,7 @@ function ApplicationName() {
         className='border border-gray-900 p-0.5'
         src={hcmutLogo}
       />
-      <Typography as='a' href='#' variant='h6' className='mr-4 cursor-pointer py-1.5'>
+      <Typography as='a' href='#' variant='h5' className='mr-4 cursor-pointer py-1.5'>
         Lighting Scheduling
       </Typography>
     </div>

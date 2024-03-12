@@ -3,6 +3,6 @@
  */
 
 export * from './AuthPage';
-export * from './ViewMapPage';
 export * from './ProjectDetailPage';
 export * from './ProjectGeneralPage';
+export * from './ViewMapPage';
