@@ -3,6 +3,11 @@ import { smartPoleService } from '@services';
 
 export const useSmartPoleStore = create<SmartPoleStore>()((set, get) => ({
   smartPoleStatus: 'UNINIT',
+  zoom: 9,
+  center: {
+    lat: 10.788221571991595,
+    lng: 106.7090790252019
+  },
   smartPoles: [],
   smartPoleSelectedById: {
     id: '',
@@ -79,5 +84,11 @@ export const useSmartPoleStore = create<SmartPoleStore>()((set, get) => ({
   },
   setRoad: (road) => {
     set(() => ({ road: road }));
+  },
+  setZoom: (zoom) => {
+    set(() => ({ zoom: zoom }));
+  },
+  setCenter: (center) => {
+    set(() => ({ center: center }));
   }
 }));

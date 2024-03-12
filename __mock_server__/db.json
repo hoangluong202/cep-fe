@@ -562,6 +562,605 @@
       "level": 3,
       "burningHours": 60.46,
       "frequency": 22
+    },
+
+    {
+      "id": "0",
+      "area": "HCMUT CS2",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.879494116720537,
+        "lng": 106.80523847040068
+      },
+      "status": false,
+      "level": 27,
+      "burningHours": 148.3,
+      "frequency": 2
+    },
+    {
+      "id": "1",
+      "area": "HCMUT CS2",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.879694572037469,
+        "lng": 106.8053769721133
+      },
+      "status": true,
+      "level": 98,
+      "burningHours": 137.58,
+      "frequency": 32
+    },
+    {
+      "id": "2",
+      "area": "HCMUT CS2",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.879895027354403,
+        "lng": 106.8055154738259
+      },
+      "status": false,
+      "level": 99,
+      "burningHours": 289.98,
+      "frequency": 74
+    },
+    {
+      "id": "3",
+      "area": "HCMUT CS2",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.880095482671337,
+        "lng": 106.80565397553853
+      },
+      "status": true,
+      "level": 37,
+      "burningHours": 247.14,
+      "frequency": 9
+    },
+    {
+      "id": "4",
+      "area": "HCMUT CS2",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.880295937988269,
+        "lng": 106.80579247725113
+      },
+      "status": true,
+      "level": 27,
+      "burningHours": 47.48,
+      "frequency": 72
+    },
+    {
+      "id": "0",
+      "area": "HCMUT CS2",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.879584453005418,
+        "lng": 106.80506650806123
+      },
+      "status": false,
+      "level": 94,
+      "burningHours": 134.32,
+      "frequency": 87
+    },
+    {
+      "id": "1",
+      "area": "HCMUT CS2",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.879788006451738,
+        "lng": 106.80519858658668
+      },
+      "status": false,
+      "level": 3,
+      "burningHours": 298.04,
+      "frequency": 27
+    },
+    {
+      "id": "2",
+      "area": "HCMUT CS2",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.879991559898059,
+        "lng": 106.80533066511212
+      },
+      "status": true,
+      "level": 12,
+      "burningHours": 37.02,
+      "frequency": 24
+    },
+    {
+      "id": "3",
+      "area": "HCMUT CS2",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.88019511334438,
+        "lng": 106.80546274363759
+      },
+      "status": true,
+      "level": 18,
+      "burningHours": 248.76,
+      "frequency": 33
+    },
+    {
+      "id": "4",
+      "area": "HCMUT CS2",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.8803986667907,
+        "lng": 106.80559482216304
+      },
+      "status": false,
+      "level": 29,
+      "burningHours": 94.52,
+      "frequency": 17
+    },
+    {
+      "id": "5",
+      "area": "HCMUT CS2",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.880602220237021,
+        "lng": 106.80572690068848
+      },
+      "status": true,
+      "level": 59,
+      "burningHours": 222.16,
+      "frequency": 31
+    },
+    {
+      "id": "6",
+      "area": "HCMUT CS2",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.880805773683342,
+        "lng": 106.80585897921395
+      },
+      "status": false,
+      "level": 15,
+      "burningHours": 179.38,
+      "frequency": 22
+    },
+    {
+      "id": "7",
+      "area": "HCMUT CS2",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.881009327129663,
+        "lng": 106.80599105773939
+      },
+      "status": false,
+      "level": 57,
+      "burningHours": 286.42,
+      "frequency": 33
+    },
+    {
+      "id": "0",
+      "area": "HCMUT CS2",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.8805374162951,
+        "lng": 106.80594919351056
+      },
+      "status": false,
+      "level": 44,
+      "burningHours": 257.9,
+      "frequency": 80
+    },
+    {
+      "id": "1",
+      "area": "HCMUT CS2",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.880814784665985,
+        "lng": 106.80611457319208
+      },
+      "status": true,
+      "level": 29,
+      "burningHours": 258.46,
+      "frequency": 31
+    },
+    {
+      "id": "0",
+      "area": "HCMUT CS2",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.880246754560215,
+        "lng": 106.80394300629523
+      },
+      "status": true,
+      "level": 73,
+      "burningHours": 163,
+      "frequency": 100
+    },
+    {
+      "id": "1",
+      "area": "HCMUT CS2",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.880109822362835,
+        "lng": 106.80415847616578
+      },
+      "status": false,
+      "level": 79,
+      "burningHours": 213.14,
+      "frequency": 96
+    },
+    {
+      "id": "2",
+      "area": "HCMUT CS2",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.879972890165453,
+        "lng": 106.80437394603632
+      },
+      "status": true,
+      "level": 29,
+      "burningHours": 77.1,
+      "frequency": 83
+    },
+    {
+      "id": "3",
+      "area": "HCMUT CS2",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.879835957968073,
+        "lng": 106.80458941590689
+      },
+      "status": false,
+      "level": 44,
+      "burningHours": 64.6,
+      "frequency": 81
+    },
+    {
+      "id": "4",
+      "area": "HCMUT CS2",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.879699025770694,
+        "lng": 106.80480488577743
+      },
+      "status": false,
+      "level": 49,
+      "burningHours": 66.98,
+      "frequency": 66
+    },
+    {
+      "id": "0",
+      "area": "HCMUT CS2",
+      "road": "Đường 5",
+      "position": {
+        "lat": 10.88060943357524,
+        "lng": 106.80472951251099
+      },
+      "status": false,
+      "level": 45,
+      "burningHours": 221.86,
+      "frequency": 3
+    },
+    {
+      "id": "1",
+      "area": "HCMUT CS2",
+      "road": "Đường 5",
+      "position": {
+        "lat": 10.880458019506532,
+        "lng": 106.80496422197554
+      },
+      "status": true,
+      "level": 53,
+      "burningHours": 196.46,
+      "frequency": 21
+    },
+    {
+      "id": "2",
+      "area": "HCMUT CS2",
+      "road": "Đường 5",
+      "position": {
+        "lat": 10.880306605437823,
+        "lng": 106.8051989314401
+      },
+      "status": true,
+      "level": 100,
+      "burningHours": 67.44,
+      "frequency": 55
+    },
+    {
+      "id": "0",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.881061831470612,
+        "lng": 106.80498175697647
+      },
+      "status": false,
+      "level": 93,
+      "burningHours": 231.06,
+      "frequency": 12
+    },
+    {
+      "id": "1",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.880933676749923,
+        "lng": 106.80518178954125
+      },
+      "status": true,
+      "level": 51,
+      "burningHours": 236.14,
+      "frequency": 93
+    },
+    {
+      "id": "2",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.880805522029235,
+        "lng": 106.80538182210606
+      },
+      "status": false,
+      "level": 27,
+      "burningHours": 75.9,
+      "frequency": 24
+    },
+    {
+      "id": "3",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.880677367308545,
+        "lng": 106.80558185467082
+      },
+      "status": true,
+      "level": 47,
+      "burningHours": 141.02,
+      "frequency": 40
+    },
+    {
+      "id": "4",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.880549212587857,
+        "lng": 106.80578188723561
+      },
+      "status": false,
+      "level": 6,
+      "burningHours": 67.26,
+      "frequency": 20
+    },
+    {
+      "id": "5",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.880421057867167,
+        "lng": 106.80598191980042
+      },
+      "status": false,
+      "level": 30,
+      "burningHours": 201.08,
+      "frequency": 34
+    },
+    {
+      "id": "6",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.880292903146477,
+        "lng": 106.80618195236521
+      },
+      "status": false,
+      "level": 22,
+      "burningHours": 255.82,
+      "frequency": 56
+    },
+    {
+      "id": "7",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.88016474842579,
+        "lng": 106.80638198492997
+      },
+      "status": false,
+      "level": 36,
+      "burningHours": 225.36,
+      "frequency": 50
+    },
+    {
+      "id": "8",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.8800365937051,
+        "lng": 106.80658201749478
+      },
+      "status": true,
+      "level": 46,
+      "burningHours": 187.1,
+      "frequency": 11
+    },
+    {
+      "id": "9",
+      "area": "HCMUT CS2",
+      "road": "Đường 6",
+      "position": {
+        "lat": 10.879908438984412,
+        "lng": 106.80678205005957
+      },
+      "status": false,
+      "level": 8,
+      "burningHours": 167.52,
+      "frequency": 57
+    },
+    {
+      "id": "0",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.882045857727132,
+        "lng": 106.80483027073063
+      },
+      "status": true,
+      "level": 51,
+      "burningHours": 217.2,
+      "frequency": 71
+    },
+    {
+      "id": "1",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.881919045666287,
+        "lng": 106.80502945725183
+      },
+      "status": false,
+      "level": 66,
+      "burningHours": 71.34,
+      "frequency": 20
+    },
+    {
+      "id": "2",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.881792233605442,
+        "lng": 106.80522864377303
+      },
+      "status": true,
+      "level": 100,
+      "burningHours": 220.62,
+      "frequency": 65
+    },
+    {
+      "id": "3",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.881665421544596,
+        "lng": 106.80542783029425
+      },
+      "status": true,
+      "level": 83,
+      "burningHours": 195.8,
+      "frequency": 75
+    },
+    {
+      "id": "4",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.881538609483753,
+        "lng": 106.80562701681545
+      },
+      "status": true,
+      "level": 44,
+      "burningHours": 85.3,
+      "frequency": 39
+    },
+    {
+      "id": "5",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.88141179742291,
+        "lng": 106.80582620333665
+      },
+      "status": false,
+      "level": 97,
+      "burningHours": 221.06,
+      "frequency": 54
+    },
+    {
+      "id": "6",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.881284985362063,
+        "lng": 106.80602538985785
+      },
+      "status": false,
+      "level": 52,
+      "burningHours": 144.2,
+      "frequency": 54
+    },
+    {
+      "id": "7",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.881158173301218,
+        "lng": 106.80622457637904
+      },
+      "status": false,
+      "level": 6,
+      "burningHours": 75.64,
+      "frequency": 35
+    },
+    {
+      "id": "8",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.881031361240373,
+        "lng": 106.80642376290024
+      },
+      "status": false,
+      "level": 82,
+      "burningHours": 41.04,
+      "frequency": 47
+    },
+    {
+      "id": "9",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.88090454917953,
+        "lng": 106.80662294942144
+      },
+      "status": true,
+      "level": 3,
+      "burningHours": 65.58,
+      "frequency": 63
+    },
+    {
+      "id": "10",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.880777737118684,
+        "lng": 106.80682213594264
+      },
+      "status": true,
+      "level": 78,
+      "burningHours": 137.32,
+      "frequency": 9
+    },
+    {
+      "id": "11",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.880650925057838,
+        "lng": 106.80702132246384
+      },
+      "status": true,
+      "level": 49,
+      "burningHours": 242.82,
+      "frequency": 92
+    },
+    {
+      "id": "12",
+      "area": "HCMUT CS2",
+      "road": "Đường 7",
+      "position": {
+        "lat": 10.880524112996993,
+        "lng": 106.80722050898505
+      },
+      "status": false,
+      "level": 25,
+      "burningHours": 234,
+      "frequency": 83
     }
   ]
 }

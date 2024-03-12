@@ -5,14 +5,6 @@ import redLightBubIcon from '@assets/redLightBub.svg';
 import { PoleCard } from '@components';
 import { useSmartPoleStore } from '@states';
 
-const defaultProps = {
-  center: {
-    lat: 10.77404592132156,
-    lng: 106.65984371362426
-  },
-  zoom: 16
-};
-
 const defaultStyle = [
   {
     featureType: 'all',
@@ -90,7 +82,7 @@ const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ smartPole }) => {
 };
 
 export function SimpleMap() {
-  const { smartPoles } = useSmartPoleStore();
+  const { smartPoles, zoom, center, setZoom, setCenter } = useSmartPoleStore();
   return (
     // Important! Always set the container height explicitly
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY}>
@@ -101,10 +93,14 @@ export function SimpleMap() {
           borderRadius: '10px',
           boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)'
         }}
-        defaultZoom={defaultProps.zoom}
-        defaultCenter={defaultProps.center}
+        zoom={zoom}
+        center={center}
         mapTypeId='terrain'
         styles={defaultStyle}
+        onCameraChanged={(ev) => {
+          setCenter(ev.detail.center);
+          setZoom(ev.detail.zoom);
+        }}
       >
         {smartPoles.map((smartPole, index) => (
           <MarkerWithInfo key={index} smartPole={smartPole} />

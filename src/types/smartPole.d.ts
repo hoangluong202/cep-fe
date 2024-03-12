@@ -20,6 +20,8 @@ type SmartPoleStore = {
   smartPoleStatus: StoreStatus;
   area?: string;
   road?: string;
+  zoom: number;
+  center: Position;
   smartPoles: SmartPole[];
   smartPoleSelectedById: SmartPole;
   getAllSmartPoles: () => Promise<void>;
@@ -30,4 +32,6 @@ type SmartPoleStore = {
   removeSmartPole: (id: string) => Promise<void>;
   setArea: (area?: string) => void;
   setRoad: (road?: string) => void;
+  setZoom: (zoom: number) => void;
+  setCenter: (center: Point) => void;
 };

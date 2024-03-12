@@ -33,7 +33,8 @@ const SelectRoad = () => {
 };
 
 const SelectArea = () => {
-  const { area, setArea, setRoad, getSmartPoleByAreaAndRoad } = useSmartPoleStore();
+  const { area, setZoom, setCenter, setArea, setRoad, getSmartPoleByAreaAndRoad } =
+    useSmartPoleStore();
 
   return (
     <div className='w-72'>
@@ -47,6 +48,10 @@ const SelectArea = () => {
         onChange={(area) => {
           setArea(area);
           setRoad(undefined);
+          setZoom(16);
+          area === 'HCMUT CS1'
+            ? setCenter({ lat: 10.773017439609882, lng: 106.65962377272723 })
+            : setCenter({ lat: 10.880526881399694, lng: 106.80539702296404 });
           getSmartPoleByAreaAndRoad(area);
         }}
       >
