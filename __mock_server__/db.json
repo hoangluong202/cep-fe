@@ -3,1047 +3,565 @@
     "id": "1",
     "username": "luong.ho"
   },
-  "projects": [
+  "poles": [
     {
       "id": "0",
-      "name": "STM32 ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1640970000,
-      "endDate": 1675276800,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.77215316412856,
+        "lng": 106.65799003519278
+      },
+      "status": true,
+      "level": 88,
+      "burningHours": 101.3,
+      "frequency": 66
     },
     {
       "id": "1",
-      "name": "Music Box ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1675276800,
-      "endDate": 1677811200,
-      "avatar": [
-        {
-          "name": "Hồng Thiện Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/92908580?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.772260329473895,
+        "lng": 106.6581916367509
+      },
+      "status": true,
+      "level": 11,
+      "burningHours": 15.86,
+      "frequency": 27
     },
     {
       "id": "2",
-      "name": "Application Protocol ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1680282000,
-      "endDate": 1698556800,
-      "avatar": [
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.77236749481923,
+        "lng": 106.65839323830902
+      },
+      "status": false,
+      "level": 28,
+      "burningHours": 280.24,
+      "frequency": 8
     },
     {
       "id": "3",
-      "name": "Monodepth ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1685552400,
-      "endDate": 1672147200,
-      "avatar": [
-        {
-          "name": "Vũ Nguyễn Minh Huy",
-          "imgURL": "https://avatars.githubusercontent.com/u/57817188?v=4"
-        },
-        {
-          "name": "Trần Trung Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/71246001?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.772474660164566,
+        "lng": 106.65859483986713
+      },
+      "status": true,
+      "level": 63,
+      "burningHours": 149.04,
+      "frequency": 92
     },
     {
       "id": "4",
-      "name": "TickFlow ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1646240400,
-      "endDate": 1677801600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        },
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        },
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.7725818255099,
+        "lng": 106.65879644142527
+      },
+      "status": false,
+      "level": 16,
+      "burningHours": 202.8,
+      "frequency": 87
     },
     {
       "id": "5",
-      "name": "Kahoot ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1651338000,
-      "endDate": 1672444800,
-      "avatar": [
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.772688990855233,
+        "lng": 106.65899804298338
+      },
+      "status": false,
+      "level": 98,
+      "burningHours": 260.74,
+      "frequency": 86
     },
     {
       "id": "6",
-      "name": "Signal Modulation ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1673888400,
-      "endDate": 1689945600,
-      "avatar": [
-        {
-          "name": "Nguyễn Văn Lợi",
-          "imgURL": "https://avatars.githubusercontent.com/u/100981589?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.772796156200567,
+        "lng": 106.65919964454149
+      },
+      "status": false,
+      "level": 9,
+      "burningHours": 19.02,
+      "frequency": 41
     },
     {
       "id": "7",
-      "name": "Extension Board ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1686762000,
-      "endDate": 1689312000,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.772903321545902,
+        "lng": 106.65940124609962
+      },
+      "status": false,
+      "level": 7,
+      "burningHours": 266.34,
+      "frequency": 22
     },
     {
       "id": "8",
-      "name": "Mạch điều khiển động cơ ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1673875200,
-      "endDate": 1679289600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.773010486891238,
+        "lng": 106.65960284765775
+      },
+      "status": true,
+      "level": 62,
+      "burningHours": 135.66,
+      "frequency": 21
     },
     {
       "id": "9",
-      "name": "TickFund ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "DELAY",
-      "startDate": 1681578000,
-      "endDate": 1690800000,
-      "avatar": [
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        },
-        {
-          "name": "Cù Đỗ Thanh Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/55862577?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.773117652236571,
+        "lng": 106.65980444921586
+      },
+      "status": false,
+      "level": 82,
+      "burningHours": 154.22,
+      "frequency": 67
     },
     {
       "id": "10",
-      "name": "TickKit ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "CANCELED",
-      "startDate": 1640970000,
-      "endDate": 1688284800,
-      "avatar": [
-        {
-          "name": "Ngô Minh Hồng Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/67326889?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.773224817581907,
+        "lng": 106.66000605077397
+      },
+      "status": false,
+      "level": 90,
+      "burningHours": 166.8,
+      "frequency": 47
     },
     {
       "id": "11",
-      "name": "Khóa thẻ từ TickLab ver 1",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "CANCELED",
-      "startDate": 1683219600,
-      "endDate": 1686403200,
-      "avatar": [
-        {
-          "name": "Hồng Thiện Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/92908580?v=4"
-        },
-        {
-          "name": "Nguyễn Văn Lợi",
-          "imgURL": "https://avatars.githubusercontent.com/u/100981589?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.77333198292724,
+        "lng": 106.6602076523321
+      },
+      "status": false,
+      "level": 36,
+      "burningHours": 160.26,
+      "frequency": 56
     },
     {
       "id": "12",
-      "name": "STM32 ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1640970000,
-      "endDate": 1675276800,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.773439148272573,
+        "lng": 106.66040925389021
+      },
+      "status": true,
+      "level": 32,
+      "burningHours": 108.68,
+      "frequency": 65
     },
     {
       "id": "13",
-      "name": "Music Box ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1675276800,
-      "endDate": 1677811200,
-      "avatar": [
-        {
-          "name": "Hồng Thiện Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/92908580?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.773546313617908,
+        "lng": 106.66061085544833
+      },
+      "status": false,
+      "level": 100,
+      "burningHours": 67.4,
+      "frequency": 61
     },
     {
       "id": "14",
-      "name": "Application Protocol ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1680282000,
-      "endDate": 1698556800,
-      "avatar": [
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.773653478963244,
+        "lng": 106.66081245700646
+      },
+      "status": false,
+      "level": 96,
+      "burningHours": 182.72,
+      "frequency": 42
     },
     {
       "id": "15",
-      "name": "Monodepth ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1685552400,
-      "endDate": 1672147200,
-      "avatar": [
-        {
-          "name": "Vũ Nguyễn Minh Huy",
-          "imgURL": "https://avatars.githubusercontent.com/u/57817188?v=4"
-        },
-        {
-          "name": "Trần Trung Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/71246001?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.77376064430858,
+        "lng": 106.66101405856458
+      },
+      "status": true,
+      "level": 74,
+      "burningHours": 282.4,
+      "frequency": 7
     },
     {
       "id": "16",
-      "name": "TickFlow ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1646240400,
-      "endDate": 1677801600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        },
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        },
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        }
-      ]
+      "area": "HCMUT CS1",
+      "road": "Đường 1",
+      "position": {
+        "lat": 10.773867809653911,
+        "lng": 106.66121566012269
+      },
+      "status": true,
+      "level": 34,
+      "burningHours": 50.08,
+      "frequency": 42
     },
     {
-      "id": "17",
-      "name": "Kahoot ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1651338000,
-      "endDate": 1672444800,
-      "avatar": [
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        }
-      ]
+      "id": "0",
+      "area": "HCMUT CS1",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.773974974999247,
+        "lng": 106.66141726168081
+      },
+      "status": true,
+      "level": 29,
+      "burningHours": 61.72,
+      "frequency": 99
     },
     {
-      "id": "18",
-      "name": "Signal Modulation ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1673888400,
-      "endDate": 1689945600,
-      "avatar": [
-        {
-          "name": "Nguyễn Văn Lợi",
-          "imgURL": "https://avatars.githubusercontent.com/u/100981589?v=4"
-        }
-      ]
+      "id": "1",
+      "area": "HCMUT CS1",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.774188035027068,
+        "lng": 106.66130111376282
+      },
+      "status": true,
+      "level": 54,
+      "burningHours": 162.2,
+      "frequency": 49
     },
     {
-      "id": "19",
-      "name": "Extension Board ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1686762000,
-      "endDate": 1689312000,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
+      "id": "2",
+      "area": "HCMUT CS1",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.774401095054888,
+        "lng": 106.66118496584481
+      },
+      "status": false,
+      "level": 74,
+      "burningHours": 137.08,
+      "frequency": 31
     },
     {
-      "id": "20",
-      "name": "Mạch điều khiển động cơ ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1673875200,
-      "endDate": 1679289600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        }
-      ]
+      "id": "3",
+      "area": "HCMUT CS1",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.774614155082709,
+        "lng": 106.6610688179268
+      },
+      "status": true,
+      "level": 89,
+      "burningHours": 244.94,
+      "frequency": 10
     },
     {
-      "id": "21",
-      "name": "TickFund ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "DELAY",
-      "startDate": 1681578000,
-      "endDate": 1690800000,
-      "avatar": [
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        },
-        {
-          "name": "Cù Đỗ Thanh Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/55862577?v=4"
-        }
-      ]
+      "id": "4",
+      "area": "HCMUT CS1",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.77482721511053,
+        "lng": 106.66095267000881
+      },
+      "status": false,
+      "level": 90,
+      "burningHours": 132.28,
+      "frequency": 24
     },
     {
-      "id": "22",
-      "name": "TickKit ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "CANCELED",
-      "startDate": 1640970000,
-      "endDate": 1688284800,
-      "avatar": [
-        {
-          "name": "Ngô Minh Hồng Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/67326889?v=4"
-        }
-      ]
+      "id": "5",
+      "area": "HCMUT CS1",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.775040275138352,
+        "lng": 106.66083652209079
+      },
+      "status": true,
+      "level": 87,
+      "burningHours": 187.76,
+      "frequency": 89
     },
     {
-      "id": "23",
-      "name": "Khóa thẻ từ TickLab ver 2",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "CANCELED",
-      "startDate": 1683219600,
-      "endDate": 1686403200,
-      "avatar": [
-        {
-          "name": "Hồng Thiện Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/92908580?v=4"
-        },
-        {
-          "name": "Nguyễn Văn Lợi",
-          "imgURL": "https://avatars.githubusercontent.com/u/100981589?v=4"
-        }
-      ]
+      "id": "6",
+      "area": "HCMUT CS1",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.775253335166173,
+        "lng": 106.6607203741728
+      },
+      "status": false,
+      "level": 48,
+      "burningHours": 26.76,
+      "frequency": 31
     },
     {
-      "id": "24",
-      "name": "STM32 ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1640970000,
-      "endDate": 1675276800,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
+      "id": "7",
+      "area": "HCMUT CS1",
+      "road": "Đường 2",
+      "position": {
+        "lat": 10.775466395193995,
+        "lng": 106.6606042262548
+      },
+      "status": false,
+      "level": 11,
+      "burningHours": 248.4,
+      "frequency": 19
     },
     {
-      "id": "25",
-      "name": "Music Box ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1675276800,
-      "endDate": 1677811200,
-      "avatar": [
-        {
-          "name": "Hồng Thiện Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/92908580?v=4"
-        }
-      ]
+      "id": "0",
+      "area": "HCMUT CS1",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.772883143628613,
+        "lng": 106.66058715774557
+      },
+      "status": false,
+      "level": 36,
+      "burningHours": 45.72,
+      "frequency": 58
     },
     {
-      "id": "26",
-      "name": "Application Protocol ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1680282000,
-      "endDate": 1698556800,
-      "avatar": [
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        }
-      ]
+      "id": "1",
+      "area": "HCMUT CS1",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.773099468632026,
+        "lng": 106.66046549739106
+      },
+      "status": true,
+      "level": 1,
+      "burningHours": 73,
+      "frequency": 15
     },
     {
-      "id": "27",
-      "name": "Monodepth ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1685552400,
-      "endDate": 1672147200,
-      "avatar": [
-        {
-          "name": "Vũ Nguyễn Minh Huy",
-          "imgURL": "https://avatars.githubusercontent.com/u/57817188?v=4"
-        },
-        {
-          "name": "Trần Trung Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/71246001?v=4"
-        }
-      ]
+      "id": "2",
+      "area": "HCMUT CS1",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.77331579363544,
+        "lng": 106.66034383703654
+      },
+      "status": true,
+      "level": 9,
+      "burningHours": 129.24,
+      "frequency": 7
     },
     {
-      "id": "28",
-      "name": "TickFlow ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1646240400,
-      "endDate": 1677801600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        },
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        },
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        }
-      ]
+      "id": "3",
+      "area": "HCMUT CS1",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.773532118638855,
+        "lng": 106.66022217668203
+      },
+      "status": false,
+      "level": 17,
+      "burningHours": 274.94,
+      "frequency": 43
     },
     {
-      "id": "29",
-      "name": "Kahoot ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1651338000,
-      "endDate": 1672444800,
-      "avatar": [
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        }
-      ]
+      "id": "4",
+      "area": "HCMUT CS1",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.773748443642269,
+        "lng": 106.6601005163275
+      },
+      "status": true,
+      "level": 26,
+      "burningHours": 250.24,
+      "frequency": 29
     },
     {
-      "id": "30",
-      "name": "Signal Modulation ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1673888400,
-      "endDate": 1689945600,
-      "avatar": [
-        {
-          "name": "Nguyễn Văn Lợi",
-          "imgURL": "https://avatars.githubusercontent.com/u/100981589?v=4"
-        }
-      ]
+      "id": "5",
+      "area": "HCMUT CS1",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.773964768645682,
+        "lng": 106.659978855973
+      },
+      "status": false,
+      "level": 12,
+      "burningHours": 48.28,
+      "frequency": 72
     },
     {
-      "id": "31",
-      "name": "Extension Board ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1686762000,
-      "endDate": 1689312000,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
+      "id": "6",
+      "area": "HCMUT CS1",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.774181093649096,
+        "lng": 106.65985719561849
+      },
+      "status": true,
+      "level": 77,
+      "burningHours": 11.14,
+      "frequency": 94
     },
     {
-      "id": "32",
-      "name": "Mạch điều khiển động cơ ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1673875200,
-      "endDate": 1679289600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        }
-      ]
+      "id": "7",
+      "area": "HCMUT CS1",
+      "road": "Đường 3",
+      "position": {
+        "lat": 10.77439741865251,
+        "lng": 106.65973553526396
+      },
+      "status": false,
+      "level": 65,
+      "burningHours": 83.28,
+      "frequency": 82
     },
     {
-      "id": "33",
-      "name": "TickFund ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "DELAY",
-      "startDate": 1681578000,
-      "endDate": 1690800000,
-      "avatar": [
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        },
-        {
-          "name": "Cù Đỗ Thanh Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/55862577?v=4"
-        }
-      ]
+      "id": "0",
+      "area": "HCMUT CS1",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.774240810012396,
+        "lng": 106.66022957877695
+      },
+      "status": true,
+      "level": 80,
+      "burningHours": 190.22,
+      "frequency": 26
     },
     {
-      "id": "34",
-      "name": "TickKit ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "CANCELED",
-      "startDate": 1640970000,
-      "endDate": 1688284800,
-      "avatar": [
-        {
-          "name": "Ngô Minh Hồng Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/67326889?v=4"
-        }
-      ]
+      "id": "1",
+      "area": "HCMUT CS1",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.774119561384017,
+        "lng": 106.65999958251588
+      },
+      "status": false,
+      "level": 97,
+      "burningHours": 234.14,
+      "frequency": 33
     },
     {
-      "id": "35",
-      "name": "Khóa thẻ từ TickLab ver 3",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "CANCELED",
-      "startDate": 1683219600,
-      "endDate": 1686403200,
-      "avatar": [
-        {
-          "name": "Hồng Thiện Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/92908580?v=4"
-        },
-        {
-          "name": "Nguyễn Văn Lợi",
-          "imgURL": "https://avatars.githubusercontent.com/u/100981589?v=4"
-        }
-      ]
+      "id": "2",
+      "area": "HCMUT CS1",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.773998312755639,
+        "lng": 106.65976958625485
+      },
+      "status": true,
+      "level": 1,
+      "burningHours": 172.46,
+      "frequency": 92
     },
     {
-      "id": "36",
-      "name": "STM32 ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1640970000,
-      "endDate": 1675276800,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
+      "id": "3",
+      "area": "HCMUT CS1",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.773877064127262,
+        "lng": 106.6595395899938
+      },
+      "status": false,
+      "level": 68,
+      "burningHours": 168.9,
+      "frequency": 44
     },
     {
-      "id": "37",
-      "name": "Music Box ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1675276800,
-      "endDate": 1677811200,
-      "avatar": [
-        {
-          "name": "Hồng Thiện Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/92908580?v=4"
-        }
-      ]
+      "id": "4",
+      "area": "HCMUT CS1",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.773755815498886,
+        "lng": 106.65930959373274
+      },
+      "status": false,
+      "level": 86,
+      "burningHours": 238.76,
+      "frequency": 0
     },
     {
-      "id": "38",
-      "name": "Application Protocol ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1680282000,
-      "endDate": 1698556800,
-      "avatar": [
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        }
-      ]
+      "id": "5",
+      "area": "HCMUT CS1",
+      "road": "Đường 4",
+      "position": {
+        "lat": 10.773634566870507,
+        "lng": 106.65907959747169
+      },
+      "status": false,
+      "level": 82,
+      "burningHours": 13.92,
+      "frequency": 91
     },
     {
-      "id": "39",
-      "name": "Monodepth ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1685552400,
-      "endDate": 1672147200,
-      "avatar": [
-        {
-          "name": "Vũ Nguyễn Minh Huy",
-          "imgURL": "https://avatars.githubusercontent.com/u/57817188?v=4"
-        },
-        {
-          "name": "Trần Trung Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/71246001?v=4"
-        }
-      ]
+      "id": "0",
+      "area": "HCMUT CS1",
+      "road": "Đường 5",
+      "position": {
+        "lat": 10.772510479403829,
+        "lng": 106.6598805608222
+      },
+      "status": false,
+      "level": 29,
+      "burningHours": 227.48,
+      "frequency": 45
     },
     {
-      "id": "40",
-      "name": "TickFlow ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1646240400,
-      "endDate": 1677801600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        },
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        },
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        }
-      ]
+      "id": "1",
+      "area": "HCMUT CS1",
+      "road": "Đường 5",
+      "position": {
+        "lat": 10.772723084525943,
+        "lng": 106.65974789278044
+      },
+      "status": true,
+      "level": 21,
+      "burningHours": 130.9,
+      "frequency": 76
     },
     {
-      "id": "41",
-      "name": "Kahoot ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1651338000,
-      "endDate": 1672444800,
-      "avatar": [
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        }
-      ]
+      "id": "2",
+      "area": "HCMUT CS1",
+      "road": "Đường 5",
+      "position": {
+        "lat": 10.772935689648055,
+        "lng": 106.6596152247387
+      },
+      "status": false,
+      "level": 32,
+      "burningHours": 145.32,
+      "frequency": 79
     },
     {
-      "id": "42",
-      "name": "Signal Modulation ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1673888400,
-      "endDate": 1689945600,
-      "avatar": [
-        {
-          "name": "Nguyễn Văn Lợi",
-          "imgURL": "https://avatars.githubusercontent.com/u/100981589?v=4"
-        }
-      ]
-    },
-    {
-      "id": "43",
-      "name": "Extension Board ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1686762000,
-      "endDate": 1689312000,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
-    },
-    {
-      "id": "44",
-      "name": "Mạch điều khiển động cơ ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1673875200,
-      "endDate": 1679289600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        }
-      ]
-    },
-    {
-      "id": "45",
-      "name": "TickFund ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "DELAY",
-      "startDate": 1681578000,
-      "endDate": 1690800000,
-      "avatar": [
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        },
-        {
-          "name": "Cù Đỗ Thanh Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/55862577?v=4"
-        }
-      ]
-    },
-    {
-      "id": "46",
-      "name": "TickKit ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "CANCELED",
-      "startDate": 1640970000,
-      "endDate": 1688284800,
-      "avatar": [
-        {
-          "name": "Ngô Minh Hồng Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/67326889?v=4"
-        }
-      ]
-    },
-    {
-      "id": "47",
-      "name": "Khóa thẻ từ TickLab ver 4",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "CANCELED",
-      "startDate": 1683219600,
-      "endDate": 1686403200,
-      "avatar": [
-        {
-          "name": "Hồng Thiện Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/92908580?v=4"
-        },
-        {
-          "name": "Nguyễn Văn Lợi",
-          "imgURL": "https://avatars.githubusercontent.com/u/100981589?v=4"
-        }
-      ]
-    },
-    {
-      "id": "48",
-      "name": "STM32 ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1640970000,
-      "endDate": 1675276800,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
-    },
-    {
-      "id": "49",
-      "name": "Music Box ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "PROPOSAL",
-      "startDate": 1675276800,
-      "endDate": 1677811200,
-      "avatar": [
-        {
-          "name": "Hồng Thiện Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/92908580?v=4"
-        }
-      ]
-    },
-    {
-      "id": "50",
-      "name": "Application Protocol ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1680282000,
-      "endDate": 1698556800,
-      "avatar": [
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        }
-      ]
-    },
-    {
-      "id": "51",
-      "name": "Monodepth ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1685552400,
-      "endDate": 1672147200,
-      "avatar": [
-        {
-          "name": "Vũ Nguyễn Minh Huy",
-          "imgURL": "https://avatars.githubusercontent.com/u/57817188?v=4"
-        },
-        {
-          "name": "Trần Trung Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/71246001?v=4"
-        }
-      ]
-    },
-    {
-      "id": "52",
-      "name": "TickFlow ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "ON-GOING",
-      "startDate": 1646240400,
-      "endDate": 1677801600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        },
-        {
-          "name": "Nguyễn Hồng Quân",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902312?v=4"
-        },
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        }
-      ]
-    },
-    {
-      "id": "53",
-      "name": "Kahoot ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1651338000,
-      "endDate": 1672444800,
-      "avatar": [
-        {
-          "name": "Hoàng Lương",
-          "imgURL": "https://avatars.githubusercontent.com/u/128902414?v=4"
-        },
-        {
-          "name": "Nguyễn Ngọc Phú",
-          "imgURL": "https://avatars.githubusercontent.com/u/111476687?v=4"
-        }
-      ]
-    },
-    {
-      "id": "54",
-      "name": "Signal Modulation ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "REVIEW",
-      "startDate": 1673888400,
-      "endDate": 1689945600,
-      "avatar": [
-        {
-          "name": "Nguyễn Văn Lợi",
-          "imgURL": "https://avatars.githubusercontent.com/u/100981589?v=4"
-        }
-      ]
-    },
-    {
-      "id": "55",
-      "name": "Extension Board ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1686762000,
-      "endDate": 1689312000,
-      "avatar": [
-        {
-          "name": "Phạm Thị Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/80216288?v=4"
-        }
-      ]
-    },
-    {
-      "id": "56",
-      "name": "Mạch điều khiển động cơ ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "COMPLETED",
-      "startDate": 1673875200,
-      "endDate": 1679289600,
-      "avatar": [
-        {
-          "name": "Nguyễn Thanh Hiền",
-          "imgURL": "https://avatars.githubusercontent.com/u/87921251?v=4"
-        }
-      ]
-    },
-    {
-      "id": "57",
-      "name": "TickFund ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "DELAY",
-      "startDate": 1681578000,
-      "endDate": 1690800000,
-      "avatar": [
-        {
-          "name": "Nguyễn Phúc Vinh",
-          "imgURL": "https://avatars.githubusercontent.com/u/69946748?v=4"
-        },
-        {
-          "name": "Cù Đỗ Thanh Nhân",
-          "imgURL": "https://avatars.githubusercontent.com/u/55862577?v=4"
-        }
-      ]
-    },
-    {
-      "id": "58",
-      "name": "TickKit ver 5",
-      "projectType": "Lorem ipsum",
-      "description": "Material Tailwind is an easy to use components library for Tailwind CSS and Material Design.",
-      "status": "CANCELED",
-      "startDate": 1640970000,
-      "endDate": 1688284800,
-      "avatar": [
-        {
-          "name": "Ngô Minh Hồng Thái",
-          "imgURL": "https://avatars.githubusercontent.com/u/67326889?v=4"
-        }
-      ]
+      "id": "3",
+      "area": "HCMUT CS1",
+      "road": "Đường 5",
+      "position": {
+        "lat": 10.773148294770168,
+        "lng": 106.65948255669696
+      },
+      "status": false,
+      "level": 3,
+      "burningHours": 60.46,
+      "frequency": 22
     }
   ]
 }

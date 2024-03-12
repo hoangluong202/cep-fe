@@ -1,6 +1,10 @@
 import { Select, Option, Breadcrumbs } from '@material-tailwind/react';
+import { useSmartPoleStore } from '@states';
 
+//if you want select road, you must select area first
+//if not disable select road
 const SelectRoad = () => {
+  const { area, road, setRoad, getSmartPoleByAreaAndRoad } = useSmartPoleStore();
   return (
     <div className='w-72'>
       <Select
@@ -9,20 +13,28 @@ const SelectRoad = () => {
           mount: { y: 0 },
           unmount: { y: 25 }
         }}
+        value={road}
+        onChange={(road) => {
+          setRoad(road);
+          getSmartPoleByAreaAndRoad(area, road);
+        }}
+        disabled={!area}
       >
-        <Option>Đường 1</Option>
-        <Option>Đường 2</Option>
-        <Option>Đường 3</Option>
-        <Option>Đường 4</Option>
-        <Option>Đường 5</Option>
-        <Option>Đường 6</Option>
-        <Option>Đường 7</Option>
+        <Option value='Đường 1'>Đường 1</Option>
+        <Option value='Đường 2'>Đường 2</Option>
+        <Option value='Đường 3'>Đường 3</Option>
+        <Option value='Đường 4'>Đường 4</Option>
+        <Option value='Đường 5'>Đường 5</Option>
+        <Option value='Đường 6'>Đường 6</Option>
+        <Option value='Đường 7'>Đường 7</Option>
       </Select>
     </div>
   );
 };
 
 const SelectArea = () => {
+  const { area, setArea, setRoad, getSmartPoleByAreaAndRoad } = useSmartPoleStore();
+
   return (
     <div className='w-72'>
       <Select
@@ -31,9 +43,15 @@ const SelectArea = () => {
           mount: { y: 0 },
           unmount: { y: 25 }
         }}
+        value={area}
+        onChange={(area) => {
+          setArea(area);
+          setRoad(undefined);
+          getSmartPoleByAreaAndRoad(area);
+        }}
       >
-        <Option>HCMUT CS1</Option>
-        <Option>HCMUT CS2</Option>
+        <Option value={'HCMUT CS1'}>HCMUT CS1</Option>
+        <Option value={'HCMUT CS2'}>HCMUT CS2</Option>
       </Select>
     </div>
   );

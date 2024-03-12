@@ -1,10 +1,16 @@
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '@states';
+import { useSmartPoleStore, useUserStore } from '@states';
 import { SimpleNavbar, SimpleMap, Filter } from '@components';
+import { useEffect } from 'react';
 
 export function ViewMapPage() {
   const navigate = useNavigate();
   const { userStatus } = useUserStore();
+  const { getAllSmartPoles } = useSmartPoleStore();
+
+  useEffect(() => {
+    getAllSmartPoles();
+  }, []);
 
   if (userStatus === 'UNINIT' || userStatus === 'PENDING') {
     navigate('/login');
