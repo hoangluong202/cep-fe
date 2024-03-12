@@ -102,10 +102,14 @@ export function SimpleMap() {
     // Important! Always set the container height explicitly
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY}>
       <Map
-        style={{ width: '100%', height: '100vh' }}
+        style={{
+          width: '100%',
+          height: '100vh',
+          borderRadius: '10px',
+          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)'
+        }}
         defaultZoom={defaultProps.zoom}
         defaultCenter={defaultProps.center}
-        // mapId={'key'}
         mapTypeId='terrain'
         styles={defaultStyle}
       >
