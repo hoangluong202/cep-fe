@@ -3,6 +3,8 @@ import { smartPoleService } from '@services';
 
 export const useSmartPoleStore = create<SmartPoleStore>()((set, get) => ({
   smartPoleStatus: 'UNINIT',
+  areas: [],
+  roads: [],
   zoom: 9,
   center: {
     lat: 10.788221571991595,
@@ -45,6 +47,28 @@ export const useSmartPoleStore = create<SmartPoleStore>()((set, get) => ({
     try {
       const smartPoles = await smartPoleService.getByAreaAndRoad(area, road);
       set(() => ({ smartPoles: smartPoles, smartPoleStatus: 'SUCCESS' }));
+    } catch (err) {
+      set(() => ({ smartPoleStatus: 'REJECT' }));
+    }
+  },
+  setRoads: async (area) => {
+    set(() => ({ smartPoleStatus: 'PENDING' }));
+    try {
+      const roads =
+        area === 'HCMUT CS1'
+          ? ['Đường 1', 'Đường 2', 'Đường 3', 'Đường 4', 'Đường 5']
+          : ['Đường 1', 'Đường 2', 'Đường 3', 'Đường 4', 'Đường 5', 'Đường 6', 'Đường 7'];
+      set(() => ({ roads: roads, smartPoleStatus: 'SUCCESS' }));
+    } catch (err) {
+      set(() => ({ smartPoleStatus: 'REJECT' }));
+    }
+  },
+  setAreas: async () => {
+    set(() => ({ smartPoleStatus: 'PENDING' }));
+    try {
+      const areas = await smartPoleService.getAllAreas();
+      console.log('Check api areas', areas);
+      set(() => ({ areas: areas, smartPoleStatus: 'SUCCESS' }));
     } catch (err) {
       set(() => ({ smartPoleStatus: 'REJECT' }));
     }

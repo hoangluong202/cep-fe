@@ -1162,5 +1162,10 @@
       "burningHours": 234,
       "frequency": 83
     }
-  ]
+  ],
+  "areas": ["HCMUT CS1", "HCMUT CS2"],
+  "roads": {
+    "HCMUT CS1": ["Đường 1", "Đường 2", "Đường 3", "Đường 4", "Đường 5"],
+    "HCMUT CS2": ["Đường 1", "Đường 2", "Đường 3", "Đường 4", "Đường 5", "Đường 6", "Đường 7"]
+  }
 }

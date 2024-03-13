@@ -9,6 +9,7 @@ export const smartPoleService = {
       : road
       ? invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&road=${road}`))
       : invoke<SmartPole[]>(server.get(`/api/poles?area=${area}`)),
+  getAllAreas: () => invoke<string[]>(server.get('/api/areas')),
   create: (payload: SmartPolePayload) => invoke<SmartPole>(server.post('/api/poles', payload)),
   update: (id: string, payload: SmartPolePayload) =>
     invoke<SmartPole>(server.put(`/api/poles/${id}`, payload)),

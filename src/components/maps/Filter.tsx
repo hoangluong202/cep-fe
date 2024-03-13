@@ -1,10 +1,10 @@
 import { Select, Option, Breadcrumbs } from '@material-tailwind/react';
 import { useSmartPoleStore } from '@states';
 
-//if you want select road, you must select area first
-//if not disable select road
 const SelectRoad = () => {
-  const { area, road, setRoad, getSmartPoleByAreaAndRoad } = useSmartPoleStore();
+  const { area, road, roads, setRoad, getSmartPoleByAreaAndRoad } = useSmartPoleStore();
+  const roadsList = ['All', ...roads];
+
   return (
     <div className='w-72'>
       <Select
@@ -13,28 +13,38 @@ const SelectRoad = () => {
           mount: { y: 0 },
           unmount: { y: 25 }
         }}
-        value={road}
         onChange={(road) => {
           setRoad(road);
-          getSmartPoleByAreaAndRoad(area, road);
+          road === 'All'
+            ? getSmartPoleByAreaAndRoad(area, undefined)
+            : getSmartPoleByAreaAndRoad(area, road);
         }}
         disabled={!area}
+        value={road}
       >
-        <Option value='Đường 1'>Đường 1</Option>
-        <Option value='Đường 2'>Đường 2</Option>
-        <Option value='Đường 3'>Đường 3</Option>
-        <Option value='Đường 4'>Đường 4</Option>
-        <Option value='Đường 5'>Đường 5</Option>
-        <Option value='Đường 6'>Đường 6</Option>
-        <Option value='Đường 7'>Đường 7</Option>
+        {roadsList.map((road, index) => (
+          <Option key={index + 1} value={road}>
+            {road}
+          </Option>
+        ))}
       </Select>
     </div>
   );
 };
 
 const SelectArea = () => {
-  const { area, setZoom, setCenter, setArea, setRoad, getSmartPoleByAreaAndRoad } =
-    useSmartPoleStore();
+  const {
+    areas,
+    setZoom,
+    setCenter,
+    setArea,
+    setRoad,
+    setRoads,
+    getSmartPoleByAreaAndRoad,
+    getAllSmartPoles
+  } = useSmartPoleStore();
+
+  const areasList = ['All', ...areas];
 
   return (
     <div className='w-72'>
@@ -44,19 +54,30 @@ const SelectArea = () => {
           mount: { y: 0 },
           unmount: { y: 25 }
         }}
-        value={area}
         onChange={(area) => {
-          setArea(area);
-          setRoad(undefined);
-          setZoom(16);
-          area === 'HCMUT CS1'
-            ? setCenter({ lat: 10.773017439609882, lng: 106.65962377272723 })
-            : setCenter({ lat: 10.880526881399694, lng: 106.80539702296404 });
-          getSmartPoleByAreaAndRoad(area);
+          if (area === 'All' || !area) {
+            setArea(undefined);
+            setRoad(undefined);
+            setZoom(9);
+            setCenter({ lat: 10.773017439609882, lng: 106.65962377272723 });
+            getAllSmartPoles();
+          } else {
+            setArea(area);
+            setRoad(undefined);
+            setRoads(area);
+            setZoom(16);
+            area === 'HCMUT CS1'
+              ? setCenter({ lat: 10.773017439609882, lng: 106.65962377272723 })
+              : setCenter({ lat: 10.880526881399694, lng: 106.80539702296404 });
+            getSmartPoleByAreaAndRoad(area);
+          }
         }}
       >
-        <Option value={'HCMUT CS1'}>HCMUT CS1</Option>
-        <Option value={'HCMUT CS2'}>HCMUT CS2</Option>
+        {areasList.map((area, index) => (
+          <Option key={index + 1} value={area}>
+            {area}
+          </Option>
+        ))}
       </Select>
     </div>
   );
