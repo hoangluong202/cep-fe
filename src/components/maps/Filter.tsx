@@ -84,6 +84,7 @@ const SelectArea = () => {
 };
 
 const BreadcrumbsWithIcon = () => {
+  const { area, road } = useSmartPoleStore();
   return (
     <Breadcrumbs className='order-first'>
       <a href='#' className='opacity-60 flex flex-row gap-x-0.5'>
@@ -102,10 +103,16 @@ const BreadcrumbsWithIcon = () => {
 
         <span>View Map</span>
       </a>
-      <a href='#' className='opacity-60'>
-        <span>HCMUT CS1</span>
-      </a>
-      <a href='#'>Đường 1</a>
+      {area && area !== 'All' && (
+        <a href='#' className='opacity-60'>
+          <span>{area}</span>
+        </a>
+      )}
+      {road && road !== 'All' && (
+        <a href='#' className='opacity-60'>
+          <span>{road}</span>
+        </a>
+      )}
     </Breadcrumbs>
   );
 };
