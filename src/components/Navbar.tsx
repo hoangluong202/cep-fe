@@ -101,34 +101,24 @@ function ApplicationName() {
   );
 }
 
+const listItems = [
+  { title: 'Dashboard', href: '#' },
+  { title: 'Inventory', href: '#' },
+  { title: 'View Map', href: '#' },
+  { title: 'Calendar', href: '#' },
+  { title: 'Log', href: '#' }
+];
+
 function NavList() {
   return (
     <ul className='my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6'>
-      <Typography as='li' variant='small' color='blue-gray' className='p-1 font-medium'>
-        <a href='#' className='flex items-center hover:text-blue-500 transition-colors'>
-          Dashboard
-        </a>
-      </Typography>
-      <Typography as='li' variant='small' color='blue-gray' className='p-1 font-medium'>
-        <a href='#' className='flex items-center hover:text-blue-500 transition-colors'>
-          Inventory
-        </a>
-      </Typography>
-      <Typography as='li' variant='small' color='blue-gray' className='p-1 font-medium'>
-        <a href='#' className='flex items-center hover:text-blue-500 transition-colors'>
-          View Map
-        </a>
-      </Typography>
-      <Typography as='li' variant='small' color='blue-gray' className='p-1 font-medium'>
-        <a href='#' className='flex items-center hover:text-blue-500 transition-colors'>
-          Calendar
-        </a>
-      </Typography>
-      <Typography as='li' variant='small' color='blue-gray' className='p-1 font-medium'>
-        <a href='#' className='flex items-center hover:text-blue-500 transition-colors'>
-          Log
-        </a>
-      </Typography>
+      {listItems.map((item) => (
+        <Typography as='li' variant='small' color='blue-gray' className='p-1 font-medium'>
+          <a href='#' className='flex items-center hover:text-blue-500 transition-colors'>
+            {item.title}
+          </a>
+        </Typography>
+      ))}
       <ProfileMenu />
     </ul>
   );
