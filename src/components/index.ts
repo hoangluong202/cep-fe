@@ -6,5 +6,6 @@ export * from './AppSkeleton';
 export * from './Map';
 export * from './Navbar';
 export * from './ToggleSidebarBtn';
+export * from './calendars/calendar';
 export * from './maps/Filter';
 export * from './maps/PoleCard';

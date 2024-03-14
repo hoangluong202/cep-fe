@@ -15,6 +15,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon, PowerIcon } from '@heroicons/react/24/solid';
 import hcmutLogo from '@assets/logobk.png';
 import { useUserStore } from '@states';
+import { Link } from 'react-router-dom';
 
 // profile menu component
 const profileMenuItems = [
@@ -104,19 +105,25 @@ function ApplicationName() {
 const listItems = [
   { title: 'Dashboard', href: '#' },
   { title: 'Inventory', href: '#' },
-  { title: 'View Map', href: '#' },
-  { title: 'Calendar', href: '#' },
+  { title: 'View Map', href: '/view-map' },
+  { title: 'Calendar', href: '/calendar' },
   { title: 'Log', href: '#' }
 ];
 
 function NavList() {
   return (
     <ul className='my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6'>
-      {listItems.map((item) => (
-        <Typography as='li' variant='small' color='blue-gray' className='p-1 font-medium'>
-          <a href='#' className='flex items-center hover:text-blue-500 transition-colors'>
+      {listItems.map((item, index) => (
+        <Typography
+          key={index}
+          as='li'
+          variant='small'
+          color='blue-gray'
+          className='p-1 font-medium'
+        >
+          <Link to={item.href} className='flex items-center hover:text-blue-500 transition-colors'>
             {item.title}
-          </a>
+          </Link>
         </Typography>
       ))}
       <ProfileMenu />

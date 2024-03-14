@@ -7,6 +7,7 @@ export function ViewMapPage() {
   const navigate = useNavigate();
   const { userStatus } = useUserStore();
   const { getAllSmartPoles, setAreas } = useSmartPoleStore();
+  console.log('In page view map');
 
   useEffect(() => {
     getAllSmartPoles();
