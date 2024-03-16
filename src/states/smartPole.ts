@@ -28,6 +28,7 @@ export const useSmartPoleStore = create<SmartPoleStore>()((set, get) => ({
     set(() => ({ smartPoleStatus: 'PENDING' }));
     try {
       const smartPoles = await smartPoleService.getAll();
+      console.log('Call API GET ALL SMART POLES');
       set(() => ({ smartPoles: smartPoles, smartPoleStatus: 'SUCCESS' }));
     } catch (err) {
       set(() => ({ smartPoleStatus: 'REJECT' }));
@@ -46,28 +47,30 @@ export const useSmartPoleStore = create<SmartPoleStore>()((set, get) => ({
     set(() => ({ smartPoleStatus: 'PENDING' }));
     try {
       const smartPoles = await smartPoleService.getByAreaAndRoad(area, road);
+      console.log('Call API GET SMART POLES BY AREA AND ROAD');
       set(() => ({ smartPoles: smartPoles, smartPoleStatus: 'SUCCESS' }));
     } catch (err) {
       set(() => ({ smartPoleStatus: 'REJECT' }));
     }
   },
-  setRoads: async (area) => {
+  getRoadsByArea: async (area) => {
     set(() => ({ smartPoleStatus: 'PENDING' }));
     try {
       const roads =
         area === 'HCMUT CS1'
           ? ['Đường 1', 'Đường 2', 'Đường 3', 'Đường 4', 'Đường 5']
           : ['Đường 1', 'Đường 2', 'Đường 3', 'Đường 4', 'Đường 5', 'Đường 6', 'Đường 7'];
+      console.log('Call API GET ALL ROADS BY AREA');
       set(() => ({ roads: roads, smartPoleStatus: 'SUCCESS' }));
     } catch (err) {
       set(() => ({ smartPoleStatus: 'REJECT' }));
     }
   },
-  setAreas: async () => {
+  getAllAreas: async () => {
     set(() => ({ smartPoleStatus: 'PENDING' }));
     try {
       const areas = await smartPoleService.getAllAreas();
-      console.log('Check api areas', areas);
+      console.log('Call API GET ALL AREAS');
       set(() => ({ areas: areas, smartPoleStatus: 'SUCCESS' }));
     } catch (err) {
       set(() => ({ smartPoleStatus: 'REJECT' }));

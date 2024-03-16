@@ -13,7 +13,7 @@ import {
 import { createElement, useEffect, useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon, PowerIcon } from '@heroicons/react/24/solid';
-import hcmutLogo from '@assets/logobk.png';
+import logo from '@assets/logobk.png';
 import { useUserStore } from '@states';
 import { Link } from 'react-router-dom';
 
@@ -88,13 +88,7 @@ function ProfileMenu() {
 function ApplicationName() {
   return (
     <div className='flex items-center gap-2 text-blue-gray-900'>
-      <Avatar
-        // variant='circular'
-        // size='sm'
-        // alt='tania andrew'
-        className='border border-gray-900 p-0.5'
-        src={hcmutLogo}
-      />
+      <Avatar className='border border-gray-900 p-0.5' src={logo} />
       <Typography as='a' href='#' variant='h5' className='mr-4 cursor-pointer py-1.5'>
         Lighting Scheduling
       </Typography>

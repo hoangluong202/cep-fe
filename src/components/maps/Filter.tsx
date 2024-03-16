@@ -1,9 +1,15 @@
 import { Select, Option, Breadcrumbs } from '@material-tailwind/react';
 import { useSmartPoleStore } from '@states';
+import { useEffect, useMemo } from 'react';
 
-const SelectRoad = () => {
+const FilterRoad = () => {
   const { area, road, roads, setRoad, getSmartPoleByAreaAndRoad } = useSmartPoleStore();
-  const roadsList = ['All', ...roads];
+  const roadsList = useMemo(() => ['All', ...roads], [roads]);
+
+  //when area or road change, get smartPole by area and road
+  useEffect(() => {
+    getSmartPoleByAreaAndRoad(area, road);
+  }, [area, road, getSmartPoleByAreaAndRoad]);
 
   return (
     <div className='w-72'>
@@ -13,17 +19,16 @@ const SelectRoad = () => {
           mount: { y: 0 },
           unmount: { y: 25 }
         }}
-        onChange={(road) => {
-          setRoad(road);
-          road === 'All'
-            ? getSmartPoleByAreaAndRoad(area, undefined)
-            : getSmartPoleByAreaAndRoad(area, road);
+        onChange={(changedRoad) => {
+          if (changedRoad !== road) {
+            setRoad(changedRoad);
+          }
         }}
         disabled={!area}
         value={road}
       >
-        {roadsList.map((road, index) => (
-          <Option key={index + 1} value={road}>
+        {roadsList.map((road) => (
+          <Option key={road} value={road === 'All' ? undefined : road}>
             {road}
           </Option>
         ))}
@@ -32,19 +37,19 @@ const SelectRoad = () => {
   );
 };
 
-const SelectArea = () => {
+const FilterArea = () => {
   const {
     areas,
     setZoom,
     setCenter,
     setArea,
     setRoad,
-    setRoads,
+    getRoadsByArea,
     getSmartPoleByAreaAndRoad,
     getAllSmartPoles
   } = useSmartPoleStore();
 
-  const areasList = ['All', ...areas];
+  const areasList = useMemo(() => ['All', ...areas], [areas]);
 
   return (
     <div className='w-72'>
@@ -54,27 +59,27 @@ const SelectArea = () => {
           mount: { y: 0 },
           unmount: { y: 25 }
         }}
-        onChange={(area) => {
-          if (area === 'All' || !area) {
+        onChange={(changedArea) => {
+          if (changedArea === 'All' || !changedArea) {
             setArea(undefined);
             setRoad(undefined);
             setZoom(9);
             setCenter({ lat: 10.773017439609882, lng: 106.65962377272723 });
             getAllSmartPoles();
           } else {
-            setArea(area);
+            setArea(changedArea);
             setRoad(undefined);
-            setRoads(area);
+            getRoadsByArea(changedArea);
             setZoom(16);
-            area === 'HCMUT CS1'
+            changedArea === 'HCMUT CS1'
               ? setCenter({ lat: 10.773017439609882, lng: 106.65962377272723 })
               : setCenter({ lat: 10.880526881399694, lng: 106.80539702296404 });
-            getSmartPoleByAreaAndRoad(area);
+            getSmartPoleByAreaAndRoad(changedArea);
           }
         }}
       >
-        {areasList.map((area, index) => (
-          <Option key={index + 1} value={area}>
+        {areasList.map((area) => (
+          <Option key={area} value={area}>
             {area}
           </Option>
         ))}
@@ -83,7 +88,7 @@ const SelectArea = () => {
   );
 };
 
-const BreadcrumbsWithIcon = () => {
+const BreadcrumbsViewMap = () => {
   const { area, road } = useSmartPoleStore();
   return (
     <Breadcrumbs className='order-first'>
@@ -121,11 +126,11 @@ export const Filter = () => {
   return (
     <div className='flex justify-between'>
       <div>
-        <BreadcrumbsWithIcon />
+        <BreadcrumbsViewMap />
       </div>
       <div className='flex flex-row-reverse gap-x-4'>
-        <SelectRoad />
-        <SelectArea />
+        <FilterRoad />
+        <FilterArea />
       </div>
     </div>
   );

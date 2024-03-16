@@ -6,12 +6,12 @@ import { useEffect } from 'react';
 export function ViewMapPage() {
   const navigate = useNavigate();
   const { userStatus } = useUserStore();
-  const { getAllSmartPoles, setAreas } = useSmartPoleStore();
+  const { getAllSmartPoles, getAllAreas } = useSmartPoleStore();
   console.log('In page view map');
 
   useEffect(() => {
     getAllSmartPoles();
-    setAreas();
+    getAllAreas();
   }, []);
 
   if (userStatus === 'UNINIT' || userStatus === 'PENDING') {

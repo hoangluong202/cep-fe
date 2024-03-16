@@ -11,7 +11,7 @@ export const useUserStore = create<UserStore>()((set) => ({
     set(() => ({ userStatus: 'PENDING' }));
     try {
       const userData = await userService.getInfo();
-      console.log('Check api getInfo', userData);
+      console.log('Call API GET USER DATA', userData);
       set(() => ({ userData: userData, userStatus: 'SUCCESS' }));
     } catch (err) {
       set(() => ({ userStatus: 'REJECT' }));
