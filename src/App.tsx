@@ -4,13 +4,23 @@ import { AppLayout, AuthLayout } from '@layouts';
 import { AuthPage, CalendarPage, ViewMapPage } from '@pages';
 import { useUserStore } from '@states';
 import { AppSkeleton } from '@components';
+import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 
 export default function App() {
+  const navigate: NavigateFunction = useNavigate();
+  const { pathname } = useLocation();
   const { userStatus, getUserData } = useUserStore();
 
   useEffect(() => {
     getUserData();
   }, [getUserData]);
+
+  useEffect(() => {
+    if (pathname === '/') {
+      navigate('view-map');
+    }
+  }),
+    [pathname, navigate];
 
   if (userStatus === 'UNINIT' || userStatus === 'PENDING') {
     return <AppSkeleton />;
