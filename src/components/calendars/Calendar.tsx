@@ -1,51 +1,51 @@
-import { FC, useState } from 'react';
-import { Calendar, dateFnsLocalizer, Event } from 'react-big-calendar';
-import withDragAndDrop, { withDragAndDropProps } from 'react-big-calendar/lib/addons/dragAndDrop';
+import { useCallback, useState } from 'react';
+import { Calendar, dateFnsLocalizer, Views } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US';
-// import addHours from 'date-fns/addHours';
-import { startOfHour, addHours, addDays } from 'date-fns';
 
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { addDays, startOfDay, subDays } from 'date-fns';
+import { MyEvent } from 'src/types/event';
 
-export const SchedulerCalendar: FC = () => {
-  const [events, setEvents] = useState<Event[]>([
-    {
-      title: 'Learn cool stuff',
-      start,
-      end
-    }
-  ]);
+export const SchedulerCalendar: Component = () => {
+  const [events, setEvents] = useState<MyEvent[]>(myEvents);
 
-  const onEventResize: withDragAndDropProps['onEventResize'] = (data) => {
-    const { start, end } = data;
+  const handleSelectEvent = useCallback((event: MyEvent) => window.alert(event.title), []);
 
-    setEvents((currentEvents) => {
-      const firstEvent = {
-        start: new Date(start),
-        end: new Date(end)
-      };
-      return [...currentEvents, firstEvent];
-    });
-  };
-
-  const onEventDrop: withDragAndDropProps['onEventDrop'] = (data) => {
-    console.log(data);
-  };
+  const handleSelectSlot = useCallback(
+    ({ start, end }: MyEvent) => {
+      const title = window.prompt('New Event name');
+      if (title) {
+        setEvents((prev) => [...prev, { start, end, title }]);
+      }
+    },
+    [setEvents]
+  );
 
   return (
-    <DnDCalendar
-      defaultView='week'
-      events={events}
+    <Calendar
+      dayLayoutAlgorithm={'no-overlap'}
+      defaultView={Views.MONTH}
+      events={events.sort((a, b) => (a.priority && b.priority ? b.priority - a.priority : 0))}
       localizer={localizer}
-      onEventDrop={onEventDrop}
-      onEventResize={onEventResize}
-      resizable
-      style={{ height: '100vh' }}
+      onSelectEvent={handleSelectEvent}
+      onSelectSlot={handleSelectSlot}
+      style={{ height: '100%', width: '100%' }}
+      selectable={true}
+      popup={true}
+      // showMultiDayTimes
+      eventPropGetter={(event) => {
+        return {
+          style: {
+            backgroundColor: event.color,
+            color: 'black'
+          }
+        };
+      }}
     />
   );
 };
@@ -53,15 +53,7 @@ export const SchedulerCalendar: FC = () => {
 const locales = {
   'en-US': enUS
 };
-
-const endOfHour = (date: Date): Date => {
-  const start = startOfHour(date);
-  return addHours(start, 1);
-};
-const now = new Date();
-const start = endOfHour(now);
-const end = addDays(start.getTime(), 2);
-// The types here are `object`. Strongly consider making them better as removing `locales` caused a fatal error
+const now = startOfDay(new Date());
 const localizer = dateFnsLocalizer({
   format,
   parse,
@@ -70,4 +62,61 @@ const localizer = dateFnsLocalizer({
   locales
 });
 
-const DnDCalendar = withDragAndDrop(Calendar);
+const myEvents = [
+  {
+    id: '1',
+    title: 'Lịch mặc định',
+    start: subDays(now, 24),
+    end: addDays(now, 1),
+    color: 'rgb(34 211 238)',
+    priority: 0
+  },
+  {
+    id: '1.1',
+    title: 'Lịch mặc định',
+    start: addDays(now, 7),
+    end: addDays(now, 18),
+    color: 'rgb(34 211 238)',
+    priority: 0
+  },
+  {
+    id: '2',
+    title: 'Lịch nghỉ tết',
+    start: addDays(now, 1),
+    end: addDays(now, 3),
+    color: 'rgb(74 222 128)',
+    priority: 1
+  },
+  {
+    id: '3',
+    title: 'Lịch chạy bộ',
+    start: addDays(now, 3),
+    end: addDays(now, 4),
+    color: 'rgb(253 224 71)',
+    priority: 2
+  },
+  {
+    id: '4',
+    title: 'Lịch đón quan khách',
+    start: addDays(now, 4),
+    end: addDays(now, 5),
+    color: 'rgb(249 115 22)',
+    priority: 2
+  },
+  {
+    id: '5',
+    title: 'Lịch Halloween',
+    start: addDays(now, 5),
+    end: addDays(now, 6),
+    color: 'rgb(52 211 153)',
+    priority: 1
+  },
+  {
+    id: '6',
+    title: 'Lịch giờ Trái Đất',
+    start: addDays(now, 6),
+    end: addDays(now, 7),
+    color: 'rgb(190 18 60)',
+    priority: 1
+  }
+];
