@@ -8,13 +8,25 @@ import { ThemeProvider } from '@material-tailwind/react';
 import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      gcTime: 3600000
+    }
+  }
+});
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <ToastContainer limit={1} />
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <ToastContainer limit={1} />
+          <App />
+        </QueryClientProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

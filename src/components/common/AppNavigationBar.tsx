@@ -85,7 +85,7 @@ function ProfileMenu() {
   );
 }
 
-function ApplicationName() {
+function Title() {
   return (
     <div className='flex items-center gap-2 text-blue-gray-900'>
       <Avatar className='border border-gray-900 p-0.5' src={logo} />
@@ -97,11 +97,11 @@ function ApplicationName() {
 }
 
 const listItems = [
-  { title: 'Dashboard', href: '#' },
-  { title: 'Inventory', href: '#' },
+  { title: 'Dashboard', href: '/dashboard' },
+  { title: 'Inventory', href: '/inventory' },
   { title: 'View Map', href: '/view-map' },
   { title: 'Calendar', href: '/calendar' },
-  { title: 'Log', href: '#' }
+  { title: 'Feed', href: '/feed' }
 ];
 
 function NavList() {
@@ -125,7 +125,7 @@ function NavList() {
   );
 }
 
-export function SimpleNavbar() {
+export function NavigationBar() {
   const [openNav, setOpenNav] = useState(false);
 
   const handleWindowResize = () => window.innerWidth >= 960 && setOpenNav(false);
@@ -141,7 +141,7 @@ export function SimpleNavbar() {
   return (
     <Navbar className='mx-auto max-w-screen-2xl px-6 py-3'>
       <div className='flex items-center justify-between text-blue-gray-900'>
-        <ApplicationName />
+        <Title />
         <div className='hidden lg:block'>
           <NavList />
         </div>
