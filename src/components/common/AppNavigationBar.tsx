@@ -99,7 +99,7 @@ function Title() {
 const listItems = [
   { title: 'Dashboard', href: '/dashboard' },
   { title: 'Inventory', href: '/inventory' },
-  { title: 'View Map', href: '/view-map' },
+  { title: 'View Map', href: '/map' },
   { title: 'Calendar', href: '/calendar' },
   { title: 'Feed', href: '/feed' }
 ];

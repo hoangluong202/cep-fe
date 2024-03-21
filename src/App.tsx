@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { HomeIcon } from '@heroicons/react/24/outline';
 import { AppLayout, AuthLayout } from '@layouts';
 import { AuthPage, CalendarPage, ViewMapPage } from '@pages';
 import { AppSkeleton } from '@components';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
-import { useUserQuery } from '@hooks';
+import { emitEvent, useUserQuery } from '@hooks';
 import { toast } from 'react-toastify';
+import { MAIN_MENU, SUB_MENU } from '@constants';
 
 export default function App() {
   const navigate: NavigateFunction = useNavigate();
@@ -22,7 +22,7 @@ export default function App() {
 
   useEffect(() => {
     if (pathname === '/' && isSuccess) {
-      navigate('view-map');
+      navigate('map');
     }
   }),
     [pathname, isSuccess, navigate];
@@ -46,21 +46,25 @@ export default function App() {
           {
             type: 'skeleton',
             path: '/',
+            name: 'Skeleton',
             element: <AppSkeleton />
           },
           {
-            type: 'item',
-            icon: <HomeIcon className='h-5 w-5' />,
-            path: '/view-map',
-            name: 'Google Map',
+            type: 'main-item',
+            path: '/map',
+            name: MAIN_MENU.map,
             element: <ViewMapPage />
           },
           {
-            type: 'item',
-            icon: <HomeIcon className='h-5 w-5' />,
+            type: 'main-item',
             path: '/calendar',
-            name: 'Calendar',
+            name: MAIN_MENU.calendar,
             element: <CalendarPage />
+          },
+          {
+            type: 'logout-btn',
+            name: SUB_MENU.logout,
+            onClick: () => emitEvent('logout')
           }
         ]}
       />
