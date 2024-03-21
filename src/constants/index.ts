@@ -3,5 +3,4 @@
  */
 
 export * from './menuBar';
-export * from './project';
 export * from './screen';

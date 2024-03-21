@@ -3,7 +3,5 @@
  */
 
 export * from './menuBar.state';
-export * from './navigationBar';
-export * from './projectGeneral';
 export * from './smartPole';
 export * from './user';
