@@ -62,6 +62,24 @@ export default function App() {
             element: <CalendarPage />
           },
           {
+            type: 'main-item',
+            path: '/dashboard',
+            name: MAIN_MENU.dashboard,
+            element: <></>
+          },
+          {
+            type: 'main-item',
+            path: '/inventory',
+            name: MAIN_MENU.inventory,
+            element: <></>
+          },
+          {
+            type: 'main-item',
+            path: '/feed',
+            name: MAIN_MENU.feed,
+            element: <></>
+          },
+          {
             type: 'logout-btn',
             name: SUB_MENU.logout,
             onClick: () => emitEvent('logout')
