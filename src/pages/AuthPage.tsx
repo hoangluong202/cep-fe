@@ -1,22 +1,29 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { Card, Input, Button, Typography } from '@material-tailwind/react';
 import { UserCircleIcon, KeyIcon } from '@heroicons/react/24/outline';
 import { authService } from '@services';
-import { useUserStore } from '@states';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useUserQuery } from '@hooks';
+import { useMutation } from '@tanstack/react-query';
 
 export function AuthPage() {
+  const navigate: NavigateFunction = useNavigate();
+  const {
+    info: { refetch }
+  } = useUserQuery();
+
   const { register, handleSubmit } = useForm<LoginFormData>();
 
-  const { getUserData } = useUserStore();
-
-  const navigate: NavigateFunction = useNavigate();
-
-  const submit = async (data: LoginFormData) => {
+  const loginNormal = useMutation({
+    mutationKey: ['loginNormal'],
+    mutationFn: (data: LoginFormData) => authService.login(data)
+  });
+  const submit: SubmitHandler<LoginFormData> = async (data) => {
     try {
-      await authService.login(data);
-      await getUserData();
+      await loginNormal.mutateAsync(data);
+      await refetch();
+      toast.success('Login successfully!');
       navigate('/map');
     } catch (err) {
       const errorMessage = (err as ResponseError).message;

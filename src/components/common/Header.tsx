@@ -13,6 +13,7 @@ import { ChevronDownIcon, PowerIcon } from '@heroicons/react/24/solid';
 import logo from '@assets/logobk.png';
 import { useMenuBarStore } from '@states';
 import { Link } from 'react-router-dom';
+import { useAuthMutation, useListenEvent } from '@hooks';
 
 export const Header: Component<{ mainMenu: RouteMenu; subMenu: RouteMenu }> = ({
   mainMenu,
@@ -20,6 +21,14 @@ export const Header: Component<{ mainMenu: RouteMenu; subMenu: RouteMenu }> = ({
 }) => {
   const { setSelectedMenu } = useMenuBarStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const { logout } = useAuthMutation();
+
+  const handleOpenDialog = () => {
+    setOpenDialog(!openDialog);
+  };
+
+  useListenEvent('logout', handleOpenDialog);
 
   return (
     <Navbar className='flex items-center justify-between text-blue-gray-900 px-6 py-3 max-w-full'>
@@ -40,6 +49,7 @@ export const Header: Component<{ mainMenu: RouteMenu; subMenu: RouteMenu }> = ({
           >
             <Link
               to={mainMenuItem.type === 'main-item' ? mainMenuItem.path : '#'}
+              onClick={() => setSelectedMenu(mainMenuItem.name)}
               className='flex items-center hover:text-blue-500 transition-colors'
             >
               {mainMenuItem.name}
@@ -76,6 +86,7 @@ export const Header: Component<{ mainMenu: RouteMenu; subMenu: RouteMenu }> = ({
                     setSelectedMenu(subMenuItem.name);
                     if (subMenuItem.type === 'logout-btn') {
                       subMenuItem.onClick();
+                      logout.mutateAsync();
                     }
                   }}
                   className={`flex items-center gap-2 rounded ${
