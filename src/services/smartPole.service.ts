@@ -3,14 +3,16 @@ import { server, invoke } from './common';
 export const smartPoleService = {
   getAll: () => invoke<SmartPole[]>(server.get('/api/poles')),
   getById: (id: string) => invoke<SmartPole>(server.get(`/api/poles/${id}`)),
-  getBy: (area?: string, road?: string, id?: string) =>
-    !area
+  getBy: (area?: string, road?: string, name?: string) => {
+    const id = name?.split('-')[1];
+    return !area
       ? invoke<SmartPole[]>(server.get('/api/poles'))
       : !road
       ? invoke<SmartPole[]>(server.get(`/api/poles?area=${area}`))
-      : !id
+      : !name
       ? invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&road=${road}`))
-      : invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&road=${road}&id=${id}`)),
+      : invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&road=${road}&id=${id}`));
+  },
   getAllAreas: async () => {
     const poles = await invoke<SmartPole[]>(server.get('/api/poles'));
     const areas = poles.map((pole) => pole.area);
@@ -25,9 +27,5 @@ export const smartPoleService = {
     const poles = await invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&road=${road}`));
     const smartPoleNames = poles.map((pole) => 'Pole-' + pole.id);
     return [...new Set(smartPoleNames)];
-  },
-  create: (payload: SmartPolePayload) => invoke<SmartPole>(server.post('/api/poles', payload)),
-  update: (id: string, payload: SmartPolePayload) =>
-    invoke<SmartPole>(server.put(`/api/poles/${id}`, payload)),
-  remove: (id: string) => invoke<null>(server.delete(`/api/poles/${id}`))
+  }
 };

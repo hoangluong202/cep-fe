@@ -1,9 +1,12 @@
 import { Map, InfoWindow, useMarkerRef, Marker } from '@vis.gl/react-google-maps';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import yellowLightBubIcon from '@assets/yellowLightBub.svg';
 import redLightBubIcon from '@assets/redLightBub.svg';
 import { PoleCard } from '@components';
-import { useSmartPoleStore } from '@states';
+import { useFilterSmartPoleStore } from '@states';
+import { useQuery } from '@tanstack/react-query';
+import { smartPoleService } from '@services';
+import { retryQueryFn } from '@utils';
 
 const defaultStyle = [
   {
@@ -82,7 +85,19 @@ const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ smartPole }) => {
 };
 
 export function SimpleMap() {
-  const { smartPoles, zoom, center, setZoom, setCenter } = useSmartPoleStore();
+  const { area, road, name } = useFilterSmartPoleStore();
+  const { data: smartPoles } = useQuery({
+    queryKey: ['/api/poles', area, road, name],
+    queryFn: () => smartPoleService.getBy(area, road, name),
+    retry: retryQueryFn
+  });
+  const [center, setCenter] = useState({ lat: 10.80552892012782, lng: 106.63993540154873 });
+  const [zoom, setZoom] = useState(10);
+
+  useEffect(() => {
+    setCenter(smartPoles?.[0]?.position || { lat: 10.80552892012782, lng: 106.63993540154873 });
+    setZoom(area ? 16 : 10);
+  }, [smartPoles, area]);
   return (
     <Map
       style={{
@@ -100,9 +115,7 @@ export function SimpleMap() {
         setZoom(ev.detail.zoom);
       }}
     >
-      {smartPoles.map((smartPole, index) => (
-        <MarkerWithInfo key={index} smartPole={smartPole} />
-      ))}
+      {smartPoles?.map((smartPole, index) => <MarkerWithInfo key={index} smartPole={smartPole} />)}
     </Map>
   );
 }

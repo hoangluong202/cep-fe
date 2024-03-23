@@ -4,7 +4,7 @@ import { useFilterSmartPoleStore } from '@states';
 import { useQuery } from '@tanstack/react-query';
 import { retryQueryFn } from '@utils';
 
-export const ListFilter = () => {
+export const FilterSmartPole = () => {
   const { area, road, name, setRoad, setArea, setName } = useFilterSmartPoleStore();
 
   const { data: areasList } = useQuery({
@@ -98,12 +98,6 @@ export const ListFilter = () => {
     </div>
   );
 };
-
-// const roadsList = ['Đường 1', 'Đường 2', 'Đường 3'];
-
-// const areasList = ['HCMUT CS1', 'HCMUT CS2'];
-
-// const polesList = ['Pole 1', 'Pole 2', 'Pole 3'];
 
 const animation = {
   mount: { y: 0 },
