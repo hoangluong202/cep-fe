@@ -1,16 +1,13 @@
-import { Clock, ListCalendar, FilterSmartPole, SchedulerCalendar } from '@components';
+import { ListCalendar, FilterSmartPole, SchedulerCalendar } from '@components';
 
 export const CalendarPage = () => {
-  console.log('In page calendar');
-
   return (
-    <div className='flex flex-col h-full gap-y-2'>
-      <FilterSmartPole />
-      <div className='flex flex-row items-stretch'>
-        <div className='flex flex-col gap-y-2'>
-          <Clock />
-          <ListCalendar />
-        </div>
+    <div className='flex flex-row gap-x-2 h-full'>
+      <div className='w-1/5'>
+        <ListCalendar />
+      </div>
+      <div className='w-4/5 flex flex-col gap-y-2'>
+        <FilterSmartPole />
         <SchedulerCalendar />
       </div>
     </div>

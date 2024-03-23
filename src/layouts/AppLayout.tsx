@@ -40,9 +40,11 @@ export const AppLayout: Component<{ menu: RouteMenu }> = ({ menu }) => {
   }, [menu]);
 
   return (
-    <div className='flex flex-col h-screen sm:min-h-screen'>
-      <Header mainMenu={routeItems.mainItem} subMenu={routeItems.subItem} />
-      <div className='lg:p-4 flex-1 h-100vh bg-white'>
+    <div className='flex flex-col h-screen'>
+      <div className='h-15vh'>
+        <Header mainMenu={routeItems.mainItem} subMenu={routeItems.subItem} />
+      </div>
+      <div className='lg:p-4 flex-1 h-85vh bg-white'>
         <Routes>
           {routeItems.items.map((item) => (
             <Route path={item.path} element={item.element} key={item.path} />

@@ -563,7 +563,6 @@
       "burningHours": 60.46,
       "frequency": 22
     },
-
     {
       "id": "0",
       "area": "HCMUT-CS2",
@@ -1167,5 +1166,78 @@
   "roads": {
     "HCMUT-CS1": ["Đường 1", "Đường 2", "Đường 3", "Đường 4", "Đường 5"],
     "HCMUT-CS2": ["Đường 1", "Đường 2", "Đường 3", "Đường 4", "Đường 5", "Đường 6", "Đường 7"]
-  }
+  },
+  "calendars": [
+    {
+      "id": "1",
+      "name": "Lịch mặc định",
+      "color": "rgb(34 211 238)",
+      "elements": [
+        {
+          "startTime": 0,
+          "endTime": 360,
+          "lightLevel": 24
+        },
+        {
+          "startTime": 360,
+          "endTime": 1080,
+          "lightLevel": 0
+        },
+        {
+          "startTime": 1080,
+          "endTime": 1440,
+          "lightLevel": 85
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Lịch nghỉ tết",
+      "color": "rgb(74 222 128)",
+      "elements": [
+        {
+          "startTime": 0,
+          "endTime": 360,
+          "lightLevel": 55
+        },
+        {
+          "startTime": 360,
+          "endTime": 1080,
+          "lightLevel": 0
+        },
+        {
+          "startTime": 1080,
+          "endTime": 1440,
+          "lightLevel": 95
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Lịch sự kiện chạy bộ",
+      "color": "rgb(253 224 71)",
+      "elements": [
+        {
+          "startHour": 0,
+          "endHour": 360,
+          "lightLevel": 24
+        },
+        {
+          "startHour": 360,
+          "endHour": 1080,
+          "lightLevel": 0
+        },
+        {
+          "startHour": 1080,
+          "endHour": 1200,
+          "lightLevel": 100
+        },
+        {
+          "startHour": 1200,
+          "endHour": 1440,
+          "lightLevel": 85
+        }
+      ]
+    }
+  ]
 }

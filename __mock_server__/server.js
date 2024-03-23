@@ -5,6 +5,7 @@ const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const userdb = JSON.parse(fs.readFileSync('users.json', 'UTF-8'));
+const db = JSON.parse(fs.readFileSync('db.json', 'UTF-8'));
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
@@ -48,6 +49,17 @@ server.post('/auth/logout', (req, res) => {
   // In this simple example, we don't store sessions or tokens, so nothing needs to be done
   const message = 'Logged out successfully';
   res.status(200).json({ isAuthenticated: false, message });
+});
+
+server.post('/api/calendars', (req, res) => {
+  const body = req.body;
+  const newData = {
+    id: db.calendars.length + 1,
+    ...body
+  };
+  db.calendars.push(newData);
+  fs.writeFileSync('db.json', JSON.stringify(db, null, 2));
+  res.status(200).json(newData);
 });
 
 server.use(

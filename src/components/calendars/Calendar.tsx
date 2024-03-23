@@ -34,7 +34,6 @@ export const SchedulerCalendar: Component = () => {
       localizer={localizer}
       onSelectEvent={handleSelectEvent}
       onSelectSlot={handleSelectSlot}
-      style={{ height: '100%', width: '100%' }}
       selectable={true}
       popup={true}
       // showMultiDayTimes

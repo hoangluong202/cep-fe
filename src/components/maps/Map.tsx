@@ -2,7 +2,7 @@ import { Map, InfoWindow, useMarkerRef, Marker } from '@vis.gl/react-google-maps
 import { useEffect, useState } from 'react';
 import yellowLightBubIcon from '@assets/yellowLightBub.svg';
 import redLightBubIcon from '@assets/redLightBub.svg';
-import { PoleCard } from '@components';
+import { AppSkeleton, PoleCard } from '@components';
 import { useFilterSmartPoleStore } from '@states';
 import { useQuery } from '@tanstack/react-query';
 import { smartPoleService } from '@services';
@@ -86,7 +86,7 @@ const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ smartPole }) => {
 
 export function SimpleMap() {
   const { area, road, name } = useFilterSmartPoleStore();
-  const { data: smartPoles } = useQuery({
+  const { data: smartPoles, isFetching } = useQuery({
     queryKey: ['/api/poles', area, road, name],
     queryFn: () => smartPoleService.getBy(area, road, name),
     retry: retryQueryFn
@@ -98,6 +98,10 @@ export function SimpleMap() {
     setCenter(smartPoles?.[0]?.position || { lat: 10.80552892012782, lng: 106.63993540154873 });
     setZoom(area ? 16 : 10);
   }, [smartPoles, area]);
+
+  if (isFetching) {
+    return <AppSkeleton />;
+  }
   return (
     <Map
       style={{
