@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { APIProvider } from '@vis.gl/react-google-maps';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,10 +24,12 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <ToastContainer limit={1} />
-          <App />
-        </QueryClientProvider>
+        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY}>
+          <QueryClientProvider client={queryClient}>
+            <ToastContainer limit={1} />
+            <App />
+          </QueryClientProvider>
+        </APIProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -6,7 +6,7 @@
   "poles": [
     {
       "id": "0",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.77215316412856,
@@ -19,7 +19,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.772260329473895,
@@ -32,7 +32,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.77236749481923,
@@ -45,7 +45,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.772474660164566,
@@ -58,7 +58,7 @@
     },
     {
       "id": "4",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.7725818255099,
@@ -71,7 +71,7 @@
     },
     {
       "id": "5",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.772688990855233,
@@ -84,7 +84,7 @@
     },
     {
       "id": "6",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.772796156200567,
@@ -97,7 +97,7 @@
     },
     {
       "id": "7",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.772903321545902,
@@ -110,7 +110,7 @@
     },
     {
       "id": "8",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.773010486891238,
@@ -123,7 +123,7 @@
     },
     {
       "id": "9",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.773117652236571,
@@ -136,7 +136,7 @@
     },
     {
       "id": "10",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.773224817581907,
@@ -149,7 +149,7 @@
     },
     {
       "id": "11",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.77333198292724,
@@ -162,7 +162,7 @@
     },
     {
       "id": "12",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.773439148272573,
@@ -175,7 +175,7 @@
     },
     {
       "id": "13",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.773546313617908,
@@ -188,7 +188,7 @@
     },
     {
       "id": "14",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.773653478963244,
@@ -201,7 +201,7 @@
     },
     {
       "id": "15",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.77376064430858,
@@ -214,7 +214,7 @@
     },
     {
       "id": "16",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 1",
       "position": {
         "lat": 10.773867809653911,
@@ -227,7 +227,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 2",
       "position": {
         "lat": 10.773974974999247,
@@ -240,7 +240,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 2",
       "position": {
         "lat": 10.774188035027068,
@@ -253,7 +253,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 2",
       "position": {
         "lat": 10.774401095054888,
@@ -266,7 +266,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 2",
       "position": {
         "lat": 10.774614155082709,
@@ -279,7 +279,7 @@
     },
     {
       "id": "4",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 2",
       "position": {
         "lat": 10.77482721511053,
@@ -292,7 +292,7 @@
     },
     {
       "id": "5",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 2",
       "position": {
         "lat": 10.775040275138352,
@@ -305,7 +305,7 @@
     },
     {
       "id": "6",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 2",
       "position": {
         "lat": 10.775253335166173,
@@ -318,7 +318,7 @@
     },
     {
       "id": "7",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 2",
       "position": {
         "lat": 10.775466395193995,
@@ -331,7 +331,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 3",
       "position": {
         "lat": 10.772883143628613,
@@ -344,7 +344,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 3",
       "position": {
         "lat": 10.773099468632026,
@@ -357,7 +357,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 3",
       "position": {
         "lat": 10.77331579363544,
@@ -370,7 +370,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 3",
       "position": {
         "lat": 10.773532118638855,
@@ -383,7 +383,7 @@
     },
     {
       "id": "4",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 3",
       "position": {
         "lat": 10.773748443642269,
@@ -396,7 +396,7 @@
     },
     {
       "id": "5",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 3",
       "position": {
         "lat": 10.773964768645682,
@@ -409,7 +409,7 @@
     },
     {
       "id": "6",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 3",
       "position": {
         "lat": 10.774181093649096,
@@ -422,7 +422,7 @@
     },
     {
       "id": "7",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 3",
       "position": {
         "lat": 10.77439741865251,
@@ -435,7 +435,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 4",
       "position": {
         "lat": 10.774240810012396,
@@ -448,7 +448,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 4",
       "position": {
         "lat": 10.774119561384017,
@@ -461,7 +461,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 4",
       "position": {
         "lat": 10.773998312755639,
@@ -474,7 +474,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 4",
       "position": {
         "lat": 10.773877064127262,
@@ -487,7 +487,7 @@
     },
     {
       "id": "4",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 4",
       "position": {
         "lat": 10.773755815498886,
@@ -500,7 +500,7 @@
     },
     {
       "id": "5",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 4",
       "position": {
         "lat": 10.773634566870507,
@@ -513,7 +513,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 5",
       "position": {
         "lat": 10.772510479403829,
@@ -526,7 +526,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 5",
       "position": {
         "lat": 10.772723084525943,
@@ -539,7 +539,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 5",
       "position": {
         "lat": 10.772935689648055,
@@ -552,7 +552,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS1",
+      "area": "HCMUT-CS1",
       "road": "Đường 5",
       "position": {
         "lat": 10.773148294770168,
@@ -566,7 +566,7 @@
 
     {
       "id": "0",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 1",
       "position": {
         "lat": 10.879494116720537,
@@ -579,7 +579,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 1",
       "position": {
         "lat": 10.879694572037469,
@@ -592,7 +592,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 1",
       "position": {
         "lat": 10.879895027354403,
@@ -605,7 +605,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 1",
       "position": {
         "lat": 10.880095482671337,
@@ -618,7 +618,7 @@
     },
     {
       "id": "4",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 1",
       "position": {
         "lat": 10.880295937988269,
@@ -631,7 +631,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 2",
       "position": {
         "lat": 10.879584453005418,
@@ -644,7 +644,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 2",
       "position": {
         "lat": 10.879788006451738,
@@ -657,7 +657,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 2",
       "position": {
         "lat": 10.879991559898059,
@@ -670,7 +670,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 2",
       "position": {
         "lat": 10.88019511334438,
@@ -683,7 +683,7 @@
     },
     {
       "id": "4",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 2",
       "position": {
         "lat": 10.8803986667907,
@@ -696,7 +696,7 @@
     },
     {
       "id": "5",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 2",
       "position": {
         "lat": 10.880602220237021,
@@ -709,7 +709,7 @@
     },
     {
       "id": "6",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 2",
       "position": {
         "lat": 10.880805773683342,
@@ -722,7 +722,7 @@
     },
     {
       "id": "7",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 2",
       "position": {
         "lat": 10.881009327129663,
@@ -735,7 +735,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 3",
       "position": {
         "lat": 10.8805374162951,
@@ -748,7 +748,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 3",
       "position": {
         "lat": 10.880814784665985,
@@ -761,7 +761,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 4",
       "position": {
         "lat": 10.880246754560215,
@@ -774,7 +774,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 4",
       "position": {
         "lat": 10.880109822362835,
@@ -787,7 +787,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 4",
       "position": {
         "lat": 10.879972890165453,
@@ -800,7 +800,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 4",
       "position": {
         "lat": 10.879835957968073,
@@ -813,7 +813,7 @@
     },
     {
       "id": "4",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 4",
       "position": {
         "lat": 10.879699025770694,
@@ -826,7 +826,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 5",
       "position": {
         "lat": 10.88060943357524,
@@ -839,7 +839,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 5",
       "position": {
         "lat": 10.880458019506532,
@@ -852,7 +852,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 5",
       "position": {
         "lat": 10.880306605437823,
@@ -865,7 +865,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.881061831470612,
@@ -878,7 +878,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.880933676749923,
@@ -891,7 +891,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.880805522029235,
@@ -904,7 +904,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.880677367308545,
@@ -917,7 +917,7 @@
     },
     {
       "id": "4",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.880549212587857,
@@ -930,7 +930,7 @@
     },
     {
       "id": "5",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.880421057867167,
@@ -943,7 +943,7 @@
     },
     {
       "id": "6",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.880292903146477,
@@ -956,7 +956,7 @@
     },
     {
       "id": "7",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.88016474842579,
@@ -969,7 +969,7 @@
     },
     {
       "id": "8",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.8800365937051,
@@ -982,7 +982,7 @@
     },
     {
       "id": "9",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 6",
       "position": {
         "lat": 10.879908438984412,
@@ -995,7 +995,7 @@
     },
     {
       "id": "0",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.882045857727132,
@@ -1008,7 +1008,7 @@
     },
     {
       "id": "1",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.881919045666287,
@@ -1021,7 +1021,7 @@
     },
     {
       "id": "2",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.881792233605442,
@@ -1034,7 +1034,7 @@
     },
     {
       "id": "3",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.881665421544596,
@@ -1047,7 +1047,7 @@
     },
     {
       "id": "4",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.881538609483753,
@@ -1060,7 +1060,7 @@
     },
     {
       "id": "5",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.88141179742291,
@@ -1073,7 +1073,7 @@
     },
     {
       "id": "6",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.881284985362063,
@@ -1086,7 +1086,7 @@
     },
     {
       "id": "7",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.881158173301218,
@@ -1099,7 +1099,7 @@
     },
     {
       "id": "8",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.881031361240373,
@@ -1112,7 +1112,7 @@
     },
     {
       "id": "9",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.88090454917953,
@@ -1125,7 +1125,7 @@
     },
     {
       "id": "10",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.880777737118684,
@@ -1138,7 +1138,7 @@
     },
     {
       "id": "11",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.880650925057838,
@@ -1151,7 +1151,7 @@
     },
     {
       "id": "12",
-      "area": "HCMUT CS2",
+      "area": "HCMUT-CS2",
       "road": "Đường 7",
       "position": {
         "lat": 10.880524112996993,
@@ -1163,9 +1163,9 @@
       "frequency": 83
     }
   ],
-  "areas": ["HCMUT CS1", "HCMUT CS2"],
+  "areas": ["HCMUT-CS1", "HCMUT-CS2"],
   "roads": {
-    "HCMUT CS1": ["Đường 1", "Đường 2", "Đường 3", "Đường 4", "Đường 5"],
-    "HCMUT CS2": ["Đường 1", "Đường 2", "Đường 3", "Đường 4", "Đường 5", "Đường 6", "Đường 7"]
+    "HCMUT-CS1": ["Đường 1", "Đường 2", "Đường 3", "Đường 4", "Đường 5"],
+    "HCMUT-CS2": ["Đường 1", "Đường 2", "Đường 3", "Đường 4", "Đường 5", "Đường 6", "Đường 7"]
   }
 }

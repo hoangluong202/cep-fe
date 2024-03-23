@@ -1,4 +1,4 @@
-import { APIProvider, Map, InfoWindow, useMarkerRef, Marker } from '@vis.gl/react-google-maps';
+import { Map, InfoWindow, useMarkerRef, Marker } from '@vis.gl/react-google-maps';
 import { useState } from 'react';
 import yellowLightBubIcon from '@assets/yellowLightBub.svg';
 import redLightBubIcon from '@assets/redLightBub.svg';
@@ -84,28 +84,25 @@ const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ smartPole }) => {
 export function SimpleMap() {
   const { smartPoles, zoom, center, setZoom, setCenter } = useSmartPoleStore();
   return (
-    // Important! Always set the container height explicitly
-    <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY}>
-      <Map
-        style={{
-          width: '100%',
-          height: '100vh',
-          borderRadius: '10px',
-          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)'
-        }}
-        zoom={zoom}
-        center={center}
-        mapTypeId='terrain'
-        styles={defaultStyle}
-        onCameraChanged={(ev) => {
-          setCenter(ev.detail.center);
-          setZoom(ev.detail.zoom);
-        }}
-      >
-        {smartPoles.map((smartPole, index) => (
-          <MarkerWithInfo key={index} smartPole={smartPole} />
-        ))}
-      </Map>
-    </APIProvider>
+    <Map
+      style={{
+        width: '100%',
+        height: '100vh',
+        borderRadius: '10px',
+        boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)'
+      }}
+      zoom={zoom}
+      center={center}
+      mapTypeId='terrain'
+      styles={defaultStyle}
+      onCameraChanged={(ev) => {
+        setCenter(ev.detail.center);
+        setZoom(ev.detail.zoom);
+      }}
+    >
+      {smartPoles.map((smartPole, index) => (
+        <MarkerWithInfo key={index} smartPole={smartPole} />
+      ))}
+    </Map>
   );
 }

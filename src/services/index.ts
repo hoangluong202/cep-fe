@@ -4,5 +4,5 @@
 
 export * from './auth.service';
 export * from './common';
-export * from './smartPole';
+export * from './smartPole.service';
 export * from './user.service';

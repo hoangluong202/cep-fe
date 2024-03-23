@@ -46,7 +46,7 @@ export const useSmartPoleStore = create<SmartPoleStore>()((set, get) => ({
   getSmartPoleByAreaAndRoad: async (area, road) => {
     set(() => ({ smartPoleStatus: 'PENDING' }));
     try {
-      const smartPoles = await smartPoleService.getByAreaAndRoad(area, road);
+      const smartPoles = await smartPoleService.getBy(area, road);
       console.log('Call API GET SMART POLES BY AREA AND ROAD');
       set(() => ({ smartPoles: smartPoles, smartPoleStatus: 'SUCCESS' }));
     } catch (err) {

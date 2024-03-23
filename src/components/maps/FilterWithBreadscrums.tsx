@@ -1,6 +1,6 @@
 import { BreadcrumbsViewMap, SelectArea, SelectRoad } from '@components';
 
-export const Filter = () => {
+export const FilterWithBreadscrums = () => {
   return (
     <div className='flex justify-between'>
       <div>
