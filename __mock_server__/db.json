@@ -1169,73 +1169,154 @@
   },
   "calendars": [
     {
-      "id": "1",
-      "name": "Lịch mặc định",
-      "color": "rgb(34 211 238)",
-      "elements": [
+      "id": 1,
+      "name": "Lịch dành giờ Trái Đất",
+      "color": "#dc0909",
+      "configLightLevel": [
         {
-          "startTime": 0,
-          "endTime": 360,
-          "lightLevel": 24
+          "start": "00:00",
+          "end": "06:00",
+          "level": "12"
         },
         {
-          "startTime": 360,
-          "endTime": 1080,
-          "lightLevel": 0
+          "start": "06:00",
+          "end": "18:00",
+          "level": "0"
         },
         {
-          "startTime": 1080,
-          "endTime": 1440,
-          "lightLevel": 85
+          "start": "18:00",
+          "end": "20:30",
+          "level": "76"
+        },
+        {
+          "start": "20:30",
+          "end": "21:30",
+          "level": "0"
+        },
+        {
+          "start": "21:30",
+          "end": "23:59",
+          "level": "24"
         }
       ]
     },
     {
-      "id": "2",
-      "name": "Lịch nghỉ tết",
-      "color": "rgb(74 222 128)",
-      "elements": [
+      "id": 2,
+      "name": "Lịch nghỉ Tết",
+      "color": "#219744",
+      "configLightLevel": [
         {
-          "startTime": 0,
-          "endTime": 360,
-          "lightLevel": 55
+          "start": "00:00",
+          "end": "06:00",
+          "level": "90"
         },
         {
-          "startTime": 360,
-          "endTime": 1080,
-          "lightLevel": 0
+          "start": "06:00",
+          "end": "17:00",
+          "level": "0"
         },
         {
-          "startTime": 1080,
-          "endTime": 1440,
-          "lightLevel": 95
+          "start": "17:00",
+          "end": "23:59",
+          "level": "90"
         }
       ]
     },
     {
       "id": 3,
-      "name": "Lịch sự kiện chạy bộ",
-      "color": "rgb(253 224 71)",
-      "elements": [
+      "name": "Lịch chạy bộ Runner",
+      "color": "#dac225",
+      "configLightLevel": [
         {
-          "startHour": 0,
-          "endHour": 360,
-          "lightLevel": 24
+          "start": "00:00",
+          "end": "06:00",
+          "level": "13"
         },
         {
-          "startHour": 360,
-          "endHour": 1080,
-          "lightLevel": 0
+          "start": "06:00",
+          "end": "17:00",
+          "level": "0"
         },
         {
-          "startHour": 1080,
-          "endHour": 1200,
-          "lightLevel": 100
+          "start": "17:00",
+          "end": "19:00",
+          "level": "100"
         },
         {
-          "startHour": 1200,
-          "endHour": 1440,
-          "lightLevel": 85
+          "start": "19:00",
+          "end": "23:59",
+          "level": "21"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Lịch dành đón quan khách",
+      "color": "#151aa8",
+      "configLightLevel": [
+        {
+          "start": "00:00",
+          "end": "06:00",
+          "level": "31"
+        },
+        {
+          "start": "06:00",
+          "end": "08:00",
+          "level": "99"
+        },
+        {
+          "start": "08:00",
+          "end": "18:00",
+          "level": "0"
+        },
+        {
+          "start": "18:00",
+          "end": "23:59",
+          "level": "76"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Lịch tối Halloween",
+      "color": "#cd2acf",
+      "configLightLevel": [
+        {
+          "start": "00:00",
+          "end": "05:00",
+          "level": "80"
+        },
+        {
+          "start": "05:00",
+          "end": "17:00",
+          "level": "0"
+        },
+        {
+          "start": "17:00",
+          "end": "23:59",
+          "level": "83"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Lịch mặc định",
+      "color": "#000000",
+      "configLightLevel": [
+        {
+          "start": "00:00",
+          "end": "05:30",
+          "level": "16"
+        },
+        {
+          "start": "05:30",
+          "end": "17:30",
+          "level": "0"
+        },
+        {
+          "start": "17:30",
+          "end": "23:59",
+          "level": "80"
         }
       ]
     }

@@ -2,7 +2,7 @@ import { List, ListItem, ListItemPrefix, Dialog } from '@material-tailwind/react
 import { Card, Button, Typography } from '@material-tailwind/react';
 import { PlusIcon } from '@heroicons/react/24/solid';
 import { CalendarIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { AppSkeleton } from '@components';
 import { retryQueryFn } from '@utils';
 import { calendarService } from '@services';
@@ -17,11 +17,19 @@ export const ListCalendar = () => {
       configLightLevel: [{ start: '00:00', end: '23:59', level: '50' }]
     }
   });
+
   const { fields, append, remove } = useFieldArray({
     name: 'configLightLevel',
     control
   });
-  const onSubmit: SubmitHandler<CreateCalendarFormData> = (data) => console.log(data);
+
+  const onSubmit: SubmitHandler<CreateCalendarFormData> = (data) => {
+    mutation.mutate({
+      name: data.name,
+      color: data.color,
+      configLightLevel: data.configLightLevel
+    });
+  };
 
   const { data: listCalendars, isLoading } = useQuery({
     queryKey: ['/api/calendars'],
@@ -30,24 +38,23 @@ export const ListCalendar = () => {
   });
 
   const [openDialog, setOpenDialog] = useState(false);
+
   const handleOpenDialog = () => {
     setOpenDialog(!openDialog);
   };
 
-  // const mutation = useMutation({
-  //   mutationFn: calendarService.create
-  //   // onSuccess: () => {
-  //   //   // Invalidate and refetch
-  //   //   // queryClient.invalidateQueries({ queryKey: ['todos'] })
-  //   // },
-  // });
+  const mutation = useMutation({
+    mutationFn: calendarService.create
+  });
+
   if (isLoading) return <AppSkeleton />;
 
   const ConfigLightItem: Component<{
     index: number;
     field: FieldArrayWithId<CreateCalendarFormData, 'configLightLevel', 'id'>;
   }> = ({ index, field }) => {
-    const [level, setLevel] = useState('50');
+    const [level, setLevel] = useState(field.level);
+    const [lastEndTime, setLastEndTime] = useState('23:59');
 
     return (
       <div key={field.id} className='flex flex-row gap-x-2 mt-2'>
@@ -65,6 +72,11 @@ export const ListCalendar = () => {
           <input
             type='time'
             {...register(`configLightLevel.${index}.end`)}
+            onChange={(e) => {
+              if (index === fields.length - 1) {
+                setLastEndTime(e.target.value);
+              }
+            }}
             className='peer h-full w-full rounded-[7px]  !border  !border-gray-300 border-t-transparent bg-transparent bg-white px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700  shadow-lg shadow-gray-900/5 outline outline-0 ring-4 ring-transparent transition-all placeholder:text-gray-500 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2  focus:!border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 focus:ring-gray-900/10 disabled:border-0 disabled:bg-blue-gray-50'
           />
         </div>
@@ -92,6 +104,7 @@ export const ListCalendar = () => {
             color='red'
             onClick={() => {
               if (fields.length > 1) {
+                setLastEndTime(fields[fields.length - 2].end);
                 remove(index);
               }
             }}
@@ -100,9 +113,10 @@ export const ListCalendar = () => {
         <button
           type='button'
           className=''
+          hidden={index !== fields.length - 1 || lastEndTime === '23:59'}
           onClick={() =>
             append({
-              start: '00:00',
+              start: lastEndTime,
               end: '23:59',
               level: '50'
             })
@@ -113,6 +127,7 @@ export const ListCalendar = () => {
       </div>
     );
   };
+
   return (
     <>
       <Card className='shadow-blue-gray-900/5'>
@@ -122,8 +137,8 @@ export const ListCalendar = () => {
           </Typography>
         </div>
         <List>
-          {listCalendars?.map((calendar) => (
-            <ListItem>
+          {listCalendars?.map((calendar, index) => (
+            <ListItem key={index}>
               <ListItemPrefix>
                 <CalendarIcon className='h-5 w-5 ' fill={calendar.color} />
               </ListItemPrefix>
@@ -184,7 +199,7 @@ export const ListCalendar = () => {
             </div>
 
             <div className='flex flex-row-reverse gap-x-2'>
-              <Button type='submit' className='mt-6 w-48'>
+              <Button type='submit' className='mt-6 w-48' onClick={handleOpenDialog}>
                 Tạo
               </Button>
               <Button className='mt-6 w-48' onClick={handleOpenDialog}>

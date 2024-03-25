@@ -14,5 +14,8 @@
     "json-server, node, REST API"
   ],
   "author": "Jesper Orb",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }

@@ -1,14 +1,14 @@
-type TimeFragment = {
-  startHour: number;
-  endHour: number;
-  lightLevel: number;
+type ConfigLightLevel = {
+  start: string;
+  end: string;
+  level: string;
 };
 
 type MyCalendar = {
   id: string;
   name: string;
   color: string;
-  elements: TimeFragment[];
+  configLightLevel: ConfigLightLevel[];
 };
 
-type MyCalendarPayload = Omit<MyCalendar, 'id'>;
+type CreateCalendarFormData = Omit<MyCalendar, 'id'>;
