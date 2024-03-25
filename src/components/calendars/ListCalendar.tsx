@@ -1,5 +1,5 @@
-import { List, ListItem, ListItemPrefix, Dialog, Select } from '@material-tailwind/react';
-import { Card, Input, Option, Button, Typography } from '@material-tailwind/react';
+import { List, ListItem, ListItemPrefix, Dialog } from '@material-tailwind/react';
+import { Card, Button, Typography } from '@material-tailwind/react';
 import { PlusIcon } from '@heroicons/react/24/solid';
 import { CalendarIcon } from '@heroicons/react/24/outline';
 import { useQuery } from '@tanstack/react-query';
@@ -28,6 +28,7 @@ export const ListCalendar = () => {
   //   // },
   // });
   if (isLoading) return <AppSkeleton />;
+
   return (
     <>
       <Card className='shadow-blue-gray-900/5'>
@@ -64,30 +65,26 @@ export const ListCalendar = () => {
                 <Typography variant='h6' color='blue-gray' className='-mb-3'>
                   Tên lịch mới
                 </Typography>
-                <Input
-                  size='lg'
-                  placeholder='Lịch cho ...'
-                  className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
-                  labelProps={{
-                    className: 'before:content-none after:content-none'
-                  }}
-                  crossOrigin='true'
-                />
+                <div className='relative w-full min-w-[80px] h-10'>
+                  <input
+                    className='peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900'
+                    placeholder=' '
+                  />
+                  <label className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-blue-gray-200 peer-focus:before:!border-gray-900 after:border-blue-gray-200 peer-focus:after:!border-gray-900">
+                    Tên lịch mới
+                  </label>
+                </div>
               </div>
-              <div className='mb-1 flex flex-col gap-6'>
+              <div className='mb-1 flex flex-col gap-6 w-1/5'>
                 <Typography variant='h6' color='blue-gray' className='-mb-3'>
                   Chọn màu
                 </Typography>
-                <Input
-                  type='color'
-                  size='md'
-                  // placeholder='Lịch cho ...'
-                  // className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
-                  // labelProps={{
-                  //   className: 'before:content-none after:content-none'
-                  // }}
-                  crossOrigin='true'
-                />
+                <div className='relative h-10 w-full min-w-[80px] '>
+                  <input
+                    type='color'
+                    className='peer h-full w-full rounded-[7px]  !border  !border-gray-300 border-t-transparent bg-transparent bg-white px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700  shadow-lg shadow-gray-900/5 outline outline-0 ring-4 ring-transparent transition-all placeholder:text-gray-500 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2  focus:!border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 focus:ring-gray-900/10 disabled:border-0 disabled:bg-blue-gray-50'
+                  />
+                </div>
               </div>
             </div>
 
@@ -95,33 +92,32 @@ export const ListCalendar = () => {
               Cấu hình độ sáng
             </Typography>
 
-            <div className='flex flex-row gap-x-6'>
-              <Select
-                label='Hour'
-                onResize={() => {
-                  width: '100px';
-                }}
-              >
-                {[...Array(24).keys()].map((hour) => (
-                  <Option>{hour}</Option>
-                ))}
-              </Select>
+            <div className='flex flex-row gap-x-2 mt-2'>
+              <div className='relative h-10 w-40 min-w-[150px] '>
+                <input
+                  type='time'
+                  className='peer h-full w-full rounded-[7px]  !border  !border-gray-300 border-t-transparent bg-transparent bg-white px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700  shadow-lg shadow-gray-900/5 outline outline-0 ring-4 ring-transparent transition-all placeholder:text-gray-500 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2  focus:!border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 focus:ring-gray-900/10 disabled:border-0 disabled:bg-blue-gray-50'
+                />
+              </div>
+              <div className='relative h-10 w-5'>
+                <div className='absolute inset-0 pt-2'>-</div>
+              </div>
+              <div className='relative h-10 w-40 min-w-[150px] '>
+                <input
+                  type='time'
+                  className='peer h-full w-full rounded-[7px]  !border  !border-gray-300 border-t-transparent bg-transparent bg-white px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700  shadow-lg shadow-gray-900/5 outline outline-0 ring-4 ring-transparent transition-all placeholder:text-gray-500 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2  focus:!border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 focus:ring-gray-900/10 disabled:border-0 disabled:bg-blue-gray-50'
+                />
+              </div>
 
-              <Select label='Minute'>
-                {[...Array(60).keys()].map((hour) => (
-                  <Option>{hour}</Option>
-                ))}
-              </Select>
-              <Select label='Hour'>
-                {[...Array(24).keys()].map((hour) => (
-                  <Option>{hour}</Option>
-                ))}
-              </Select>
-              <Select label='Minute'>
-                {[...Array(60).keys()].map((hour) => (
-                  <Option>{hour}</Option>
-                ))}
-              </Select>
+              <div className='relative h-10 w-full min-w-[80px] '>
+                <input
+                  type='number'
+                  placeholder='0'
+                  min='0'
+                  max='100'
+                  className='peer h-full w-full rounded-[7px]  !border  !border-gray-300 border-t-transparent bg-transparent bg-white px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700  shadow-lg shadow-gray-900/5 outline outline-0 ring-4 ring-transparent transition-all placeholder:text-gray-500 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2  focus:!border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 focus:ring-gray-900/10 disabled:border-0 disabled:bg-blue-gray-50'
+                />
+              </div>
             </div>
 
             <Button className='mt-6 w-full'>CREATE</Button>
