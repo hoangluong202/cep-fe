@@ -3,7 +3,6 @@ import { Card, Button, Typography } from '@material-tailwind/react';
 import { PlusIcon } from '@heroicons/react/24/solid';
 import { CalendarIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { AppSkeleton } from '@components';
 import { retryQueryFn } from '@utils';
 import { calendarService } from '@services';
 import { useState } from 'react';
@@ -31,23 +30,29 @@ export const ListCalendar = () => {
     });
   };
 
-  const { data: listCalendars, isLoading } = useQuery({
+  const { data: listCalendars } = useQuery({
     queryKey: ['/api/calendars'],
     queryFn: () => calendarService.getAll(),
     retry: retryQueryFn
   });
 
-  const [openDialog, setOpenDialog] = useState(false);
+  const [calendar, setCalendar] = useState(listCalendars?.[0]);
 
-  const handleOpenDialog = () => {
-    setOpenDialog(!openDialog);
+  const [openFormDialog, setOpenFormDialog] = useState(false);
+  const handleOpenFormDialog = () => {
+    setOpenFormDialog(!openFormDialog);
+  };
+
+  const [openViewDialog, setOpenViewDialog] = useState(false);
+  const handleOpenViewDialog = (id: number) => {
+    setOpenViewDialog(!openViewDialog);
+    const calendar = listCalendars?.find((calendar) => calendar.id === id);
+    setCalendar(calendar || undefined); // Provide a default value for calendar
   };
 
   const mutation = useMutation({
     mutationFn: calendarService.create
   });
-
-  if (isLoading) return <AppSkeleton />;
 
   const ConfigLightItem: Component<{
     index: number;
@@ -138,14 +143,14 @@ export const ListCalendar = () => {
         </div>
         <List>
           {listCalendars?.map((calendar, index) => (
-            <ListItem key={index}>
+            <ListItem key={index} onClick={() => handleOpenViewDialog(calendar.id)}>
               <ListItemPrefix>
                 <CalendarIcon className='h-5 w-5 ' fill={calendar.color} />
               </ListItemPrefix>
               {calendar.name}
             </ListItem>
           ))}
-          <ListItem onClick={handleOpenDialog}>
+          <ListItem onClick={handleOpenFormDialog}>
             <ListItemPrefix>
               <PlusIcon className='h-5 w-5 ' />
             </ListItemPrefix>
@@ -153,7 +158,7 @@ export const ListCalendar = () => {
           </ListItem>
         </List>
       </Card>
-      <Dialog open={openDialog} handler={handleOpenDialog}>
+      <Dialog open={openFormDialog} handler={handleOpenFormDialog}>
         <Card color='transparent' shadow={false} className='p-10'>
           <Typography variant='h4' color='blue-gray' className='align-center'>
             Tạo thêm lịch mới
@@ -199,14 +204,32 @@ export const ListCalendar = () => {
             </div>
 
             <div className='flex flex-row-reverse gap-x-2'>
-              <Button type='submit' className='mt-6 w-48' onClick={handleOpenDialog}>
+              <Button type='submit' className='mt-6 w-48' onClick={handleOpenFormDialog}>
                 Tạo
               </Button>
-              <Button className='mt-6 w-48' onClick={handleOpenDialog}>
+              <Button className='mt-6 w-48' onClick={handleOpenFormDialog}>
                 Hủy
               </Button>
             </div>
           </form>
+        </Card>
+      </Dialog>
+      <Dialog open={openViewDialog} handler={handleOpenViewDialog}>
+        <Card color='transparent' shadow={false} className='p-10'>
+          <div className='flex flex-row h-full gap-3'>
+            <CalendarIcon className='h-full w-8 ' fill={calendar?.color} />
+            <Typography variant='h4' color='blue-gray' className='align-center'>
+              {calendar?.name}
+            </Typography>
+          </div>
+          <Typography variant='h6' color='blue-gray' className='align-center'>
+            Cấu hình độ sáng
+          </Typography>
+          {/* <div className='overflow-y-scroll max-h-72'>
+              {calendar?.configLightLevel.map((field, index) => (
+                <ConfigLightItem key={index} index={index}  />
+              ))}
+            </div> */}
         </Card>
       </Dialog>
     </>

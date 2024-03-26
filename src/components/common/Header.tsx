@@ -35,7 +35,7 @@ export const Header: Component<{ mainMenu: RouteMenu; subMenu: RouteMenu }> = ({
       <div className='flex items-center gap-2 text-blue-gray-900'>
         <Avatar className='border border-gray-900 p-0.5' src={logo} />
         <Typography as='a' href='#' variant='h5' className='mr-4 cursor-pointer py-1.5'>
-          Lighting Scheduling
+          Lập lịch chiếu sáng
         </Typography>
       </div>
       <ul className='my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6'>

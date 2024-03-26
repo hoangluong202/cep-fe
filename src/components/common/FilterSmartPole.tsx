@@ -41,7 +41,7 @@ export const FilterSmartPole = () => {
     <div className='flex flex-row-reverse gap-x-4'>
       <div className='w-48'>
         <Select
-          label='Select Smart Pole'
+          label='Chọn Smart Pole'
           animate={animation}
           onChange={(changedSmartPole) => {
             setName(changedSmartPole);
@@ -59,7 +59,7 @@ export const FilterSmartPole = () => {
       </div>
       <div className='w-48'>
         <Select
-          label='Select Road'
+          label='Chọn đường'
           animate={animation}
           onChange={(changedRoad) => {
             setRoad(changedRoad);
@@ -78,7 +78,7 @@ export const FilterSmartPole = () => {
       </div>
       <div className='w-48'>
         <Select
-          label='Select Area'
+          label='Chọn khu vực'
           animate={animation}
           onChange={(changedArea) => {
             setArea(changedArea);

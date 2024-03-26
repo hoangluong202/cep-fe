@@ -4,6 +4,7 @@
 
 export * from './calendars/Calendar';
 export * from './calendars/Clock';
+export * from './calendars/FormUsingCalendar';
 export * from './calendars/ListCalendar';
 export * from './common/AppSkeleton';
 export * from './common/FilterSmartPole';
