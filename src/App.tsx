@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { AppLayout, AuthLayout } from '@layouts';
 import { AuthPage, CalendarPage, ViewMapPage } from '@pages';
-import { AppSkeleton, /*DefaultCard,*/ SimpleCard } from '@components';
+import { AppSkeleton } from '@components';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 import { emitEvent, useUserQuery } from '@hooks';
 import { toast } from 'react-toastify';
@@ -71,8 +71,7 @@ export default function App() {
             type: 'main-item',
             path: '/inventory',
             name: MAIN_MENU.inventory,
-            // element: <DefaultCard/>
-            element: <SimpleCard />
+            element: <></>
           },
           {
             type: 'main-item',
