@@ -1,4 +1,4 @@
-import { ListCalendar, FilterSmartPole, SchedulerCalendar, FormUsingCalendar } from '@components';
+import { ListCalendar, FilterSmartPole, SchedulerCalendar, SchedulerForm } from '@components';
 
 export const CalendarPage = () => {
   return (
@@ -9,7 +9,7 @@ export const CalendarPage = () => {
       <div className='w-4/5 flex flex-col gap-y-2'>
         <div className='flex flex-row-reverse gap-x-5'>
           <FilterSmartPole />
-          <FormUsingCalendar />
+          <SchedulerForm />
         </div>
         <SchedulerCalendar />
       </div>

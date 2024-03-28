@@ -1169,7 +1169,7 @@
   },
   "calendars": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Lịch dành giờ Trái Đất",
       "color": "#dc0909",
       "configLightLevel": [
@@ -1201,7 +1201,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Lịch nghỉ Tết",
       "color": "#219744",
       "configLightLevel": [
@@ -1223,7 +1223,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Lịch chạy bộ Runner",
       "color": "#dac225",
       "configLightLevel": [
@@ -1250,7 +1250,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Lịch dành đón quan khách",
       "color": "#151aa8",
       "configLightLevel": [
@@ -1277,7 +1277,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Lịch tối Halloween",
       "color": "#cd2acf",
       "configLightLevel": [
@@ -1299,7 +1299,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Lịch mặc định",
       "color": "#000000",
       "configLightLevel": [
@@ -1319,6 +1319,53 @@
           "level": "80"
         }
       ]
+    },
+    {
+      "id": "7",
+      "name": "Lịch nghỉ lễ",
+      "color": "#ae2929",
+      "configLightLevel": [
+        {
+          "start": "00:00",
+          "end": "05:00",
+          "level": "17"
+        },
+        {
+          "start": "05:00",
+          "end": "17:00",
+          "level": "0"
+        },
+        {
+          "start": "17:00",
+          "end": "23:59",
+          "level": "84"
+        }
+      ]
+    }
+  ],
+  "schedulers": [
+    {
+      "id": "1",
+      "isRepeat": true,
+      "startDate": "",
+      "repeatInterval": "10",
+      "repeatType": "week",
+      "endDate": "",
+      "repeatValue": "7",
+      "calendarId": "3"
+    },
+    {
+      "id": "2",
+      "isRepeat": false,
+      "startDate": "2024-03-28",
+      "repeatInterval": "10",
+      "repeatType": "week",
+      "endDate": "2024-03-30",
+      "repeatValue": "7",
+      "calendarId": "4",
+      "area": "HCMUT-CS1",
+      "road": "Đường 2",
+      "smartPole": "Pole-2"
     }
   ]
 }

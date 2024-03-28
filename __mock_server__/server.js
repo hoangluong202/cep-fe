@@ -54,10 +54,21 @@ server.post('/auth/logout', (req, res) => {
 server.post('/api/calendars', (req, res) => {
   const body = req.body;
   const newData = {
-    id: db.calendars.length + 1,
+    id: (db.calendars.length + 1).toString(),
     ...body
   };
   db.calendars.push(newData);
+  fs.writeFileSync('db.json', JSON.stringify(db, null, 2));
+  res.status(200).json(newData);
+});
+
+server.post('/api/schedulers', (req, res) => {
+  const body = req.body;
+  const newData = {
+    id: (db.schedulers.length + 1).toString(),
+    ...body
+  };
+  db.schedulers.push(newData);
   fs.writeFileSync('db.json', JSON.stringify(db, null, 2));
   res.status(200).json(newData);
 });

@@ -5,7 +5,7 @@ type ConfigLightLevel = {
 };
 
 type MyCalendar = {
-  id: number;
+  id: string;
   name: string;
   color: string;
   configLightLevel: ConfigLightLevel[];

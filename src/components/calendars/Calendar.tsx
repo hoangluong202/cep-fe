@@ -36,7 +36,6 @@ export const SchedulerCalendar: Component = () => {
       onSelectSlot={handleSelectSlot}
       selectable={true}
       popup={true}
-      // showMultiDayTimes
       eventPropGetter={(event) => {
         return {
           style: {
@@ -69,53 +68,5 @@ const myEvents = [
     end: addDays(now, 1),
     color: 'rgb(34 211 238)',
     priority: 0
-  },
-  {
-    id: '1.1',
-    title: 'Lịch mặc định',
-    start: addDays(now, 7),
-    end: addDays(now, 18),
-    color: 'rgb(34 211 238)',
-    priority: 0
-  },
-  {
-    id: '2',
-    title: 'Lịch nghỉ tết',
-    start: addDays(now, 1),
-    end: addDays(now, 3),
-    color: 'rgb(74 222 128)',
-    priority: 1
-  },
-  {
-    id: '3',
-    title: 'Lịch chạy bộ',
-    start: addDays(now, 3),
-    end: addDays(now, 4),
-    color: 'rgb(253 224 71)',
-    priority: 2
-  },
-  {
-    id: '4',
-    title: 'Lịch đón quan khách',
-    start: addDays(now, 4),
-    end: addDays(now, 5),
-    color: 'rgb(249 115 22)',
-    priority: 2
-  },
-  {
-    id: '5',
-    title: 'Lịch Halloween',
-    start: addDays(now, 5),
-    end: addDays(now, 6),
-    color: 'rgb(52 211 153)',
-    priority: 1
-  },
-  {
-    id: '6',
-    title: 'Lịch giờ Trái Đất',
-    start: addDays(now, 6),
-    end: addDays(now, 7),
-    color: 'rgb(190 18 60)',
-    priority: 1
   }
 ];

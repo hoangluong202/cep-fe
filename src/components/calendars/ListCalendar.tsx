@@ -44,7 +44,7 @@ export const ListCalendar = () => {
   };
 
   const [openViewDialog, setOpenViewDialog] = useState(false);
-  const handleOpenViewDialog = (id: number) => {
+  const handleOpenViewDialog = (id: string) => {
     setOpenViewDialog(!openViewDialog);
     const calendar = listCalendars?.find((calendar) => calendar.id === id);
     setCalendar(calendar || undefined); // Provide a default value for calendar
@@ -219,7 +219,7 @@ export const ListCalendar = () => {
           <div className='flex flex-row h-full gap-3'>
             <CalendarIcon className='h-full w-8 ' fill={calendar?.color} />
             <Typography variant='h4' color='blue-gray' className='align-center'>
-              {calendar?.name}
+              {calendar?.name}''
             </Typography>
           </div>
           <Typography variant='h6' color='blue-gray' className='align-center'>
