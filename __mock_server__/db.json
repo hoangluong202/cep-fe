@@ -1170,7 +1170,7 @@
   "calendars": [
     {
       "id": "1",
-      "name": "Lịch dành giờ Trái Đất",
+      "name": "Lịch giờ Trái Đất",
       "color": "#dc0909",
       "configLightLevel": [
         {
@@ -1301,7 +1301,7 @@
     {
       "id": "6",
       "name": "Lịch mặc định",
-      "color": "#000000",
+      "color": "#33E0FF",
       "configLightLevel": [
         {
           "start": "00:00",
@@ -1343,29 +1343,5 @@
       ]
     }
   ],
-  "schedulers": [
-    {
-      "id": "1",
-      "isRepeat": true,
-      "startDate": "",
-      "repeatInterval": "10",
-      "repeatType": "week",
-      "endDate": "",
-      "repeatValue": "7",
-      "calendarId": "3"
-    },
-    {
-      "id": "2",
-      "isRepeat": false,
-      "startDate": "2024-03-28",
-      "repeatInterval": "10",
-      "repeatType": "week",
-      "endDate": "2024-03-30",
-      "repeatValue": "7",
-      "calendarId": "4",
-      "area": "HCMUT-CS1",
-      "road": "Đường 2",
-      "smartPole": "Pole-2"
-    }
-  ]
+  "schedulers": []
 }

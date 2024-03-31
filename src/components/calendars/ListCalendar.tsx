@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemPrefix, Dialog } from '@material-tailwind/react';
+import { List, ListItem, ListItemPrefix, Dialog, Switch } from '@material-tailwind/react';
 import { Card, Button, Typography } from '@material-tailwind/react';
 import { PlusIcon } from '@heroicons/react/24/solid';
 import { CalendarIcon, TrashIcon } from '@heroicons/react/24/outline';
@@ -36,18 +36,9 @@ export const ListCalendar = () => {
     retry: retryQueryFn
   });
 
-  const [calendar, setCalendar] = useState(listCalendars?.[0]);
-
   const [openFormDialog, setOpenFormDialog] = useState(false);
   const handleOpenFormDialog = () => {
     setOpenFormDialog(!openFormDialog);
-  };
-
-  const [openViewDialog, setOpenViewDialog] = useState(false);
-  const handleOpenViewDialog = (id: string) => {
-    setOpenViewDialog(!openViewDialog);
-    const calendar = listCalendars?.find((calendar) => calendar.id === id);
-    setCalendar(calendar || undefined); // Provide a default value for calendar
   };
 
   const mutation = useMutation({
@@ -136,14 +127,24 @@ export const ListCalendar = () => {
   return (
     <>
       <Card className='shadow-blue-gray-900/5'>
-        <div className='mb-2 p-4'>
-          <Typography variant='h5' color='blue-gray'>
+        <div className='flex justify-between pt-4 pl-4'>
+          <Typography variant='h5' color='blue-gray' className=''>
             Lịch của tôi
           </Typography>
+          <div className='flex flex-row gap-x-2'>
+            <Switch color='blue' crossOrigin='' className='' />
+            <CalendarIcon className='h-6 w-6 mt-0.5 mr-2' />
+          </div>
         </div>
         <List>
           {listCalendars?.map((calendar, index) => (
-            <ListItem key={index} onClick={() => handleOpenViewDialog(calendar.id)}>
+            <ListItem
+              key={index}
+              ripple={false}
+              // onClick={() => {
+              //   handleOpenViewDialog(calendar.id);
+              // }}
+            >
               <ListItemPrefix>
                 <CalendarIcon className='h-5 w-5 ' fill={calendar.color} />
               </ListItemPrefix>
@@ -212,24 +213,6 @@ export const ListCalendar = () => {
               </Button>
             </div>
           </form>
-        </Card>
-      </Dialog>
-      <Dialog open={openViewDialog} handler={handleOpenViewDialog}>
-        <Card color='transparent' shadow={false} className='p-10'>
-          <div className='flex flex-row h-full gap-3'>
-            <CalendarIcon className='h-full w-8 ' fill={calendar?.color} />
-            <Typography variant='h4' color='blue-gray' className='align-center'>
-              {calendar?.name}''
-            </Typography>
-          </div>
-          <Typography variant='h6' color='blue-gray' className='align-center'>
-            Cấu hình độ sáng
-          </Typography>
-          {/* <div className='overflow-y-scroll max-h-72'>
-              {calendar?.configLightLevel.map((field, index) => (
-                <ConfigLightItem key={index} index={index}  />
-              ))}
-            </div> */}
         </Card>
       </Dialog>
     </>

@@ -11,7 +11,7 @@ export const CalendarPage = () => {
           <FilterSmartPole />
           <SchedulerForm />
         </div>
-        <SchedulerCalendar />
+        {<SchedulerCalendar />}
       </div>
     </div>
   );

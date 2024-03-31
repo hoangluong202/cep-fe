@@ -9,18 +9,18 @@ import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { addDays, startOfDay, subDays } from 'date-fns';
-import { MyEvent } from 'src/types/event';
+import { Event } from 'react-big-calendar';
 
 export const SchedulerCalendar: Component = () => {
-  const [events, setEvents] = useState<MyEvent[]>(myEvents);
+  const [events, setEvents] = useState<Event[]>(myEvents);
 
-  const handleSelectEvent = useCallback((event: MyEvent) => window.alert(event.title), []);
+  const handleSelectEvent = useCallback((event: Event) => window.alert(event.title), []);
 
   const handleSelectSlot = useCallback(
-    ({ start, end }: MyEvent) => {
+    ({ start, end }: Event) => {
       const title = window.prompt('New Event name');
       if (title) {
-        setEvents((prev) => [...prev, { start, end, title }]);
+        setEvents((prev) => [...prev, { start, end, title, color: '#219744' }]);
       }
     },
     [setEvents]
@@ -30,16 +30,16 @@ export const SchedulerCalendar: Component = () => {
     <Calendar
       dayLayoutAlgorithm={'no-overlap'}
       defaultView={Views.MONTH}
-      events={events.sort((a, b) => (a.priority && b.priority ? b.priority - a.priority : 0))}
+      events={events}
       localizer={localizer}
       onSelectEvent={handleSelectEvent}
       onSelectSlot={handleSelectSlot}
       selectable={true}
       popup={true}
-      eventPropGetter={(event) => {
+      eventPropGetter={(e) => {
         return {
           style: {
-            backgroundColor: event.color,
+            backgroundColor: e.resource?.color,
             color: 'black'
           }
         };
@@ -59,14 +59,77 @@ const localizer = dateFnsLocalizer({
   getDay,
   locales
 });
+//event repeat of Event type
 
-const myEvents = [
+const myEvents: Event[] = [
   {
-    id: '1',
     title: 'Lịch mặc định',
-    start: subDays(now, 24),
-    end: addDays(now, 1),
-    color: 'rgb(34 211 238)',
-    priority: 0
+    start: subDays(now, 33),
+    end: subDays(now, 23),
+    allDay: true,
+    resource: {
+      id: '6',
+      color: '#33E0FF'
+    }
+  },
+  {
+    title: 'Lịch giờ Trái Đất',
+    start: subDays(now, 23),
+    end: subDays(now, 20),
+    allDay: true,
+    resource: {
+      id: '1',
+      color: '#dc0909'
+    }
+  },
+  {
+    title: 'Lịch mặc định',
+    start: subDays(now, 20),
+    end: subDays(now, 10),
+    allDay: true,
+    resource: {
+      id: '6',
+      color: '#33E0FF'
+    }
+  },
+  {
+    title: 'Lịch chạy bộ Runner',
+    start: subDays(now, 10),
+    end: subDays(now, 9),
+    allDay: true,
+    resource: {
+      id: '3',
+      color: '#dac225'
+    }
+  },
+  {
+    title: 'Lịch mặc định',
+    start: subDays(now, 9),
+    end: now,
+    allDay: true,
+    resource: {
+      id: '6',
+      color: '#33E0FF'
+    }
+  },
+  {
+    title: 'Lịch dành đón quan khách',
+    start: now,
+    end: addDays(now, 2),
+    allDay: true,
+    resource: {
+      id: '4',
+      color: '#151aa8'
+    }
+  },
+  {
+    title: 'Lịch mặc định',
+    start: addDays(now, 2),
+    end: addDays(now, 10),
+    allDay: true,
+    resource: {
+      id: '6',
+      color: '#33E0FF'
+    }
   }
 ];
