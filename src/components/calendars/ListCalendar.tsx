@@ -7,6 +7,7 @@ import { retryQueryFn } from '@utils';
 import { calendarService } from '@services';
 import { useState } from 'react';
 import { useForm, SubmitHandler, useFieldArray, FieldArrayWithId } from 'react-hook-form';
+import { useIsShowCalendar } from '@states';
 
 export const ListCalendar = () => {
   const { register, handleSubmit, control } = useForm<CreateCalendarFormData>({
@@ -16,6 +17,8 @@ export const ListCalendar = () => {
       configLightLevel: [{ start: '00:00', end: '23:59', level: '50' }]
     }
   });
+
+  const { isShowCalendar, setIsShowCalendar } = useIsShowCalendar();
 
   const { fields, append, remove } = useFieldArray({
     name: 'configLightLevel',
@@ -132,7 +135,13 @@ export const ListCalendar = () => {
             Lịch của tôi
           </Typography>
           <div className='flex flex-row gap-x-2'>
-            <Switch color='blue' crossOrigin='' className='' />
+            <Switch
+              color='blue'
+              crossOrigin=''
+              className=''
+              checked={isShowCalendar}
+              onChange={() => setIsShowCalendar(!isShowCalendar)}
+            />
             <CalendarIcon className='h-6 w-6 mt-0.5 mr-2' />
           </div>
         </div>
