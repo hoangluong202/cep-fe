@@ -7,7 +7,7 @@ import { retryQueryFn } from '@utils';
 import { calendarService } from '@services';
 import { useState } from 'react';
 import { useForm, SubmitHandler, useFieldArray, FieldArrayWithId } from 'react-hook-form';
-import { useIsShowCalendar } from '@states';
+import { useIsShow } from '@states';
 
 export const ListCalendar = () => {
   const { register, handleSubmit, control } = useForm<CreateCalendarFormData>({
@@ -18,7 +18,7 @@ export const ListCalendar = () => {
     }
   });
 
-  const { isShowCalendar, setIsShowCalendar } = useIsShowCalendar();
+  const { isShowCalendar, setIsShowCalendar } = useIsShow();
 
   const { fields, append, remove } = useFieldArray({
     name: 'configLightLevel',

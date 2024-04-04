@@ -15,7 +15,7 @@ import { calendarService, schedulerService } from '@services';
 import { retryQueryFn } from '@utils';
 import { FilterSmartPole } from '@components';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useFilterSmartPoleStore } from '@states';
+import { useFilterSmartPoleStore, useIsShow } from '@states';
 
 const weekDays = [
   {
@@ -68,9 +68,9 @@ const repeatOptions = [
 ];
 
 export const SchedulerForm = () => {
-  const [openDialog, setOpenDialog] = useState(false);
+  const { isShowSchedulerForm, setIsShowSchedulerForm } = useIsShow();
   const handleOpenDialog = () => {
-    setOpenDialog(!openDialog);
+    setIsShowSchedulerForm(!isShowSchedulerForm);
   };
 
   const [calendarId, setCalendarId] = useState<string | undefined>('');
@@ -109,7 +109,7 @@ export const SchedulerForm = () => {
       <button type='button' onClick={handleOpenDialog} className='h-full'>
         <PlusCircleIcon className='h-full w-8' />
       </button>
-      <Dialog open={openDialog} handler={handleOpenDialog} className='w-fit'>
+      <Dialog open={isShowSchedulerForm} handler={handleOpenDialog} className='w-fit'>
         <Card color='transparent' shadow={false} className='p-5'>
           <Typography variant='h5' color='blue-gray'>
             Cài đặt lịch cho Smart Pole

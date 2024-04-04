@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { Calendar, dateFnsLocalizer, Views } from 'react-big-calendar';
 import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
@@ -23,24 +23,19 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline';
 import { PieChart } from '@mui/x-charts';
+import { useIsShow } from '@states';
 
 export const SchedulerCalendar: Component = () => {
-  const [events, setEvents] = useState<Event[]>(myEvents);
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const handleSelectEvent = () => {
     setIsChecked(!isChecked);
   };
 
-  const handleSelectSlot = useCallback(
-    ({ start, end }: Event) => {
-      const title = window.prompt('New Event name');
-      if (title) {
-        setEvents((prev) => [...prev, { start, end, title, color: '#219744' }]);
-      }
-    },
-    [setEvents]
-  );
+  const { setIsShowSchedulerForm } = useIsShow();
+  const handleSelectSlot = () => {
+    setIsShowSchedulerForm(true);
+  };
 
   function getColor(value: number, min = 0, max = 100) {
     if (value === 0) return 'rgb(150,150,150)';
@@ -68,7 +63,7 @@ export const SchedulerCalendar: Component = () => {
       <Calendar
         dayLayoutAlgorithm={'no-overlap'}
         defaultView={Views.MONTH}
-        events={events}
+        events={myEvents}
         localizer={localizer}
         onSelectEvent={handleSelectEvent}
         onSelectSlot={handleSelectSlot}

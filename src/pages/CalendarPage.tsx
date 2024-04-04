@@ -2,11 +2,11 @@ import { ListCalendar, FilterSmartPole, SchedulerCalendar, SchedulerForm } from 
 import { CalendarIcon, ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { Chip, Typography } from '@material-tailwind/react';
 import { PieChart } from '@mui/x-charts';
-import { useIsShowCalendar } from '@states';
+import { useIsShow } from '@states';
 import { differenceInMinutes, parse } from 'date-fns';
 
 export const CalendarPage = () => {
-  const { isShowCalendar } = useIsShowCalendar();
+  const { isShowCalendar } = useIsShow();
 
   function getColor(value: number, min = 0, max = 100) {
     if (value === 0) return 'rgb(150,150,150)';
