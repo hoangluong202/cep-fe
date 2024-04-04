@@ -147,13 +147,7 @@ export const ListCalendar = () => {
         </div>
         <List>
           {listCalendars?.map((calendar, index) => (
-            <ListItem
-              key={index}
-              ripple={false}
-              // onClick={() => {
-              //   handleOpenViewDialog(calendar.id);
-              // }}
-            >
+            <ListItem key={index} ripple={false} onClick={() => setIsShowCalendar(false)}>
               <ListItemPrefix>
                 <CalendarIcon className='h-5 w-5 ' fill={calendar.color} />
               </ListItemPrefix>

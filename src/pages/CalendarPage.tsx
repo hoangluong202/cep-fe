@@ -110,11 +110,11 @@ export const CalendarPage = () => {
 
   return (
     <div className='flex flex-row gap-x-2 h-full'>
-      <div className='w-1/5 100vw'>
+      <div className='w-1/5'>
         <ListCalendar />
       </div>
       {isShowCalendar && (
-        <div className='w-4/5 flex flex-col gap-y-2'>
+        <div className='w-full h-full flex flex-col gap-y-2 px-2 py-2.5 bg-white shadow-md bg-clip-border rounded-xl'>
           <div className='flex flex-row-reverse gap-x-5'>
             <FilterSmartPole />
             <SchedulerForm />
@@ -144,7 +144,7 @@ export const CalendarPage = () => {
                     innerRadius: '5%',
                     outerRadius: '80%',
                     endAngle: 360,
-                    cx: '80%',
+                    cx: '70%',
                     cy: '25%'
                   }
                 ]}
@@ -154,7 +154,7 @@ export const CalendarPage = () => {
                   legend: {
                     direction: 'column',
                     position: { vertical: 'bottom', horizontal: 'middle' },
-                    padding: 50,
+                    padding: 60,
                     itemMarkWidth: 20,
                     itemMarkHeight: 10,
                     markGap: 5,
