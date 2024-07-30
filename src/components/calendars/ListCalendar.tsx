@@ -14,7 +14,7 @@ export const ListCalendar = () => {
     defaultValues: {
       name: 'Lịch dành cho ...',
       color: '#000000',
-      configLightLevel: [{ start: '00:00', end: '23:59', level: '50' }]
+      configLightLevel: [{ startHour: '00:00', endHour: '23:59', lightLevel: '50' }]
     }
   });
 
@@ -33,10 +33,23 @@ export const ListCalendar = () => {
     });
   };
 
-  const { data: listCalendars } = useQuery({
+  // const { data: listCalendars } = useQuery({
+  //   queryKey: ['/api/calendars'],
+  //   queryFn: () => calendarService.getAll(),
+  //   retry: retryQueryFn
+  // });
+
+  const { data: listCalendars, refetch } = useQuery({
     queryKey: ['/api/calendars'],
     queryFn: () => calendarService.getAll(),
     retry: retryQueryFn
+  });
+
+  listCalendars?.forEach((calendar) => {
+    if (calendar.name === 'Lịch giờ Trái Đất') calendar.color = '#dc0909';
+    if (calendar.name === 'Lịch mặc định') calendar.color = '#33E0FF';
+    if (calendar.name === 'Lịch chạy bộ') calendar.color = '#dac225';
+    if (calendar.name === 'Lịch đón quan khách') calendar.color = '#151aa8';
   });
 
   const [openFormDialog, setOpenFormDialog] = useState(false);
@@ -44,15 +57,22 @@ export const ListCalendar = () => {
     setOpenFormDialog(!openFormDialog);
   };
 
+  // const mutation = useMutation({
+  //   mutationFn: calendarService.create
+  // });
+
   const mutation = useMutation({
-    mutationFn: calendarService.create
+    mutationFn: calendarService.create,
+    onSuccess: () => {
+      refetch();
+    }
   });
 
   const ConfigLightItem: Component<{
     index: number;
     field: FieldArrayWithId<CreateCalendarFormData, 'configLightLevel', 'id'>;
   }> = ({ index, field }) => {
-    const [level, setLevel] = useState(field.level);
+    const [level, setLevel] = useState(field.lightLevel);
     const [lastEndTime, setLastEndTime] = useState('23:59');
 
     return (
@@ -60,7 +80,7 @@ export const ListCalendar = () => {
         <div className='relative h-10 w-40 min-w-[150px] '>
           <input
             type='time'
-            {...register(`configLightLevel.${index}.start`)}
+            {...register(`configLightLevel.${index}.startHour`)}
             className='peer h-full w-full rounded-[7px]  !border  !border-gray-300 border-t-transparent bg-transparent bg-white px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700  shadow-lg shadow-gray-900/5 outline outline-0 ring-4 ring-transparent transition-all placeholder:text-gray-500 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2  focus:!border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 focus:ring-gray-900/10 disabled:border-0 disabled:bg-blue-gray-50'
           />
         </div>
@@ -70,7 +90,7 @@ export const ListCalendar = () => {
         <div className='relative h-10 w-40 min-w-[150px] '>
           <input
             type='time'
-            {...register(`configLightLevel.${index}.end`)}
+            {...register(`configLightLevel.${index}.endHour`)}
             onChange={(e) => {
               if (index === fields.length - 1) {
                 setLastEndTime(e.target.value);
@@ -86,7 +106,7 @@ export const ListCalendar = () => {
             min='0'
             max='100'
             step='1'
-            {...register(`configLightLevel.${index}.level`)}
+            {...register(`configLightLevel.${index}.lightLevel`)}
             onChange={(e) => {
               setLevel(e.target.value);
             }}
@@ -103,7 +123,7 @@ export const ListCalendar = () => {
             color='red'
             onClick={() => {
               if (fields.length > 1) {
-                setLastEndTime(fields[fields.length - 2].end);
+                setLastEndTime(fields[fields.length - 2].endHour);
                 remove(index);
               }
             }}
@@ -115,9 +135,9 @@ export const ListCalendar = () => {
           hidden={index !== fields.length - 1 || lastEndTime === '23:59'}
           onClick={() =>
             append({
-              start: lastEndTime,
-              end: '23:59',
-              level: '50'
+              startHour: lastEndTime,
+              endHour: '23:59',
+              lightLevel: '50'
             })
           }
         >

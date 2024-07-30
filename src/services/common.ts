@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 
 export const server = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
-  withCredentials: true
+  withCredentials: false
 });
 
 export async function invoke<R = unknown, D = unknown>(call: Promise<AxiosResponse<R, D>>) {

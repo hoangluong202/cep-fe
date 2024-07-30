@@ -1,5 +1,5 @@
 import { server, invoke } from './common';
 
 export const userService = {
-  getInfo: () => invoke<UserReturnValue>(server.get('/api/users'))
+  getInfo: (id: number) => invoke<UserReturnValue>(server.get(`/api/users/${id}`))
 };

@@ -53,9 +53,9 @@ export const CalendarPage = () => {
       ) : (
         <ChevronRightIcon className='h-4 w-4' />
       )}
-      <p className='block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900'>
+      <h6 className='block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900'>
         {data}
-      </p>
+      </h6>
     </div>
   );
 
@@ -237,9 +237,9 @@ export const CalendarPage = () => {
                       </button>
                     </td>
                     <td className='p-4 border-b border-blue-gray-50'>
-                      <p className='block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900'>
+                      <h6 className='block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900'>
                         <CalendarChip calendarType='pole' calendarName='Lịch giờ Trái Đất' />
-                      </p>
+                      </h6>
                     </td>
                   </tr>
                 </tbody>

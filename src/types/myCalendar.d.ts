@@ -1,7 +1,7 @@
 type ConfigLightLevel = {
-  start: string;
-  end: string;
-  level: string;
+  startHour: string;
+  endHour: string;
+  lightLevel: string;
 };
 
 type MyCalendar = {

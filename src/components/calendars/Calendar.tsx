@@ -142,7 +142,7 @@ export const SchedulerCalendar: Component = () => {
                   <MapPinIcon className='h-full w-full' color='#356859' />
                 </div>
                 <div className='flex flex-col gap-y-1 h-full w-full'>
-                  <Typography variant='body1' style={{ color: '#356859' }} className='font-bold'>
+                  <Typography variant='small' style={{ color: '#356859' }} className='font-bold'>
                     Vị trí áp dụng
                   </Typography>
                   <Typography variant='h5' color='blue-gray'>
@@ -160,7 +160,7 @@ export const SchedulerCalendar: Component = () => {
                   <ClockIcon className='h-full w-full' color='#356859' />
                 </div>
                 <div className='flex flex-col gap-y-1 h-full w-full'>
-                  <Typography variant='body1' style={{ color: '#356859' }} className='font-bold'>
+                  <Typography variant='small' style={{ color: '#356859' }} className='font-bold'>
                     Ngày bắt đầu áp dụng
                   </Typography>
                   <Typography variant='h5' color='blue-gray'>
@@ -178,7 +178,7 @@ export const SchedulerCalendar: Component = () => {
                   <ArrowPathIcon className='h-full w-full' color='#356859' />
                 </div>
                 <div className='flex flex-col gap-y-1 h-full w-full'>
-                  <Typography variant='body1' style={{ color: '#356859' }} className='font-bold'>
+                  <Typography variant='small' style={{ color: '#356859' }} className='font-bold'>
                     Lặp lại
                   </Typography>
                   <Typography variant='h5' color='blue-gray'>
@@ -196,7 +196,7 @@ export const SchedulerCalendar: Component = () => {
                   <ClockIcon className='h-full w-full' color='#356859' />
                 </div>
                 <div className='flex flex-col gap-y-1 h-full w-full'>
-                  <Typography variant='body1' style={{ color: '#356859' }} className='font-bold'>
+                  <Typography variant='small' style={{ color: '#356859' }} className='font-bold'>
                     Ngày kết thúc
                   </Typography>
                   <Typography variant='h5' color='blue-gray'>
@@ -257,7 +257,7 @@ const myEvents: Event[] = [
     }
   },
   {
-    title: 'Lịch chạy bộ Runner',
+    title: 'Lịch chạy bộ',
     start: subDays(now, 10),
     end: subDays(now, 9),
     allDay: true,
@@ -277,7 +277,7 @@ const myEvents: Event[] = [
     }
   },
   {
-    title: 'Lịch dành đón quan khách',
+    title: 'Lịch đón quan khách',
     start: now,
     end: addDays(now, 2),
     allDay: true,
