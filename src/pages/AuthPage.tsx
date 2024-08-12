@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { Card, Input, Button, Typography } from '@material-tailwind/react';
 import { UserCircleIcon, KeyIcon } from '@heroicons/react/24/outline';
-import { authService } from '@services';
+import { authService, server } from '@services';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useUserQuery } from '@hooks';
 import { useMutation } from '@tanstack/react-query';
@@ -17,7 +17,14 @@ export function AuthPage() {
 
   const loginNormal = useMutation({
     mutationKey: ['loginNormal'],
-    mutationFn: (data: LoginFormData) => authService.login(data)
+    mutationFn: async (data: LoginFormData) => {
+      const response = await authService.login(data);
+      const { access_token } = response;
+      console.log('access_token', access_token);
+      localStorage.setItem('authToken', access_token);
+      server.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+      return response;
+    }
   });
   const submit: SubmitHandler<LoginFormData> = async (data) => {
     try {

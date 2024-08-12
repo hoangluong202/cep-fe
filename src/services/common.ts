@@ -5,6 +5,12 @@ export const server = axios.create({
   withCredentials: false
 });
 
+// Set the token from local storage if it exists
+const token = localStorage.getItem('authToken');
+if (token) {
+  server.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
+
 export async function invoke<R = unknown, D = unknown>(call: Promise<AxiosResponse<R, D>>) {
   try {
     const response = await call;
