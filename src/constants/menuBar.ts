@@ -1,11 +1,7 @@
-export const MAIN_MENU = {
+export const MENU_BAR = {
   dashboard: 'Dashboard',
   inventory: 'Inventory',
   map: 'View Map',
   calendar: 'Calendar',
   feed: 'Feed'
-};
-
-export const SUB_MENU = {
-  logout: 'Log out'
 };

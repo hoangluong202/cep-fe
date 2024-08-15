@@ -1,56 +1,29 @@
-import { useMemo } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Header } from '@components';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { MENU_BAR } from '@constants';
+import { useMenuBarStore } from '@states';
+import { useEffect } from 'react';
 
 export const AppLayout: Component<{ menu: RouteMenu }> = ({ menu }) => {
-  const routeItems = useMemo(() => {
-    const mainItem: RouteMenu = [];
-    const subItem: RouteMenu = [];
-    const items: { path: string; element: React.ReactElement }[] = [];
+  const { pathname } = useLocation();
+  const { setSelectedMenu } = useMenuBarStore();
+  const routeItems = menu;
 
-    for (const menuItem of menu) {
-      if (menuItem.type === 'logout-btn') {
-        subItem.push({ type: menuItem.type, name: menuItem.name, onClick: menuItem.onClick });
-        continue;
-      }
-      items.push({ path: menuItem.path, element: menuItem.element });
-      if (menuItem.type === 'main-item') {
-        mainItem.push({
-          type: menuItem.type,
-          name: menuItem.name,
-          path: menuItem.path,
-          element: menuItem.element
-        });
-      }
-      if (menuItem.type === 'sub-item') {
-        subItem.push({
-          type: menuItem.type,
-          name: menuItem.name,
-          path: menuItem.path,
-          element: menuItem.element
-        });
-      }
+  useEffect(() => {
+    if (pathname === '/map') {
+      setSelectedMenu(MENU_BAR.map);
     }
-
-    return {
-      items,
-      mainItem,
-      subItem
-    };
-  }, [menu]);
+    if (pathname === '/calendar') {
+      setSelectedMenu(MENU_BAR.calendar);
+    }
+  }, [pathname, setSelectedMenu]);
 
   return (
     <div className='flex flex-col h-screen'>
-      <div className='h-15vh'>
-        <Header mainMenu={routeItems.mainItem} subMenu={routeItems.subItem} />
-      </div>
-      <div className='lg:p-4 flex-1 h-85vh bg-white'>
-        <Routes>
-          {routeItems.items.map((item) => (
-            <Route path={item.path} element={item.element} key={item.path} />
-          ))}
-        </Routes>
-      </div>
+      <Routes>
+        {routeItems.map((item) => (
+          <Route path={item.path} element={item.element} key={item.path} />
+        ))}
+      </Routes>
     </div>
   );
 };

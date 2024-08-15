@@ -1,14 +1,8 @@
 type RouteItem = {
   name: string;
-  type: 'main-item' | 'sub-item';
+  type: 'item';
   path: string;
   element: React.ReactElement;
-};
-
-type LogoutBtn = {
-  name: string;
-  type: 'logout-btn';
-  onClick: () => void;
 };
 
 type RouteSkeleton = {
@@ -18,6 +12,6 @@ type RouteSkeleton = {
   element: React.ReactElement;
 };
 
-type RouteMenuItem = RouteItem | RouteSkeleton | LogoutBtn;
+type RouteMenuItem = RouteItem | RouteSkeleton;
 
 type RouteMenu = RouteMenuItem[];

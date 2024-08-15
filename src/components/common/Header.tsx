@@ -13,7 +13,7 @@ import { ChevronDownIcon, PowerIcon } from '@heroicons/react/24/solid';
 import logo from '@assets/logobk.png';
 import { useMenuBarStore } from '@states';
 import { Link } from 'react-router-dom';
-import { useAuthMutation, useListenEvent } from '@hooks';
+import { useListenEvent } from '@hooks';
 
 export const Header: Component<{ mainMenu: RouteMenu; subMenu: RouteMenu }> = ({
   mainMenu,
@@ -22,10 +22,12 @@ export const Header: Component<{ mainMenu: RouteMenu; subMenu: RouteMenu }> = ({
   const { setSelectedMenu } = useMenuBarStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const { logout } = useAuthMutation();
 
   const handleOpenDialog = () => {
     setOpenDialog(!openDialog);
+  };
+  const deleteAccessToken = () => {
+    localStorage.removeItem('authToken');
   };
 
   useListenEvent('logout', handleOpenDialog);
@@ -85,8 +87,9 @@ export const Header: Component<{ mainMenu: RouteMenu; subMenu: RouteMenu }> = ({
                   onClick={() => {
                     setSelectedMenu(subMenuItem.name);
                     if (subMenuItem.type === 'logout-btn') {
-                      subMenuItem.onClick();
-                      logout.mutateAsync();
+                      // subMenuItem.onClick();
+                      // logout.mutateAsync();
+                      deleteAccessToken();
                     }
                   }}
                   className={`flex items-center gap-2 rounded ${

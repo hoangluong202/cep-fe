@@ -1,12 +1,7 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
-import { MAIN_MENU } from '@constants';
+import { MENU_BAR } from '@constants';
 
-export const useMenuBarStore = create<MenuBarStore>()(
-  devtools((set) => ({
-    selectedMenu: MAIN_MENU.map,
-    setSelectedMenu: (selectedMenu) => {
-      set({ selectedMenu: selectedMenu });
-    }
-  }))
-);
+export const useMenuBarStore = create<MenuBarStore>()((set) => ({
+  selectedMenu: MENU_BAR.map,
+  setSelectedMenu: (selectedMenu) => set({ selectedMenu: selectedMenu })
+}));

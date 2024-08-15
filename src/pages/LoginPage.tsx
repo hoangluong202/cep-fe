@@ -3,15 +3,25 @@ import { toast } from 'react-toastify';
 import { Card, Input, Button, Typography } from '@material-tailwind/react';
 import { UserCircleIcon, KeyIcon } from '@heroicons/react/24/outline';
 import { authService, server } from '@services';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useUserQuery } from '@hooks';
 import { useMutation } from '@tanstack/react-query';
+// import { Navigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-export function AuthPage() {
+export function LoginPage() {
   const navigate: NavigateFunction = useNavigate();
   const {
     info: { refetch }
   } = useUserQuery();
+
+  // const { refetch } = useQuery({
+  //   queryKey: ['api/users/1'],
+  //   queryFn: () => userService.getInfo(1),
+  //   retry(failureCount, error: ResponseError) {
+  //     if (error.statusCode && error.statusCode >= 400 && error.statusCode < 500) return false;
+  //     return failureCount < 0;
+  //   }
+  // });
 
   const { register, handleSubmit } = useForm<LoginFormData>();
 
@@ -23,14 +33,19 @@ export function AuthPage() {
       console.log('access_token', access_token);
       localStorage.setItem('authToken', access_token);
       server.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+      console.log('server.defaults.headers.common', server.defaults.headers.common);
       return response;
     }
   });
   const submit: SubmitHandler<LoginFormData> = async (data) => {
     try {
+      console.log('login');
       await loginNormal.mutateAsync(data);
       await refetch();
       toast.success('Login successfully!');
+
+      // console.log('authToken', authToken);
+      // console.log('Navigating to /map');
       navigate('/map');
     } catch (err) {
       const errorMessage = (err as ResponseError).message;
