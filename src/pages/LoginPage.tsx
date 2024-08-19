@@ -1,11 +1,11 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { Card, Input, Button, Typography } from '@material-tailwind/react';
-import { UserCircleIcon, KeyIcon } from '@heroicons/react/24/outline';
 import { authService, server } from '@services';
 import { useUserQuery } from '@hooks';
 import { useMutation } from '@tanstack/react-query';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export function LoginPage() {
   const navigate: NavigateFunction = useNavigate();
@@ -50,45 +50,42 @@ export function LoginPage() {
         </p>
       </div>
 
-      <Card className='mt-24' color='transparent' shadow={false}>
-        <Typography variant='h4' color='white'>
-          Đăng nhập
-        </Typography>
+      <div className='mt-24'>
+        <p className='text-white text-2xl font-bold'>Đăng nhập</p>
         <p className='mt-1 font-normal text-white'>Nhập tài khoản và mật khẩu để đăng nhập</p>
         <form className='mt-8 mb-2 w-72 md:w-80 max-w-screen-lg' onSubmit={handleSubmit(submit)}>
-          <div className='mb-4 flex flex-col gap-6'>
-            <Input
-              id='auth-username'
-              size='lg'
-              label='Tài khoản'
-              icon={<UserCircleIcon color='white' />}
-              {...register('username', {
-                required: true,
-                minLength: 5
-              })}
-              color='white'
-              crossOrigin=''
-            />
-            <Input
-              id='auth-password'
-              type='password'
-              size='lg'
-              icon={<KeyIcon color='white' />}
-              label='Mật khẩu'
-              color='white'
-              {...register('password', {
-                required: true,
-                minLength: 8
-              })}
-              crossOrigin=''
-            />
+          <div className='mb-4 flex flex-col gap-4'>
+            <div className='grid gap-2'>
+              <p className='text-white font-bold'>Tài khoản</p>
+              <Input
+                id='auth-username'
+                type='text'
+                placeholder='luong.hoang'
+                required
+                {...register('username', {
+                  required: true,
+                  minLength: 5
+                })}
+              />
+            </div>
+            <div className='grid gap-2'>
+              <p className='text-white font-bold'>Mật khẩu</p>
+              <Input
+                id='auth-password'
+                type='password'
+                required
+                {...register('password', {
+                  required: true,
+                  minLength: 8
+                })}
+              />
+            </div>
           </div>
-
-          <Button className='mt-6 bg-blue-500' fullWidth type='submit'>
+          <Button className='w-full font-bold' type='submit'>
             ĐĂNG NHẬP
           </Button>
         </form>
-      </Card>
+      </div>
     </div>
   );
 }

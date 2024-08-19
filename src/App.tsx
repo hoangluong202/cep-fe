@@ -1,5 +1,5 @@
 import { AppLayout } from '@layouts';
-import { LoginPage, CalendarPage, ViewMapPage } from '@pages';
+import { LoginPage, CalendarPage, ViewMapPage, HomePage } from '@pages';
 import { MENU_BAR } from '@constants';
 
 export default function App() {
@@ -8,9 +8,15 @@ export default function App() {
       menu={[
         {
           type: 'item',
-          path: '/',
+          path: '/login',
           name: 'Login',
           element: <LoginPage />
+        },
+        {
+          type: 'item',
+          path: '/',
+          name: 'Home',
+          element: <HomePage />
         },
         {
           type: 'item',
