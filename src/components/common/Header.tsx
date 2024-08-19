@@ -1,119 +1,77 @@
-import {
-  Navbar,
-  Typography,
-  Menu,
-  MenuHandler,
-  Button,
-  Avatar,
-  MenuList,
-  MenuItem
-} from '@material-tailwind/react';
-import { createElement, useState } from 'react';
-import { ChevronDownIcon, PowerIcon } from '@heroicons/react/24/solid';
-import logo from '@assets/logobk.png';
-import { useMenuBarStore } from '@states';
 import { Link } from 'react-router-dom';
-import { useListenEvent } from '@hooks';
+import { Search, User } from 'lucide-react';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from '@/components/ui/breadcrumb';
+import { Input } from '@/components/ui/input';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { useMenuBarStore } from '@/states';
 
-export const Header: Component<{ mainMenu: RouteMenu; subMenu: RouteMenu }> = ({
-  mainMenu,
-  subMenu
-}) => {
+export const Header: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const { setSelectedMenu } = useMenuBarStore();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
-
-  const handleOpenDialog = () => {
-    setOpenDialog(!openDialog);
-  };
-  const deleteAccessToken = () => {
+  const handleLogout = () => {
     localStorage.removeItem('authToken');
+    setSelectedMenu('Login');
   };
-
-  useListenEvent('logout', handleOpenDialog);
-
   return (
-    <Navbar className='flex items-center justify-between text-blue-gray-900 px-6 py-3 max-w-full'>
-      <div className='flex items-center gap-2 text-blue-gray-900'>
-        <Avatar className='border border-gray-900 p-0.5' src={logo} />
-        <Typography as='a' href='#' variant='h5' className='mr-4 cursor-pointer py-1.5'>
-          Lập lịch chiếu sáng
-        </Typography>
+    <header className='sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6'>
+      <Breadcrumb className='hidden md:flex'>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link to={menu[0].path}>Dashboard</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link to='#'>Orders</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Recent Orders</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <div className='relative ml-auto flex-1 md:grow-0'>
+        <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
+        <Input
+          type='search'
+          placeholder='Search...'
+          className='w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]'
+        />
       </div>
-      <ul className='my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6'>
-        {mainMenu.map((mainMenuItem, index) => (
-          <Typography
-            key={index}
-            as='li'
-            variant='small'
-            color='blue-gray'
-            className='p-1 font-medium'
-          >
-            <Link
-              to={mainMenuItem.type === 'main-item' ? mainMenuItem.path : '#'}
-              onClick={() => setSelectedMenu(mainMenuItem.name)}
-              className='flex items-center hover:text-blue-500 transition-colors'
-            >
-              {mainMenuItem.name}
-            </Link>
-          </Typography>
-        ))}
-        <Menu open={isMenuOpen} handler={setIsMenuOpen} placement='bottom-end'>
-          <MenuHandler>
-            <Button
-              variant='text'
-              color='blue-gray'
-              className='flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto'
-            >
-              <Avatar
-                variant='circular'
-                size='sm'
-                alt='tania andrew'
-                className='border border-gray-900 p-0.5'
-                src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
-              />
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`h-3 w-3 transition-transform ${isMenuOpen ? 'rotate-180' : ''}`}
-              />
-            </Button>
-          </MenuHandler>
-          <MenuList className='p-1'>
-            {subMenu.map((subMenuItem, key) => {
-              const isLastItem = key === subMenu.length - 1;
-              return (
-                <MenuItem
-                  key={subMenuItem.name}
-                  onClick={() => {
-                    setSelectedMenu(subMenuItem.name);
-                    if (subMenuItem.type === 'logout-btn') {
-                      // subMenuItem.onClick();
-                      // logout.mutateAsync();
-                      deleteAccessToken();
-                    }
-                  }}
-                  className={`flex items-center gap-2 rounded ${
-                    isLastItem ? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10' : ''
-                  }`}
-                >
-                  {createElement(PowerIcon, {
-                    className: `h-4 w-4 ${isLastItem ? 'text-red-500' : ''}`,
-                    strokeWidth: 2
-                  })}
-                  <Typography
-                    as='span'
-                    variant='small'
-                    className='font-normal'
-                    color={isLastItem ? 'red' : 'inherit'}
-                  >
-                    {subMenuItem.name}
-                  </Typography>
-                </MenuItem>
-              );
-            })}
-          </MenuList>
-        </Menu>
-      </ul>
-    </Navbar>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant='outline' size='icon' className='overflow-hidden rounded-full'>
+            <User className='h-5 w-5' />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align='end'>
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem>Support</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className='text-red-500' onClick={handleLogout}>
+            Logout
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </header>
   );
 };

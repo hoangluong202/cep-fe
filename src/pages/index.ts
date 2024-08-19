@@ -3,6 +3,6 @@
  */
 
 export * from './CalendarPage';
-export * from './HomePage';
+export * from './DashboardPage';
 export * from './LoginPage';
-export * from './ViewMapPage';
+export * from './MapPage';

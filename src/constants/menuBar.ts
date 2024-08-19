@@ -1,7 +1,11 @@
-export const MENU_BAR = {
+export const MENU_BAR_NAME = {
   dashboard: 'Dashboard',
-  inventory: 'Inventory',
   map: 'View Map',
-  calendar: 'Calendar',
-  feed: 'Feed'
+  calendar: 'Calendar'
+};
+
+export const MENU_BAR_LABELS = {
+  dashboard: 'Bảng điều khiển',
+  map: 'Bản đồ',
+  calendar: 'Lịch'
 };

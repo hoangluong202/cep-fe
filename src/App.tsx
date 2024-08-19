@@ -1,33 +1,27 @@
 import { AppLayout } from '@layouts';
-import { LoginPage, CalendarPage, ViewMapPage, HomePage } from '@pages';
-import { MENU_BAR } from '@constants';
+import { CalendarPage, MapPage, DashboardPage } from '@pages';
+import { MENU_BAR_NAME } from '@constants';
 
 export default function App() {
   return (
     <AppLayout
       menu={[
         {
-          type: 'item',
-          path: '/login',
-          name: 'Login',
-          element: <LoginPage />
+          type: 'menu-item',
+          path: '/dashboard',
+          name: MENU_BAR_NAME.dashboard,
+          element: <DashboardPage />
         },
         {
-          type: 'item',
-          path: '/',
-          name: 'Home',
-          element: <HomePage />
-        },
-        {
-          type: 'item',
+          type: 'menu-item',
           path: '/map',
-          name: MENU_BAR.map,
-          element: <ViewMapPage />
+          name: MENU_BAR_NAME.map,
+          element: <MapPage />
         },
         {
-          type: 'item',
+          type: 'menu-item',
           path: '/calendar',
-          name: MENU_BAR.calendar,
+          name: MENU_BAR_NAME.calendar,
           element: <CalendarPage />
         }
       ]}

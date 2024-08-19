@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { MENU_BAR } from '@constants';
+import { MENU_BAR_NAME } from '@constants';
 
 export const useMenuBarStore = create<MenuBarStore>()((set) => ({
-  selectedMenu: MENU_BAR.map,
+  selectedMenu: MENU_BAR_NAME.map,
   setSelectedMenu: (selectedMenu) => set({ selectedMenu: selectedMenu })
 }));
