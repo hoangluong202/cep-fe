@@ -3,8 +3,7 @@ import { MENU_BAR_NAME } from '@constants';
 import { useMenuBarStore } from '@states';
 import { useEffect } from 'react';
 import { LoginPage } from '@/pages';
-import { AppNav } from '@/components';
-import { Header } from '@/components/common/Header';
+import { AppNav, Header } from '@/components';
 
 export const AppLayout: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const { pathname } = useLocation();
@@ -12,7 +11,7 @@ export const AppLayout: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const routeItems = menu;
 
   useEffect(() => {
-    if (pathname === '/login' || pathname === '/') {
+    if (pathname === '/login') {
       setSelectedMenu('Login');
     }
     if (pathname === '/dashboard') {

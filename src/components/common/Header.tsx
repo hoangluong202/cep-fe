@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Search, User } from 'lucide-react';
+import { Search } from 'lucide-react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { useMenuBarStore } from '@/states';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const Header: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const { setSelectedMenu } = useMenuBarStore();
@@ -58,7 +59,10 @@ export const Header: Component<{ menu: RouteMenu }> = ({ menu }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant='outline' size='icon' className='overflow-hidden rounded-full'>
-            <User className='h-5 w-5' />
+            <Avatar>
+              <AvatarImage src='https://github.com/shadcn.png' />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end'>
