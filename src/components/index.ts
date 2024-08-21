@@ -10,7 +10,6 @@ export * from './common/AppNav';
 export * from './common/AppSkeleton';
 export * from './common/FilterSmartPole';
 export * from './common/Header';
-export * from './maps/Map';
 export * from './maps/PoleCard';
 export * from './ui/avatar';
 export * from './ui/breadcrumb';

@@ -1,17 +1,15 @@
-import { Map, InfoWindow, useMarkerRef, Marker } from '@vis.gl/react-google-maps';
-import { useEffect, useState } from 'react';
+import { Map, AdvancedMarker } from '@vis.gl/react-google-maps';
+import { useState } from 'react';
 import greenLightBubIcon from '@assets/greenLightBub.svg';
 import redLightBubIcon from '@assets/redLightBub.svg';
 import {
   AppSkeleton,
-  Button,
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  PoleCard
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
 } from '@components';
 import { useFilterSmartPoleStore } from '@states';
 import { useQuery } from '@tanstack/react-query';
@@ -26,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { ListFilter } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const defaultStyle = [
   {
@@ -77,40 +75,37 @@ interface MarkerWithInfoProps {
 
 const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ smartPole }) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
-  const [markerRef, marker] = useMarkerRef();
   return (
     <>
-      <Marker
-        ref={markerRef}
-        position={smartPole.position}
-        icon={{
-          url: smartPole.status ? greenLightBubIcon : redLightBubIcon,
-          scaledSize: {
-            width: infowindowOpen ? 60 : 20,
-            height: infowindowOpen ? 60 : 20,
-            equals: () => true
-          }
-        }}
-        onMouseOver={() => setInfowindowOpen(true)}
-        onMouseOut={() => setInfowindowOpen(false)}
-      />
-
+      <AdvancedMarker position={smartPole.position} onClick={() => setInfowindowOpen(true)}>
+        <img src={smartPole.status ? greenLightBubIcon : redLightBubIcon} width={20} height={20} />
+      </AdvancedMarker>
       {infowindowOpen && (
-        <InfoWindow anchor={marker}>
-          <PoleCard smartPole={smartPole} />
-        </InfoWindow>
+        <Card>
+          <CardHeader>
+            <CardTitle>Card Title</CardTitle>
+            <CardDescription>Card Description</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Card Content</p>
+          </CardContent>
+          <CardFooter>
+            <p>Card Footer</p>
+          </CardFooter>
+        </Card>
       )}
     </>
   );
 };
 
 const AreaSelect = () => {
+  const { setArea, area } = useFilterSmartPoleStore();
   const data = [
-    { value: 'hcmut-cs1', label: 'HCMUT CS1' },
-    { value: 'hcmut-cs2', label: 'HCMUT CS2' }
+    { value: 'hcmut-1', label: 'HCMUT CS1' },
+    { value: 'hcmut-2', label: 'HCMUT CS2' }
   ];
   return (
-    <Select>
+    <Select onValueChange={(val) => setArea(val)} value={area}>
       <SelectTrigger className='w-[180px]'>
         <SelectValue placeholder='Chọn một khu vực' />
       </SelectTrigger>
@@ -126,21 +121,21 @@ const AreaSelect = () => {
 };
 
 const StatusFilter = () => {
+  const { setStatus } = useFilterSmartPoleStore();
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant='outline' size='sm' className='h-10 gap-1'>
-          <ListFilter className='h-3.5 w-3.5' />
-          <span className='sr-only sm:not-sr-only sm:whitespace-nowrap'>Lọc</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'>
-        <DropdownMenuLabel>Lọc theo trạng thái</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem checked>Hoạt động</DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem>Không hoạt động</DropdownMenuCheckboxItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Tabs defaultValue='all'>
+      <TabsList>
+        <TabsTrigger value='all' onClick={(val) => setStatus(val ? 'all' : 'bug')}>
+          Tất cả
+        </TabsTrigger>
+        <TabsTrigger value='active' onClick={(val) => setStatus(val ? 'active' : 'bug')}>
+          Đang bật
+        </TabsTrigger>
+        <TabsTrigger value='inactive' onClick={(val) => setStatus(val ? 'inactive' : 'bug')}>
+          Đang tắt
+        </TabsTrigger>
+      </TabsList>
+    </Tabs>
   );
 };
 
@@ -151,13 +146,22 @@ export function MapPage() {
     queryFn: () => smartPoleService.getBy(area, road, name),
     retry: retryQueryFn
   });
-  const [center, setCenter] = useState({ lat: 10.80552892012782, lng: 106.63993540154873 });
-  const [zoom, setZoom] = useState(10);
-
-  useEffect(() => {
-    setCenter(smartPoles?.[0]?.position || { lat: 10.80552892012782, lng: 106.63993540154873 });
-    setZoom(area ? 16 : 10);
-  }, [smartPoles, area]);
+  const defaultViewMap = {
+    center: { lat: 10.80552892012782, lng: 106.63993540154873 },
+    zoom: 10
+  };
+  const setUpViewMap = [
+    {
+      area: 'hcmut-1',
+      center: { lat: 10.77392998449525, lng: 106.65959695077382 },
+      zoom: 17
+    },
+    {
+      area: 'hcmut-2',
+      center: { lat: 10.880852145509786, lng: 106.80538147754153 },
+      zoom: 17.2
+    }
+  ];
 
   if (isFetching) {
     return <AppSkeleton />;
@@ -166,19 +170,16 @@ export function MapPage() {
   return (
     <div className='relative h-full w-full px-4'>
       <Map
+        mapId='1'
         style={{
           width: '100%',
           borderRadius: '10px',
           boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)'
         }}
-        zoom={zoom}
-        center={center}
+        zoom={setUpViewMap.find((item) => item.area === area)?.zoom || defaultViewMap.zoom}
+        center={setUpViewMap.find((item) => item.area === area)?.center || defaultViewMap.center}
         mapTypeId='terrain'
         styles={defaultStyle}
-        onCameraChanged={(ev) => {
-          setCenter(ev.detail.center);
-          setZoom(ev.detail.zoom);
-        }}
       >
         {smartPoles?.map((smartPole, index) => (
           <MarkerWithInfo key={index} smartPole={smartPole} />

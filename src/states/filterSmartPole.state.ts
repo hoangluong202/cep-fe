@@ -3,6 +3,7 @@ import { devtools } from 'zustand/middleware';
 
 export const useFilterSmartPoleStore = create<FilterSmartPoleStore>()(
   devtools((set) => ({
+    status: 'all',
     setArea: (area) => {
       set({ area: area });
     },
@@ -11,6 +12,9 @@ export const useFilterSmartPoleStore = create<FilterSmartPoleStore>()(
     },
     setName: (smartPoleName) => {
       set({ name: smartPoleName });
+    },
+    setStatus: (status) => {
+      set({ status: status });
     }
   }))
 );
