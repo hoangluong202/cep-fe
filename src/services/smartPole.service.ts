@@ -2,15 +2,8 @@ import { server, invoke } from './common';
 
 export const smartPoleService = {
   getById: (id: string) => invoke<SmartPole>(server.get(`/api/poles/${id}`)),
-  getBy: (area?: string, road?: string, name?: string) => {
-    const id = name?.split('-')[1];
-    return !area
-      ? invoke<SmartPole[]>(server.get('/api/poles'))
-      : !road
-      ? invoke<SmartPole[]>(server.get(`/api/poles?area=${area}`))
-      : !name
-      ? invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&road=${road}`))
-      : invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&road=${road}&poleId=${id}`));
+  getBy: (area: string, status: string) => {
+    return invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&status=${status}`));
   },
   getAllAreas: async () => {
     const poles = await invoke<SmartPole[]>(server.get('/api/poles'));

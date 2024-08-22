@@ -26,54 +26,27 @@ import {
 } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-const defaultStyle = [
+const setUpViewMap = [
   {
-    featureType: 'all',
-    elementType: 'all',
-    stylers: [{ saturation: '32' }, { lightness: '-3' }, { visibility: 'on' }, { weight: '1.18' }]
+    area: 'all',
+    center: { lat: 10.826846427727276, lng: 106.68068577543532 },
+    zoom: 12
   },
   {
-    featureType: 'administrative',
-    elementType: 'labels',
-    stylers: [{ visibility: 'off' }]
+    area: 'hcmut-1',
+    center: { lat: 10.77392998449525, lng: 106.65959695077382 },
+    zoom: 17
   },
   {
-    featureType: 'landscape',
-    elementType: 'labels',
-    stylers: [{ visibility: 'off' }]
-  },
-  {
-    featureType: 'landscape.man_made',
-    elementType: 'all',
-    stylers: [{ saturation: '-70' }, { lightness: '14' }]
-  },
-  {
-    featureType: 'poi',
-    elementType: 'labels',
-    stylers: [{ visibility: 'off' }]
-  },
-  {
-    featureType: 'transit',
-    elementType: 'labels',
-    stylers: [{ visibility: 'off' }]
-  },
-  {
-    featureType: 'water',
-    elementType: 'all',
-    stylers: [{ saturation: '100' }, { lightness: '-14' }]
-  },
-  {
-    featureType: 'water',
-    elementType: 'labels',
-    stylers: [{ visibility: 'off' }, { lightness: '12' }]
+    area: 'hcmut-2',
+    center: { lat: 10.880852145509786, lng: 106.80538147754153 },
+    zoom: 17.2
   }
-] as google.maps.MapTypeStyle[];
+];
 
-interface MarkerWithInfoProps {
+const MarkerWithInfo: Component<{
   smartPole: SmartPole;
-}
-
-const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ smartPole }) => {
+}> = ({ smartPole }) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   return (
     <>
@@ -101,6 +74,7 @@ const MarkerWithInfo: Component<MarkerWithInfoProps> = ({ smartPole }) => {
 const AreaSelect = () => {
   const { setArea, area } = useFilterSmartPoleStore();
   const data = [
+    { value: 'all', label: 'Tất cả' },
     { value: 'hcmut-1', label: 'HCMUT CS1' },
     { value: 'hcmut-2', label: 'HCMUT CS2' }
   ];
@@ -114,6 +88,7 @@ const AreaSelect = () => {
           <SelectLabel>Khu vực</SelectLabel>
           <SelectItem value={data[0].value}>{data[0].label}</SelectItem>
           <SelectItem value={data[1].value}>{data[1].label}</SelectItem>
+          <SelectItem value={data[2].value}>{data[2].label}</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
@@ -121,9 +96,9 @@ const AreaSelect = () => {
 };
 
 const StatusFilter = () => {
-  const { setStatus } = useFilterSmartPoleStore();
+  const { status, setStatus } = useFilterSmartPoleStore();
   return (
-    <Tabs defaultValue='all'>
+    <Tabs value={status}>
       <TabsList>
         <TabsTrigger value='all' onClick={(val) => setStatus(val ? 'all' : 'bug')}>
           Tất cả
@@ -140,28 +115,12 @@ const StatusFilter = () => {
 };
 
 export function MapPage() {
-  const { area, road, name } = useFilterSmartPoleStore();
+  const { area, status } = useFilterSmartPoleStore();
   const { data: smartPoles, isFetching } = useQuery({
-    queryKey: ['/api/poles', area, road, name],
-    queryFn: () => smartPoleService.getBy(area, road, name),
+    queryKey: ['/api/poles', area, status],
+    queryFn: () => smartPoleService.getBy(area, status),
     retry: retryQueryFn
   });
-  const defaultViewMap = {
-    center: { lat: 10.80552892012782, lng: 106.63993540154873 },
-    zoom: 10
-  };
-  const setUpViewMap = [
-    {
-      area: 'hcmut-1',
-      center: { lat: 10.77392998449525, lng: 106.65959695077382 },
-      zoom: 17
-    },
-    {
-      area: 'hcmut-2',
-      center: { lat: 10.880852145509786, lng: 106.80538147754153 },
-      zoom: 17.2
-    }
-  ];
 
   if (isFetching) {
     return <AppSkeleton />;
@@ -171,15 +130,9 @@ export function MapPage() {
     <div className='relative h-full w-full px-4'>
       <Map
         mapId='1'
-        style={{
-          width: '100%',
-          borderRadius: '10px',
-          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)'
-        }}
-        zoom={setUpViewMap.find((item) => item.area === area)?.zoom || defaultViewMap.zoom}
-        center={setUpViewMap.find((item) => item.area === area)?.center || defaultViewMap.center}
+        zoom={setUpViewMap.find((item) => item.area === area)?.zoom}
+        center={setUpViewMap.find((item) => item.area === area)?.center}
         mapTypeId='terrain'
-        styles={defaultStyle}
       >
         {smartPoles?.map((smartPole, index) => (
           <MarkerWithInfo key={index} smartPole={smartPole} />
