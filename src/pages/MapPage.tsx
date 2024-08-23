@@ -2,15 +2,7 @@ import { Map, AdvancedMarker } from '@vis.gl/react-google-maps';
 import { useState } from 'react';
 import greenLightBubIcon from '@assets/greenLightBub.svg';
 import redLightBubIcon from '@assets/redLightBub.svg';
-import {
-  AppSkeleton,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@components';
+import { AppSkeleton } from '@components';
 import { useFilterSmartPoleStore } from '@states';
 import { useQuery } from '@tanstack/react-query';
 import { smartPoleService } from '@services';
@@ -25,6 +17,7 @@ import {
   SelectValue
 } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import smartPoleImage from '@assets/pole.png';
 
 const setUpViewMap = [
   {
@@ -43,33 +36,6 @@ const setUpViewMap = [
     zoom: 17.2
   }
 ];
-
-const MarkerWithInfo: Component<{
-  smartPole: SmartPole;
-}> = ({ smartPole }) => {
-  const [infowindowOpen, setInfowindowOpen] = useState(false);
-  return (
-    <>
-      <AdvancedMarker position={smartPole.position} onClick={() => setInfowindowOpen(true)}>
-        <img src={smartPole.status ? greenLightBubIcon : redLightBubIcon} width={20} height={20} />
-      </AdvancedMarker>
-      {infowindowOpen && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>Card Content</p>
-          </CardContent>
-          <CardFooter>
-            <p>Card Footer</p>
-          </CardFooter>
-        </Card>
-      )}
-    </>
-  );
-};
 
 const AreaSelect = () => {
   const { setArea, area } = useFilterSmartPoleStore();
@@ -113,9 +79,33 @@ const StatusFilter = () => {
     </Tabs>
   );
 };
+const CardSmartPoleInfo: Component<{ smartPole?: SmartPole }> = ({ smartPole }) => {
+  return (
+    <div className='flex flex-col w-80 bg-slate-200 h-full'>
+      <img src={smartPoleImage} alt='smartPoleImage' />
+      <div className='flex-col pl-4 gap-2 py-4'>
+        <p className='font-medium text-lg pt-4'>Đèn {smartPole?.id}</p>
+        <p className='font-normal text-sm'>
+          {smartPole?.road}, khu vực {smartPole?.area}
+        </p>
+        <p className='pt-2 text-base font-light'>
+          {smartPole?.status === true ? 'Đang bật' : 'Đang tắt'}
+        </p>
+        <p className='text-base font-light'>Số lần bật tắt: {smartPole?.frequency} lần</p>
+        <p className='text-base font-light'>Thời gian chiếu sáng: {smartPole?.burningHours} giờ</p>
+      </div>
+    </div>
+  );
+};
 
 export function MapPage() {
   const { area, status } = useFilterSmartPoleStore();
+  const [showCard, setShowCard] = useState(false);
+  const [selectedSmartPoleId, setSelectedSmartPoleId] = useState<string | null>(null);
+  const handleMarkerClick = (smartPoleId: string) => {
+    setSelectedSmartPoleId(smartPoleId);
+    if (selectedSmartPoleId === smartPoleId) setShowCard(!showCard);
+  };
   const { data: smartPoles, isFetching } = useQuery({
     queryKey: ['/api/poles', area, status],
     queryFn: () => smartPoleService.getBy(area, status),
@@ -132,15 +122,32 @@ export function MapPage() {
         mapId='1'
         zoom={setUpViewMap.find((item) => item.area === area)?.zoom}
         center={setUpViewMap.find((item) => item.area === area)?.center}
-        mapTypeId='terrain'
       >
-        {smartPoles?.map((smartPole, index) => (
-          <MarkerWithInfo key={index} smartPole={smartPole} />
+        {smartPoles?.map((smartPole) => (
+          <AdvancedMarker
+            key={smartPole.id}
+            position={smartPole.position}
+            onClick={() => handleMarkerClick(smartPole.id)}
+          >
+            <img
+              src={smartPole.status ? greenLightBubIcon : redLightBubIcon}
+              width={smartPole.id === selectedSmartPoleId && showCard ? 40 : 20}
+              height={20}
+            />
+          </AdvancedMarker>
         ))}
       </Map>
-      <div className='flex items-stretch gap-2 absolute top-4 left-8'>
+      <div className='flex items-stretch gap-2 absolute top-4 left-8 z-10'>
         <AreaSelect />
         <StatusFilter />
+      </div>
+
+      <div className='absolute left-4 top-0 z-0 h-full'>
+        {showCard && (
+          <CardSmartPoleInfo
+            smartPole={smartPoles?.find((item) => item.id === selectedSmartPoleId)}
+          />
+        )}
       </div>
     </div>
   );
