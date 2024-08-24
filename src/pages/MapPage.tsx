@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import smartPoleImage from '@assets/pole.png';
+import { Repeat1, History } from 'lucide-react';
 
 const setUpViewMap = [
   {
@@ -81,18 +82,31 @@ const StatusFilter = () => {
 };
 const CardSmartPoleInfo: Component<{ smartPole?: SmartPole }> = ({ smartPole }) => {
   return (
-    <div className='flex flex-col w-80 bg-slate-200 h-full'>
+    <div className='flex flex-col w-80 bg-white h-full border-2 text-sm text-[#202124] font-normal'>
       <img src={smartPoleImage} alt='smartPoleImage' />
-      <div className='flex-col pl-4 gap-2 py-4'>
-        <p className='font-medium text-lg pt-4'>Đèn {smartPole?.id}</p>
-        <p className='font-normal text-sm'>
-          {smartPole?.road}, khu vực {smartPole?.area}
+      <div className='flex flex-col pl-6 gap-1 py-2'>
+        <p className='font-medium text-[22px]'>Đèn {smartPole?.id}</p>
+        <p className='font-normal text-sm text-[#70757a] pb-4'>
+          Lắp đặt tại {smartPole?.road}, khu vực {smartPole?.area}
         </p>
-        <p className='pt-2 text-base font-light'>
-          {smartPole?.status === true ? 'Đang bật' : 'Đang tắt'}
-        </p>
-        <p className='text-base font-light'>Số lần bật tắt: {smartPole?.frequency} lần</p>
-        <p className='text-base font-light'>Thời gian chiếu sáng: {smartPole?.burningHours} giờ</p>
+
+        <div className='flex flex-row items-center gap-4'>
+          <img
+            src={smartPole?.status ? greenLightBubIcon : redLightBubIcon}
+            width={24}
+            height={24}
+          />
+          <p>{smartPole?.status === true ? 'Đang bật' : 'Đang tắt'}</p>
+        </div>
+        <div className='flex flex-row items-center gap-4'>
+          <Repeat1 color='blue' />
+          <p>{smartPole?.frequency} lần bật/tắt</p>
+        </div>
+
+        <div className='flex flex-row items-center gap-4'>
+          <History color='blue' />
+          <p>Đã hoạt động {smartPole?.burningHours} giờ chiếu sáng</p>
+        </div>
       </div>
     </div>
   );
@@ -103,8 +117,9 @@ export function MapPage() {
   const [showCard, setShowCard] = useState(false);
   const [selectedSmartPoleId, setSelectedSmartPoleId] = useState<string | null>(null);
   const handleMarkerClick = (smartPoleId: string) => {
-    setSelectedSmartPoleId(smartPoleId);
     if (selectedSmartPoleId === smartPoleId) setShowCard(!showCard);
+    else setShowCard(true);
+    setSelectedSmartPoleId(smartPoleId);
   };
   const { data: smartPoles, isFetching } = useQuery({
     queryKey: ['/api/poles', area, status],
