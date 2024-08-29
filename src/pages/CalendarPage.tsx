@@ -1,318 +1,260 @@
-import { ListCalendar, FilterSmartPole, SchedulerCalendar, SchedulerForm } from '@components';
-import { CalendarIcon, ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { Chip, Typography } from '@material-tailwind/react';
-import { PieChart } from '@mui/x-charts';
-import { useIsShow } from '@states';
-import { differenceInMinutes, parse } from 'date-fns';
+import { DateSelectArg, EventApi, EventClickArg, EventContentArg } from '@fullcalendar/core';
+import FullCalendar from '@fullcalendar/react';
+import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
+import interactionPlugin from '@fullcalendar/interaction';
+import { EditIcon, CrossIcon, DeleteIcon } from '@assets/icon';
+import { useState } from 'react';
+import { ButtonIcon } from '@/components/common/ButtonIcon';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog';
+import { MapPinned, CalendarCheck } from 'lucide-react';
 
-export const CalendarPage = () => {
-  const { isShowCalendar } = useIsShow();
+import { formatDate } from '@/utils';
+import { CreateEvent } from '@/components/calendars/PopoverCreateEditEvent';
 
-  function getColor(value: number, min = 0, max = 100) {
-    if (value === 0) return 'rgb(150,150,150)';
-    const ratio = (value - min) / (max - min);
-    const r = Math.round(150 + (255 - 150) * ratio);
-    const g = Math.round(150 + (255 - 150) * ratio);
-    const b = Math.round(0);
-    return `rgb(${r},${g},${b})`;
-  }
+type TEventPopoverState = {
+  top: number;
+  left: number;
+  visibleView: boolean;
+  visibleCreate: boolean;
+  event: EventApi | null;
+};
 
-  const configPieChartData = calendarData.configLightLevel.map((item, index) => {
-    return {
-      id: index,
-      value: differenceInMinutes(
-        parse(item.end, 'HH:mm', new Date()),
-        parse(item.start, 'HH:mm', new Date())
-      ),
-      label: `${item.start} - ${item.end} (${item.level}%)`,
-      color: getColor(parseInt(item.level))
-    };
+export function CalendarPage() {
+  const [events, setEvents] = useState<EventApi[]>([]);
+  const [eventPopover, setEventPopover] = useState<TEventPopoverState>({
+    top: 0,
+    left: 0,
+    visibleView: false,
+    visibleCreate: false,
+    event: null
   });
+  const handleDateSelect = (selectInfo: DateSelectArg) => {
+    const midPositionOfScreen = window.innerWidth / 2;
+    // const clientY = selectInfo.jsEvent?.clientY ?? 0;
+    const clientX = selectInfo.jsEvent?.clientX ?? 0;
+    const calendarApi = selectInfo.view.calendar;
 
-  const CollapseRow = ({
-    isOpen,
-    data,
-    type,
-    leaveNode
-  }: {
-    isOpen: boolean;
-    data: string;
-    type?: string;
-    leaveNode?: boolean;
-  }) => (
-    <div
-      className='flex flex-row gap-x-2'
-      style={{
-        paddingLeft: type === 'road' ? '25px' : type === 'pole' ? '50px' : '0px'
-      }}
-    >
-      {leaveNode ? (
-        <></>
-      ) : isOpen ? (
-        <ChevronDownIcon className='h-4 w-4' />
-      ) : (
-        <ChevronRightIcon className='h-4 w-4' />
-      )}
-      <h6 className='block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900'>
-        {data}
-      </h6>
-    </div>
-  );
+    calendarApi.unselect(); // clear date selection
 
-  const CalendarChip = ({
-    calendarType,
-    calendarName
-  }: {
-    calendarType?: string;
-    calendarName?: string;
-  }) => (
-    <div className='flex flex-row gap-x-2'>
-      <Chip
-        variant='ghost'
-        color={
-          calendarType === 'area'
-            ? 'light-blue'
-            : calendarType === 'road'
-            ? 'light-green'
-            : 'orange'
-        }
-        size='sm'
-        value={
-          calendarType === 'area'
-            ? 'Lịch khu vực'
-            : calendarType === 'road'
-            ? 'Lịch tuyến đường'
-            : 'Lịch smart pole'
-        }
-        icon={
-          <span
-            className="mx-auto mt-1 block h-2 w-2 rounded-full bg-blue-900 content-['']"
-            style={{
-              backgroundColor:
-                calendarType === 'area'
-                  ? '#3b82f6'
-                  : calendarType === 'road'
-                  ? '#10b981'
-                  : '#f59e0b'
-            }}
-          />
-        }
-      />
-      <Chip
-        variant='ghost'
-        color='red'
-        size='sm'
-        value={`${calendarName}`}
-        icon={<span className="mx-auto mt-1 block h-2 w-2 rounded-full bg-red-900 content-['']" />}
-      />
-    </div>
-  );
+    calendarApi.addEvent({
+      id: 'x' + Math.random(),
+      resourceId: selectInfo.resource?.id,
+      title: 'Tên lịch chiếu',
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+      allDay: true,
+      backgroundColor: 'orange'
+    });
+
+    setEventPopover({
+      ...eventPopover,
+      visibleCreate: true,
+      top: 40,
+      left: midPositionOfScreen < clientX ? clientX - 400 : clientX
+    });
+  };
+  const handleEvents = (events: EventApi[]) => {
+    setEvents(events);
+  };
+  const handleEventClick = (clickInfo: EventClickArg) => {
+    const midPositionOfScreen = window.innerWidth / 2;
+    setEventPopover({
+      ...eventPopover,
+      event: clickInfo.event,
+      top: clickInfo.jsEvent.clientY - 80,
+      left:
+        midPositionOfScreen < clickInfo.jsEvent.clientX
+          ? clickInfo.jsEvent.clientX - 400
+          : clickInfo.jsEvent.clientX,
+      visibleView: true
+    });
+  };
+  const handleCloseViewPopover = () => {
+    setEventPopover({
+      ...eventPopover,
+      visibleView: false,
+      event: null
+    });
+  };
+  const handleCloseCreatePopover = () => {
+    setEventPopover({
+      ...eventPopover,
+      visibleCreate: false
+    });
+  };
+  const handleDeleteEvent = () => {
+    const event = events.find((event) => event.id === eventPopover.event?.id);
+    if (event) {
+      event.remove();
+    }
+    setEventPopover({
+      ...eventPopover,
+      visibleView: false,
+      event: null
+    });
+  };
+  const handleEditEvent = () => {
+    setEventPopover({
+      ...eventPopover,
+      top: 40,
+      visibleCreate: true
+    });
+  };
 
   return (
-    <div className='flex flex-row gap-x-2 h-full'>
-      <div className='w-1/5'>
-        <ListCalendar />
-      </div>
-      {isShowCalendar && (
-        <div className='w-full h-full flex flex-col gap-y-2 px-2 py-2.5 bg-white shadow-md bg-clip-border rounded-xl'>
-          <div className='flex flex-row-reverse gap-x-5'>
-            <FilterSmartPole />
-            <SchedulerForm />
+    <div className='relative h-screen w-full px-4'>
+      <FullCalendar
+        schedulerLicenseKey='CC-Attribution-NonCommercial-NoDerivatives'
+        plugins={[resourceTimelinePlugin, interactionPlugin]}
+        initialView='resourceTimelineMonth'
+        resources={resources}
+        initialEvents={initialEvents}
+        nowIndicator={true}
+        resourcesInitiallyExpanded={true}
+        initialDate={now}
+        resourceAreaWidth='15%'
+        buttonText={{
+          today: 'Tháng này'
+        }}
+        editable={true}
+        selectable={true}
+        select={handleDateSelect}
+        eventsSet={handleEvents} //This callback will be useful for syncing an external data source with all calendar event data.
+        eventContent={renderEventContent}
+        eventClick={handleEventClick}
+      />
+      {eventPopover.visibleView && (
+        <div
+          className='flex flex-col gap-y-3 pr-2 pl-6 pt-2 pb-6 absolute w-72 rounded-lg border-2 z-10 bg-white shadow-2xl'
+          style={{
+            top: `${eventPopover.top}px`,
+            left: `${eventPopover.left}px`
+          }}
+        >
+          <div className='flex flex-row-reverse'>
+            <ButtonIcon icon={<CrossIcon />} onClick={handleCloseViewPopover} />
+            <Dialog>
+              <DialogTrigger>
+                <ButtonIcon icon={<DeleteIcon />} />
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Bạn có chắc chắn muốn xóa sự kiện này?</DialogTitle>
+                  <DialogDescription>
+                    Hành động này sẽ không thể thu hồi. Sự kiện sẽ được xóa vĩnh viễn.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className='flex justify-end gap-x-2'>
+                  <button className='text-red-500' onClick={handleDeleteEvent}>
+                    Xóa
+                  </button>
+                </div>
+              </DialogContent>
+            </Dialog>
+            <ButtonIcon icon={<EditIcon />} onClick={handleEditEvent} />
           </div>
-          {<SchedulerCalendar />}
+          <div className='flex flex-row justify-items-start justify-start gap-2'>
+            <div
+              className='rounded-lg w-5 h-5 mt-2'
+              style={{ backgroundColor: eventPopover.event?.backgroundColor }}
+            ></div>
+            <div className='flex flex-col items-start'>
+              <p className='text-[22px] font-normal break-words'>{eventPopover.event?.title}</p>
+              <p className='text-[14px] font-normal break-words'>
+                {formatDate({ date: eventPopover?.event?.start, type: 'start' })} - {''}
+                {formatDate({ date: eventPopover?.event?.end, type: 'end' })}
+              </p>
+            </div>
+          </div>
+          <div className='flex flex-row justify-items-center justify-start gap-2'>
+            <MapPinned className='h-5 w-5' />
+            <p className='border-2 rounded-lg bg-blue-300 px-1 py-[2px] text-sm'>Hcmut-1</p>
+          </div>
+          <div className='flex flex-row justify-items-center justify-start gap-2'>
+            <CalendarCheck className='h-5 w-5' />
+            <p className='border-2 rounded-lg bg-blue-300 px-1 py-[2px] text-sm'>
+              Chiếu sáng lễ hội
+            </p>
+          </div>
         </div>
       )}
-      {!isShowCalendar && (
-        <div className='w-full h-full gap-x-2 p-2 bg-white shadow-md bg-clip-border rounded-xl'>
-          <div className='w-full h-1/6 flex flex-row p-6 pl-10 gap-x-2'>
-            <CalendarIcon className='h-10 w-10 ' fill={calendarData.color} />
-            <Typography variant='h4' color='blue-gray' className='align-center pt-1'>
-              {calendarData.name}
-            </Typography>
-          </div>
-          <div className='w-full h-5/6 flex flex-row gap-x-2'>
-            <div className='h-full w-2/5'>
-              <PieChart
-                series={[
-                  {
-                    data: configPieChartData,
-                    highlightScope: { faded: 'global', highlighted: 'item' },
-                    faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-                    paddingAngle: 1,
-                    cornerRadius: 5,
-                    startAngle: 0,
-                    innerRadius: '5%',
-                    outerRadius: '80%',
-                    endAngle: 360,
-                    cx: '70%',
-                    cy: '25%'
-                  }
-                ]}
-                width={330}
-                height={440}
-                slotProps={{
-                  legend: {
-                    direction: 'column',
-                    position: { vertical: 'bottom', horizontal: 'middle' },
-                    padding: 60,
-                    itemMarkWidth: 20,
-                    itemMarkHeight: 10,
-                    markGap: 5,
-                    itemGap: 8,
-                    labelStyle: {
-                      fontSize: 14,
-                      fill: 'blue-gray-700'
-                    }
-                  }
-                }}
-              />
-            </div>
-            <div className='h-full w-3/5 text-gray-700 bg-white shadow-md'>
-              <table className='w-full text-left table-auto rounded-lg '>
-                <thead>
-                  <tr>
-                    <th className='p-4 border-b border-blue-gray-100 bg-blue-gray-50 rounded-tl-lg'>
-                      <Typography variant='h6' color='blue-gray' className='align-center'>
-                        Địa điểm áp dụng
-                      </Typography>
-                    </th>
-                    <th className='p-4 border-b border-blue-gray-100 bg-blue-gray-50 rounded-tr-lg'>
-                      <Typography variant='h6' color='blue-gray' className='align-center'>
-                        Lịch
-                      </Typography>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className='s'>
-                  <tr>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <button>
-                        <CollapseRow isOpen={false} data={'HCMUT-CS1'} leaveNode={true} />
-                      </button>
-                    </td>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <CalendarChip calendarType='area' calendarName='Lịch giờ Trái Đất' />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <button>
-                        <CollapseRow isOpen={true} data={'HCMUT-CS2'} />
-                      </button>
-                    </td>
-                    <td className='p-4 border-b border-blue-gray-50'></td>
-                  </tr>
-                  <tr>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <button>
-                        <CollapseRow isOpen={false} data={'Đường 1'} type='road' leaveNode={true} />
-                      </button>
-                    </td>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <CalendarChip calendarType='road' calendarName='Lịch giờ Trái Đất' />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <button>
-                        <CollapseRow isOpen={false} data={'Đường 2'} type='road' leaveNode={true} />
-                      </button>
-                    </td>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <CalendarChip calendarType='road' calendarName='Lịch giờ Trái Đất' />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <button>
-                        <CollapseRow isOpen={true} data={'Đường 3'} type='road' />
-                      </button>
-                    </td>
-                    <td className='p-4 border-b border-blue-gray-50'></td>
-                  </tr>
-                  <tr>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <button>
-                        <CollapseRow isOpen={false} data={'Pole-1'} type='pole' leaveNode={true} />
-                      </button>
-                    </td>
-                    <td className='p-4 border-b border-blue-gray-50'>
-                      <h6 className='block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900'>
-                        <CalendarChip calendarType='pole' calendarName='Lịch giờ Trái Đất' />
-                      </h6>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+      {eventPopover.visibleCreate && (
+        <div
+          className='flex flex-row gap-y-3 pr-2 pl-6 pt-2 pb-6 absolute w-[530px] rounded-lg border-2 z-10 bg-white shadow-2xl'
+          style={{
+            top: `${eventPopover.top}px`,
+            left: `${eventPopover.left}px`
+          }}
+        >
+          <CreateEvent />
+          <ButtonIcon icon={<CrossIcon />} onClick={handleCloseCreatePopover} />
         </div>
       )}
     </div>
   );
-};
+}
 
-const calendarData = {
-  id: '1',
-  name: 'Lịch giờ Trái Đất',
-  color: '#dc0909',
-  configLightLevel: [
-    {
-      start: '00:00',
-      end: '06:00',
-      level: '14'
-    },
-    {
-      start: '06:00',
-      end: '18:00',
-      level: '0'
-    },
-    {
-      start: '18:00',
-      end: '20:30',
-      level: '76'
-    },
-    {
-      start: '20:30',
-      end: '21:30',
-      level: '0'
-    },
-    {
-      start: '21:30',
-      end: '23:30',
-      level: '100'
-    },
-    {
-      start: '23:30',
-      end: '23:59',
-      level: '55'
-    }
-  ],
-  scheduler: [
-    {
-      area: 'HCMUT-CS1'
-    },
-    {
-      area: 'HCMUT-CS2',
-      children: [
-        {
-          road: 'Đường 1'
-        },
-        {
-          road: 'Đường 2'
-        },
-        {
-          road: 'Đường 3',
-          children: [
-            {
-              name: 'Pole-1'
-            },
-            {
-              name: 'Pole-2'
-            }
-          ]
-        }
-      ]
-    }
-  ]
-};
+const initialEvents = [
+  {
+    id: '1',
+    resourceId: '1',
+    title: 'Lễ khai giảng',
+    start: '2024-08-24T00:00:00',
+    allDay: true,
+    end: '2024-08-25T00:00:00',
+    backgroundColor: 'blue'
+  },
+  {
+    id: '2',
+    resourceId: 'hcmut-1',
+    title: 'Quốc Khánh',
+    start: '2024-08-30T00:00:00',
+    allDay: true,
+    end: '2024-09-03T00:00:00',
+    backgroundColor: 'green'
+  },
+  {
+    id: '3',
+    resourceId: 'hcmut-2',
+    title: 'Quốc Khánh',
+    start: '2024-08-30T00:00:00',
+    allDay: true,
+    end: '2024-09-03T00:00:00',
+    backgroundColor: 'green'
+  },
+  {
+    id: '4',
+    resourceId: '3',
+    title: 'Job Fair',
+    start: '2024-09-05T00:00:00',
+    allDay: true,
+    end: '2024-09-06T00:00:00',
+    backgroundColor: 'red'
+  }
+];
+
+const resources = [
+  { id: 'hcmut-1', title: 'HCMUT CS1' },
+  { id: 'hcmut-2', title: 'HCMUT CS2' },
+  { id: '1', title: 'Sảnh trước toà A5', parentId: 'hcmut-1' },
+  { id: '2', title: 'Sân đánh tenis', parentId: 'hcmut-1' },
+  { id: '3', title: 'Sảnh trước toà H6', parentId: 'hcmut-2' }
+];
+
+const now = new Date();
+
+function renderEventContent(eventContent: EventContentArg) {
+  return (
+    <>
+      <b>{eventContent.timeText}</b>
+      <i>{eventContent.event.title}</i>
+    </>
+  );
+}
