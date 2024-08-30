@@ -12,6 +12,3 @@ export const formatDate = ({ date, type }: TFormatDate): string => {
     day: 'numeric'
   }).format(dateTime);
 };
-
-const now = new Date();
-console.log(formatDate({ date: now, type: 'start' })); // 20 tháng 8, 2021
