@@ -1,8 +1,8 @@
-import { Map, AdvancedMarker } from '@vis.gl/react-google-maps';
-import { useState } from 'react';
+import { Map, AdvancedMarker, MapControl, ControlPosition } from '@vis.gl/react-google-maps';
+import { useEffect, useState } from 'react';
 import greenLightBubIcon from '@assets/greenLightBub.svg';
 import redLightBubIcon from '@assets/redLightBub.svg';
-import { AppSkeleton } from '@components';
+import { AppSkeleton, UndoRedoControl } from '@components';
 import { useFilterSmartPoleStore } from '@states';
 import { useQuery } from '@tanstack/react-query';
 import { smartPoleService } from '@services';
@@ -19,6 +19,8 @@ import {
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import smartPoleImage from '@assets/pole.png';
 import { Repeat1, History } from 'lucide-react';
+import { useDrawingManager } from '@/components/maps/use-drawing-manager';
+import { CreateIcon } from '@/assets/icon';
 
 const setUpViewMap = [
   {
@@ -40,25 +42,50 @@ const setUpViewMap = [
 
 const AreaSelect = () => {
   const { setArea, area } = useFilterSmartPoleStore();
-  const data = [
+  const [group, setGroup] = useState<string>('0');
+  const areaData = [
     { value: 'all', label: 'Tất cả' },
-    { value: 'hcmut-1', label: 'HCMUT CS1' },
-    { value: 'hcmut-2', label: 'HCMUT CS2' }
+    { value: 'hcmut-1', label: 'BK Cơ sở 1' },
+    { value: 'hcmut-2', label: 'BK Cơ sở 2' }
+  ];
+  const groupData = [
+    { value: '0', area: '', label: 'Nhóm' },
+    { value: '1', area: 'hcmut-1', label: 'Nhóm 1' },
+    { value: '2', area: 'hcmut-1', label: 'Nhóm 2' },
+    { value: '3', area: 'hcmut-1', label: 'Nhóm 3' },
+    { value: '4', area: 'hcmut-2', label: 'Nhóm 1' },
+    { value: '5', area: 'hcmut-2', label: 'Nhóm 2' },
+    { value: '6', area: 'hcmut-2', label: 'Nhóm 3' }
   ];
   return (
-    <Select onValueChange={(val) => setArea(val)} value={area}>
-      <SelectTrigger className='w-[180px]'>
-        <SelectValue placeholder='Chọn một khu vực' />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Khu vực</SelectLabel>
-          <SelectItem value={data[0].value}>{data[0].label}</SelectItem>
-          <SelectItem value={data[1].value}>{data[1].label}</SelectItem>
-          <SelectItem value={data[2].value}>{data[2].label}</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <>
+      <Select onValueChange={(val) => setArea(val)} value={area}>
+        <SelectTrigger className='w-[120px]'>
+          <SelectValue placeholder='Chọn một khu vực' />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Khu vực</SelectLabel>
+            <SelectItem value={areaData[0].value}>{areaData[0].label}</SelectItem>
+            <SelectItem value={areaData[1].value}>{areaData[1].label}</SelectItem>
+            <SelectItem value={areaData[2].value}>{areaData[2].label}</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      <Select onValueChange={(val) => setGroup(val)} value={group}>
+        <SelectTrigger className='w-[120px]'>
+          <SelectValue placeholder='Nhóm' />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Nhóm</SelectLabel>
+            <SelectItem value={groupData[0].value}>{groupData[0].label}</SelectItem>
+            <SelectItem value={groupData[1].value}>{groupData[1].label}</SelectItem>
+            <SelectItem value={groupData[2].value}>{groupData[2].label}</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </>
   );
 };
 
@@ -116,6 +143,14 @@ export function MapPage() {
   const { area, status } = useFilterSmartPoleStore();
   const [showCard, setShowCard] = useState(false);
   const [selectedSmartPoleId, setSelectedSmartPoleId] = useState<string | null>(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const drawingManager = useDrawingManager(isDrawing);
+  useEffect(() => {
+    if (drawingManager) {
+      drawingManager.setDrawingMode(isDrawing ? google.maps.drawing.OverlayType.POLYLINE : null);
+    }
+  }, [isDrawing, drawingManager]);
+
   const handleMarkerClick = (smartPoleId: string) => {
     if (selectedSmartPoleId === smartPoleId) setShowCard(!showCard);
     else setShowCard(true);
@@ -137,6 +172,8 @@ export function MapPage() {
         mapId='1'
         zoom={setUpViewMap.find((item) => item.area === area)?.zoom}
         center={setUpViewMap.find((item) => item.area === area)?.center}
+        gestureHandling={'greedy'}
+        disableDefaultUI={true}
       >
         {smartPoles?.map((smartPole) => (
           <AdvancedMarker
@@ -152,11 +189,12 @@ export function MapPage() {
           </AdvancedMarker>
         ))}
       </Map>
-      <div className='flex items-stretch gap-2 absolute top-4 left-8 z-10'>
-        <AreaSelect />
-        <StatusFilter />
-      </div>
-
+      {!isDrawing && (
+        <div className='flex items-stretch gap-2 absolute top-4 left-8 z-10'>
+          <AreaSelect />
+          <StatusFilter />
+        </div>
+      )}
       <div className='absolute left-4 top-0 z-0 h-full'>
         {showCard && (
           <CardSmartPoleInfo
@@ -164,6 +202,18 @@ export function MapPage() {
           />
         )}
       </div>
+      <button
+        className='absolute top-4 right-10 z-10 bg-white p-2 rounded-lg flex flex-col items-center gap-1'
+        onClick={() => {
+          setIsDrawing(!isDrawing);
+        }}
+      >
+        <CreateIcon />
+        <p className='font-bold text-[14px]'>Tạo nhóm</p>
+      </button>
+      <MapControl position={ControlPosition.TOP_CENTER}>
+        <UndoRedoControl drawingManager={drawingManager} isDrawing={isDrawing} />
+      </MapControl>
     </div>
   );
 }
