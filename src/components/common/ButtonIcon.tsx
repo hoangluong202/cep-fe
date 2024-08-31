@@ -6,7 +6,7 @@ type ButtonIconProps = {
 
 export const ButtonIcon = ({ icon, className, onClick }: ButtonIconProps) => (
   <button
-    className={`flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 ${className}`}
+    className={`group/button flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100${className}`}
     onClick={onClick}
   >
     {icon}

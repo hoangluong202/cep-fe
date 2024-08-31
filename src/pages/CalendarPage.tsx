@@ -13,18 +13,12 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog';
-import {
-  MapPinned,
-  CalendarCheck,
-  ChevronDown,
-  ChevronUp,
-  EllipsisVertical,
-  X
-} from 'lucide-react';
+import { MapPinned, CalendarCheck, ChevronDown, ChevronUp, X, Plus, Pencil } from 'lucide-react';
 
 import { formatDate } from '@/utils';
 import { CreateEvent } from '@/components/calendars/PopoverCreateEditEvent';
 import { calculatePosition } from '@/utils/caculatePositon';
+import { useNavigate } from 'react-router-dom';
 
 type TEventPopoverState = {
   top: number;
@@ -44,6 +38,7 @@ export function CalendarPage() {
     event: null
   });
   const [showList, setShowList] = useState(false);
+  const navigate = useNavigate();
   const handleDateSelect = (selectInfo: DateSelectArg) => {
     const top = 100;
     const left = window.outerWidth / 6;
@@ -142,6 +137,9 @@ export function CalendarPage() {
       title: data.innerText.trim()
     };
   };
+  const handleCreateTemplate = () => {
+    navigate('/template');
+  };
 
   useEffect(() => {
     const draggableEl = document.getElementById('external-events');
@@ -157,45 +155,58 @@ export function CalendarPage() {
     <div className='flex h-screen w-full'>
       <div className='flex w-1/6 flex-col mx-1 gap-2'>
         <button
-          className='flex px-2 py-1 rounded-lg bg-inherit hover:bg-gray-100 active:bg-gray-200'
+          className='flex justify-between items-center px-2 py-1 rounded-lg bg-inherit hover:bg-gray-100 active:bg-gray-200'
           onClick={() => setShowList(!showList)}
         >
-          <p className='text-[16px] font-bold'>Mẫu chiếu sáng trong ngày</p>
-          {showList ? <ChevronDown /> : <ChevronUp />}
+          <p className='text-[16px] font-medium'>Mẫu chiếu sáng</p>
+          <div className='flex items-center'>
+            <ButtonIcon
+              icon={<Plus className='text-gray-500 group-hover/button:text-black' />}
+              className='h-6 w-6'
+              onClick={handleCreateTemplate}
+            />
+            {showList ? <ChevronDown /> : <ChevronUp />}
+          </div>
         </button>
         {showList && (
-          <div id='external-events' className='draggable-container flex flex-col w-full'>
+          <div id='external-events' className='draggable-container flex flex-col px-1 w-full'>
             <div
               draggable
-              className='draggable-item group flex flex-row hover:bg-gray-100 items-center h-10'
+              className='draggable-item group w-full flex justify-between hover:bg-gray-100 items-center h-10 rounded-lg px-1'
             >
-              <div className='h-7 w-7 rounded-lg bg-green-500'></div>
-              <p className='text-[14px] font-normal truncate'>Chiếu sáng lễ hội</p>
-              <div className='flex flex-row-reverse self-end ml-auto'>
-                <ButtonIcon
-                  icon={<X className='h-6 w-6' color='gray' />}
-                  className='hover:bg-gray-200 hidden group-hover:flex'
-                />
-                <ButtonIcon
-                  icon={<EllipsisVertical className='h-6 w-6' color='gray' />}
-                  className='hover:bg-gray-200 hidden group-hover:flex'
-                />
+              <div className='flex items-center gap-1'>
+                <div className='h-7 w-7 rounded-lg bg-green-500'></div>
+                <p className='max-w-[100px] text-[14px] font-normal truncate '>
+                  Giờ Trái Đất Giờ Trái Đất
+                </p>
               </div>
-            </div>
-            <div
-              draggable
-              className='draggable-item group flex flex-row hover:bg-gray-100 items-center h-10'
-            >
-              <div className='h-7 w-7 rounded-lg bg-blue-500'></div>
-              <p className='text-[14px] font-normal truncate'>Giờ Trái Đất</p>
-              <div className='flex flex-row-reverse self-end ml-auto'>
+              <div className='flex gap-2'>
+                <Dialog>
+                  <DialogTrigger>
+                    <ButtonIcon
+                      icon={<X className='text-gray-500 group-hover/button:text-red-500' />}
+                      className='h-6 w-6'
+                    />
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Bạn có chắc chắn muốn xóa sự kiện này?</DialogTitle>
+                      <DialogDescription>
+                        Hành động này sẽ không thể thu hồi. Sự kiện sẽ được xóa vĩnh viễn.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className='flex justify-end gap-x-2'>
+                      <button className='text-red-500' onClick={handleDeleteEvent}>
+                        Xóa
+                      </button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
                 <ButtonIcon
-                  icon={<X className='h-6 w-6' color='gray' />}
-                  className='hover:bg-gray-200 hidden group-hover:flex'
-                />
-                <ButtonIcon
-                  icon={<EllipsisVertical className='h-6 w-6' color='gray' />}
-                  className='hover:bg-gray-200 hidden group-hover:flex'
+                  icon={<Pencil className='text-gray-500 group-hover/button:text-black h-5 w-5' />}
+                  className='h-6 w-6'
+                  onClick={handleCreateTemplate}
                 />
               </div>
             </div>
