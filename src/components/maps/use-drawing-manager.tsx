@@ -30,22 +30,6 @@ export function useDrawingManager(
       }
     });
 
-    // Add event listener for overlaycomplete
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    google.maps.event.addListener(newDrawingManager, 'overlaycomplete', (event: any) => {
-      if (event.type === google.maps.drawing.OverlayType.POLYGON) {
-        const polyline = event.overlay;
-        const path = polyline.getPath();
-        const positions = [];
-        for (let i = 0; i < path.getLength(); i++) {
-          const latLng = path.getAt(i);
-          positions.push({ lat: latLng.lat(), lng: latLng.lng() });
-        }
-        console.log('Polygone positions:', positions);
-        // You can store or use the positions as needed
-      }
-    });
-
     setDrawingManager(newDrawingManager);
 
     return () => {

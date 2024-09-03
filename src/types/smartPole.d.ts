@@ -12,4 +12,5 @@ type SmartPole = {
   level: number;
   burningHours: number;
   frequency: number;
+  color?: string;
 };
