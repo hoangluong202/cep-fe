@@ -7,6 +7,8 @@ export * from './calendars/Clock';
 export * from './calendars/ListCalendar';
 export * from './calendars/PopoverCreateEditEvent';
 export * from './calendars/SchedulerForm';
+export * from './charts/PieChart';
+export * from './charts/PowerConsumption';
 export * from './common/AppNav';
 export * from './common/AppSkeleton';
 export * from './common/ButtonIcon';

@@ -118,7 +118,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 export const DoubleBarChart = () => {
   return (
-    <Card className='ml-4 mr-4'>
+    <Card>
       <CardHeader className='flex flex-row justify-between '>
         <div className='flex flex-col'>
           <CardTitle>Điện năng tiêu thụ của từng khu vực</CardTitle>
@@ -135,9 +135,17 @@ export const DoubleBarChart = () => {
           <DatePickerDemo />
         </div>
       </CardHeader>
-      <CardContent className='mt-8'>
+      <CardContent>
         <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
+          <BarChart
+            accessibilityLayer
+            data={chartData}
+            margin={{
+              right: 24,
+              top: 24,
+              bottom: 24
+            }}
+          >
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey='month'
@@ -146,7 +154,7 @@ export const DoubleBarChart = () => {
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 3)}
             />
-            <YAxis width={90} tickMargin={5} tickFormatter={(value) => `${value} kWh`} />
+            <YAxis tickMargin={5} tickFormatter={(value) => `${value} kWh`} />
             <ChartTooltip cursor={false} content={<ChartTooltipContent indicator='dashed' />} />
             <ChartLegend content={<ChartLegendContent />} />
             <Bar dataKey='hcmut1' fill='var(--color-hcmut1)' radius={4}>
