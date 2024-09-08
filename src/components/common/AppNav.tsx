@@ -1,6 +1,6 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Link } from 'react-router-dom';
-import { Home, Settings, Map, Calendar } from 'lucide-react';
+import { Home, Settings, Map, Calendar, Bell } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
@@ -14,7 +14,7 @@ export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
         <TooltipTrigger asChild>
           <Link
             to={path}
-            className='flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8'
+            className='flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-gray-200 active:bg-gray-300'
           >
             {icon}
             <span className='sr-only'>{label}</span>
@@ -39,6 +39,7 @@ export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
         />
         <AppNavItem path={menu[1].path} icon={<Map className='h-5 w-5' />} label='Bản đồ' />
         <AppNavItem path={menu[2].path} icon={<Calendar className='h-5 w-5' />} label='Lịch' />
+        <AppNavItem path={menu[3].path} icon={<Bell className='h-5 w-5' />} label='Cảnh báo' />
       </nav>
       <nav className='mt-auto flex flex-col items-center gap-4 px-2 sm:py-4'>
         <Tooltip>
