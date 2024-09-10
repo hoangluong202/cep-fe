@@ -88,7 +88,7 @@ export const columns: ColumnDef<TAlarmData>[] = [
       const areaLabel = getLabel(area, AREA);
       return (
         <div className='text-sm text-gray-500'>
-          Khu vực {areaLabel}, trụ đèn số POLE-{poleId}
+          Khu vực {areaLabel}, trụ đèn POLE-{poleId}
         </div>
       );
     }
@@ -98,7 +98,7 @@ export const columns: ColumnDef<TAlarmData>[] = [
     header: () => <div className='font-bold text-[15px]'>Kiểu lỗi</div>,
     cell: ({ row }) => {
       const errType = row.original.errType;
-      return <Badge variant='destructive'>{getLabel(errType, ALARM_ERROR)}</Badge>;
+      return <Badge variant='secondary'>{getLabel(errType, ALARM_ERROR)}</Badge>;
     }
   },
   {
@@ -106,7 +106,6 @@ export const columns: ColumnDef<TAlarmData>[] = [
     header: () => <div className='font-bold text-[15px]'>Độ ưu tiên</div>,
     cell: ({ row }) => {
       const priority = row.original.priority;
-
       return (
         <div className='flex gap-1 items-center'>
           <img
@@ -119,7 +118,13 @@ export const columns: ColumnDef<TAlarmData>[] = [
             }
             alt='squad'
           />
-          <Badge variant='secondary' className='bg-green-300'>
+          <Badge
+            variant='secondary'
+            style={{
+              backgroundColor:
+                priority === 'high' ? '#fca5a5' : priority === 'medium' ? '#fb923c' : '#fcd34d'
+            }}
+          >
             {getLabel(priority, PRIORITY)}
           </Badge>
         </div>
@@ -143,7 +148,14 @@ export const columns: ColumnDef<TAlarmData>[] = [
             }
             alt='squad'
           />
-          <Badge variant='secondary' className='bg-sky-300'>
+          <Badge
+            variant='secondary'
+            className='bg-sky-300'
+            style={{
+              backgroundColor:
+                status === 'pending' ? '#fde047' : status === 'in-progress' ? '#86efac' : '#5eead4'
+            }}
+          >
             {getLabel(status, ALARM_STATUS)}
           </Badge>
         </div>

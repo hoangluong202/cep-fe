@@ -8,7 +8,8 @@ import {
   SortingState,
   getSortedRowModel,
   ColumnFiltersState,
-  getFilteredRowModel
+  getFilteredRowModel,
+  PaginationState
 } from '@tanstack/react-table';
 import {
   Table,
@@ -86,6 +87,10 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     'in-progress': false,
     resolved: false
   });
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 6
+  });
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const table = useReactTable({
@@ -93,11 +98,14 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setPagination,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    // autoResetPageIndex: false,
     state: {
+      pagination,
       sorting,
       columnFilters
     }
@@ -326,21 +334,53 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
       </div>
       <div className='flex flex-row justify-between	items-center py-3'>
         <div className='flex flex-row gap-2 items-center'>
-          <p className='font-normal text-[12px] text-gray-500'>Tổng 160 giá trị</p>
-          <p className='font-normal text-[12px] text-gray-500'>Hiển thị 8 giá trị/trang</p>
+          <p className='font-normal text-[12px] text-gray-500'>
+            Tổng {table.getRowCount()} giá trị
+          </p>
+          <p className='font-normal text-[12px] text-gray-500'>
+            Hiển thị {pagination.pageSize} giá trị/trang
+          </p>
         </div>
         <div className='flex flex-row gap-2 items-center'>
-          <p className='font-normal text-[12px] text-gray-500'>Trang 1/20</p>
-          <button className='border-2 p-1 rounded'>
+          <p className='font-normal text-[12px] text-gray-500'>
+            Trang {pagination.pageIndex + 1}/{table.getPageCount()}
+          </p>
+          <button
+            className={`border-2 p-1 rounded ${
+              table.getCanPreviousPage() ? 'bg-gray-100' : 'bg-gray-300'
+            }`}
+            onClick={() => {
+              table.firstPage();
+            }}
+            disabled={!table.getCanPreviousPage()}
+          >
             <img src={moveFirstIcon} alt='moveFirst' />
           </button>
-          <button className='border-2 p-1 rounded'>
+          <button
+            className={`border-2 p-1 rounded ${
+              table.getCanPreviousPage() ? 'bg-gray-100' : 'bg-gray-300'
+            }`}
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
             <img src={movePreviousIcon} alt='movePrevious' />
           </button>
-          <button className='border-2 p-1 rounded'>
+          <button
+            className={`border-2 p-1 rounded ${
+              table.getCanNextPage() ? 'bg-gray-100' : 'bg-gray-300'
+            }`}
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
             <img src={moveNextIcon} alt='moveNext' />
           </button>
-          <button className='border-2 p-1 rounded'>
+          <button
+            className={`border-2 p-1 rounded ${
+              table.getCanNextPage() ? 'bg-gray-100' : 'bg-gray-300'
+            }`}
+            onClick={() => table.lastPage()}
+            disabled={!table.getCanNextPage()}
+          >
             <img src={moveLastIcon} alt='moveLast' />
           </button>
         </div>

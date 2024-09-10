@@ -5,4 +5,5 @@
 export * from './caculatePositon';
 export * from './dateFormat';
 export * from './generateSmartPole';
+export * from './getLabel';
 export * from './retryQueryFn';
