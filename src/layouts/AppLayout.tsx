@@ -1,33 +1,27 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { MENU_BAR_NAME } from '@constants';
-import { useMenuBarStore } from '@states';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { LoginPage } from '@/pages';
 import { AppNav, Header } from '@/components';
+import { useAuth } from '@/components/common/useAuth';
+import { LoginPage } from '@/pages';
 
-export const AppLayout: Component<{ menu: RouteMenu }> = ({ menu }) => {
+export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const { pathname } = useLocation();
-  const { setSelectedMenu } = useMenuBarStore();
+  const navigate = useNavigate();
   const routeItems = menu;
 
-  useEffect(() => {
-    if (pathname === '/login') {
-      setSelectedMenu('Login');
-    }
-    if (pathname === '/dashboard') {
-      setSelectedMenu(MENU_BAR_NAME.dashboard);
-    }
-    if (pathname === '/map') {
-      setSelectedMenu(MENU_BAR_NAME.map);
-    }
-    if (pathname === '/calendar') {
-      setSelectedMenu(MENU_BAR_NAME.calendar);
-    }
-  }, [pathname, setSelectedMenu]);
+  const { isAuth } = useAuth();
 
-  if (!localStorage.getItem('authToken')) {
-    return <LoginPage />;
-  } else
+  useEffect(() => {
+    if (!isAuth) {
+      navigate('/login');
+    } else {
+      if (pathname === '/' || pathname === '/login') {
+        navigate('/map');
+      }
+    }
+  }, [pathname, isAuth, navigate]);
+
+  const AppLayout = () => {
     return (
       <div className='flex min-h-screen w-full flex-col bg-muted/40 font-cal'>
         <AppNav menu={menu} />
@@ -43,4 +37,12 @@ export const AppLayout: Component<{ menu: RouteMenu }> = ({ menu }) => {
         </div>
       </div>
     );
+  };
+  const LoginLayout = () => (
+    <div className='h-screen w-screen'>
+      <LoginPage />
+    </div>
+  );
+
+  return isAuth ? <AppLayout /> : <LoginLayout />;
 };

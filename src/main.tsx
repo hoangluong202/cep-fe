@@ -11,6 +11,7 @@ import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import { TooltipProvider } from './components';
+import { AuthProvider } from './components/common/useAuth';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,8 +29,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <TooltipProvider>
           <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY}>
             <QueryClientProvider client={queryClient}>
-              <ToastContainer limit={1} />
-              <App />
+              <AuthProvider>
+                <ToastContainer limit={1} />
+                <App />
+              </AuthProvider>
             </QueryClientProvider>
           </APIProvider>
         </TooltipProvider>

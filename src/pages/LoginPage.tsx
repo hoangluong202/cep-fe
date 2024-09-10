@@ -6,9 +6,11 @@ import { useMutation } from '@tanstack/react-query';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/components/common/useAuth';
 
 export function LoginPage() {
   const navigate: NavigateFunction = useNavigate();
+  const { login } = useAuth();
   const {
     info: { refetch }
   } = useUserQuery();
@@ -20,7 +22,7 @@ export function LoginPage() {
     mutationFn: async (data: LoginFormData) => {
       const response = await authService.login(data);
       const { access_token } = response;
-      localStorage.setItem('authToken', access_token);
+      login(access_token);
       server.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
       return response;
     }

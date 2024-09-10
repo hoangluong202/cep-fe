@@ -17,6 +17,7 @@ export * from './common/AppSkeleton';
 export * from './common/ButtonIcon';
 export * from './common/FilterSmartPole';
 export * from './common/Header';
+export * from './common/useAuth';
 export * from './maps/PoleCard';
 export * from './maps/types';
 export * from './maps/undo-redo-control';

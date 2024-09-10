@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import {
   Breadcrumb,
@@ -18,14 +18,15 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { useMenuBarStore } from '@/states';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useAuth } from './useAuth';
 
 export const Header: Component<{ menu: RouteMenu }> = ({ menu }) => {
-  const { setSelectedMenu } = useMenuBarStore();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setSelectedMenu('Login');
+    logout();
+    navigate('/login');
   };
   return (
     <header className='sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6'>
