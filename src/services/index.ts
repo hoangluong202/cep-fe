@@ -3,7 +3,6 @@
  */
 
 export * from './auth.service';
-export * from './calendar.service';
 export * from './common';
 export * from './scheduler.service';
 export * from './smartPole.service';
