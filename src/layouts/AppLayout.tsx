@@ -2,7 +2,6 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { AppNav, Header } from '@/components';
 import { useAuth } from '@/components/common/useAuth';
-import { LoginPage } from '@/pages';
 
 export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const { pathname } = useLocation();
@@ -15,9 +14,9 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
     if (!isAuth) {
       navigate('/login');
     } else {
-      if (pathname === '/' || pathname === '/login') {
-        navigate('/map');
-      }
+      // if (pathname === '/' || pathname === '/login') {
+      //   navigate('/map');
+      // }
     }
   }, [pathname, isAuth, navigate]);
 
@@ -30,7 +29,8 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
           <main className='w-full h-dvh'>
             <Routes>
               {routeItems.map((item) => {
-                return <Route path={item.path} element={item.element} key={item.path} />;
+                if (item.path !== '/login')
+                  return <Route path={item.path} element={item.element} key={item.path} />;
               })}
             </Routes>
           </main>
@@ -40,7 +40,12 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
   };
   const LoginLayout = () => (
     <div className='h-screen w-screen'>
-      <LoginPage />
+      <Routes>
+        {routeItems.map((item) => {
+          if (item.path === '/login')
+            return <Route path={item.path} element={item.element} key={item.path} />;
+        })}
+      </Routes>
     </div>
   );
 

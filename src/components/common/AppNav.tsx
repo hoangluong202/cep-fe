@@ -1,9 +1,10 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Home, Settings, Map, Calendar, Bell } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
+  const pathName = useLocation().pathname;
   const AppNavItem: Component<{ path: string; icon: JSX.Element; label: string }> = ({
     path,
     icon,
@@ -11,7 +12,10 @@ export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
   }) => (
     <>
       <Tooltip>
-        <TooltipTrigger asChild>
+        <TooltipTrigger
+          className={`hover:bg-gray-200 ${path === pathName ? 'bg-gray-200' : ''}`}
+          asChild
+        >
           <Link
             to={path}
             className='flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-gray-200 active:bg-gray-300'

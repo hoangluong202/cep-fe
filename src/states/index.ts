@@ -4,4 +4,3 @@
 
 export * from './filterSmartPole.state';
 export * from './menuBar.state';
-export * from './showCalendar.state';
