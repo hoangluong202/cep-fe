@@ -1,9 +1,9 @@
-import { PairLocation, Position, SmartPole } from '@/types/smartPole';
+import { PairLocation, Position, TPoleData } from '@/types/smartPole';
 import { faker } from '@faker-js/faker';
 
-export const generateSmartPole = (): SmartPole[] => {
+export const generateSmartPole = (): TPoleData[] => {
   let id: number = 1;
-  const poles: SmartPole[] = [];
+  const poles: TPoleData[] = [];
   const areas = ['hcmut1', 'hcmut2'];
   const distancesBetweenPoles = 25;
   const pairsLocation1 = [
@@ -76,7 +76,7 @@ export const generateSmartPole = (): SmartPole[] => {
         const poleId = id++;
         const power = 100;
         const voltage = 220;
-        const pole: SmartPole = {
+        const pole: TPoleData = {
           id: poleId.toString(),
           area: area,
           position: {
@@ -90,7 +90,7 @@ export const generateSmartPole = (): SmartPole[] => {
             max: 1000
           }),
           frequency: faker.number.int({ min: 0, max: 100 }),
-          current: power / voltage,
+          current: parseFloat((power / voltage).toFixed(2)),
           voltage: voltage,
           power: power
         };

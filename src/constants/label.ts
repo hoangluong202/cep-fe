@@ -1,4 +1,10 @@
-import { TAlarmErrorData, TAlarmStatusData, TAreaData, TPriorityData } from '@/types/alarm';
+import {
+  TAlarmErrorData,
+  TAlarmStatusData,
+  TAreaData,
+  TGroupData,
+  TPriorityData
+} from '@/types/alarm';
 
 export const AREA: TAreaData[] = [
   {
@@ -8,6 +14,29 @@ export const AREA: TAreaData[] = [
   {
     key: 'hcmut2',
     label: 'BK Cơ sở 2'
+  }
+];
+
+export const GROUP: TGroupData[] = [
+  {
+    area: 'hcmut1',
+    key: 'a3',
+    label: 'Sân A3'
+  },
+  {
+    area: 'hcmut1',
+    key: 'a5',
+    label: 'Sân A5'
+  },
+  {
+    area: 'hcmut2',
+    key: 'h1',
+    label: 'Sân H1'
+  },
+  {
+    area: 'hcmut2',
+    key: 'h6',
+    label: 'Sân H6'
   }
 ];
 

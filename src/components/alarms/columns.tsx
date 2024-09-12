@@ -20,7 +20,6 @@ import pendingStatusIcon from '@/assets/svg/pending-status.svg';
 import inProgressStatusIcon from '@/assets/svg/in-progress-status.svg';
 import resolvedStatusIcon from '@/assets/svg/resolved-status.svg';
 import moveNextIcon from '@/assets/svg/move-next.svg';
-// import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { TAlarmData } from '@/types/alarm';
 import { getLabel } from '@/utils/getLabel';

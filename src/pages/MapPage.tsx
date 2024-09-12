@@ -1,8 +1,8 @@
 import { Map, AdvancedMarker, MapControl, ControlPosition } from '@vis.gl/react-google-maps';
 import { useEffect, useState } from 'react';
-import greenLightBubIcon from '@assets/greenLightBub.svg';
-import redLightBubIcon from '@assets/redLightBub.svg';
-import yellowBub from '@assets/svg/yellow-bub.svg';
+import lightOnIcon from '@assets/svg/light-on.svg';
+import lightOffIcon from '@assets/svg/light-off.svg';
+import lightChooseIcon from '@assets/svg/light-choose.svg';
 import { ButtonIcon, UndoRedoControl } from '@components';
 import { useFilterSmartPoleStore } from '@states';
 import { generateSmartPole } from '@utils';
@@ -16,11 +16,11 @@ import {
   SelectValue
 } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import smartPoleImage from '@assets/pole.png';
+import smartPoleImage from '@assets/imgs/pole.png';
 import { Repeat1, History, ArrowLeft, FolderPen, Save } from 'lucide-react';
 import { useDrawingManager } from '@/components/maps/use-drawing-manager';
 import { CreateIcon } from '@/assets/icon';
-import { SmartPole } from '@/types/smartPole';
+import { TPoleData } from '@/types/smartPole';
 
 const setUpViewMap = [
   {
@@ -112,7 +112,7 @@ const StatusFilter = () => {
     </Tabs>
   );
 };
-const CardSmartPoleInfo: Component<{ smartPole?: SmartPole }> = ({ smartPole }) => {
+const CardSmartPoleInfo: Component<{ smartPole?: TPoleData }> = ({ smartPole }) => {
   return (
     <div className='flex flex-col w-80 bg-white h-full border-2 text-sm text-[#202124] font-normal'>
       <img src={smartPoleImage} alt='smartPoleImage' />
@@ -123,11 +123,7 @@ const CardSmartPoleInfo: Component<{ smartPole?: SmartPole }> = ({ smartPole }) 
         </p>
 
         <div className='flex flex-row items-center gap-4'>
-          <img
-            src={smartPole?.status ? greenLightBubIcon : redLightBubIcon}
-            width={24}
-            height={24}
-          />
+          <img src={smartPole?.status ? lightOnIcon : lightOffIcon} width={24} height={24} />
           <p>{smartPole?.status === true ? 'Đang bật' : 'Đang tắt'}</p>
         </div>
         <div className='flex flex-row items-center gap-4'>
@@ -208,10 +204,10 @@ export function MapPage() {
             <img
               src={
                 smartPole.color === 'selected'
-                  ? yellowBub
+                  ? lightChooseIcon
                   : smartPole.status
-                  ? greenLightBubIcon
-                  : redLightBubIcon
+                  ? lightOnIcon
+                  : lightOffIcon
               }
               width={smartPole.id === selectedSmartPoleId && showCard ? 40 : 20}
               height={20}

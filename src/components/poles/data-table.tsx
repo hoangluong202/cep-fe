@@ -22,12 +22,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import plusIcon from '@/assets/svg/plus-circle.svg';
-import highPriorityIcon from '@/assets/svg/high-priority.svg';
-import mediumPriorityIcon from '@/assets/svg/medium-priority.svg';
-import lowPriorityIcon from '@/assets/svg/low-priority.svg';
-import pendingStatusIcon from '@/assets/svg/pending-status.svg';
-import inProgressStatusIcon from '@/assets/svg/in-progress-status.svg';
-import resolvedStatusIcon from '@/assets/svg/resolved-status.svg';
 import moveFirstIcon from '@/assets/svg/move-first.svg';
 import moveLastIcon from '@/assets/svg/move-last.svg';
 import moveNextIcon from '@/assets/svg/move-next.svg';
@@ -36,56 +30,28 @@ import xIcon from '@/assets/svg/x.svg';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
+import { AREA, GROUP } from '@/constants';
+// import { TArea } from '@/types/alarm';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-const priorities = [
-  {
-    value: 'high',
-    label: 'Cao'
-  },
-  {
-    value: 'medium',
-    label: 'Trung bình'
-  },
-  {
-    value: 'low',
-    label: 'Thấp'
-  }
-];
-
-const statuses = [
-  {
-    value: 'pending',
-    label: 'Chờ xử lý'
-  },
-  {
-    value: 'in-progress',
-    label: 'Đang xử lý'
-  },
-  {
-    value: 'resolved',
-    label: 'Đã xử lý'
-  }
-];
-
 type TFilter = {
   [key: string]: boolean;
 };
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
-  const [priority, setPriority] = React.useState<TFilter>({
-    high: false,
-    medium: false,
-    low: false
+  const [area, setArea] = React.useState<TFilter>({
+    hcmut1: false,
+    hcmut2: false
   });
-  const [status, setStatus] = React.useState<TFilter>({
-    pending: false,
-    'in-progress': false,
-    resolved: false
+  const [group, setGroup] = React.useState<TFilter>({
+    a3: false,
+    a5: false,
+    h1: false,
+    h6: false
   });
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
@@ -103,7 +69,6 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
-    // autoResetPageIndex: false,
     state: {
       pagination,
       sorting,
@@ -111,102 +76,85 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     }
   });
 
-  const isPriorityFiltered = Object.values(priority).some((value) => value);
-  const isStatusFiltered = Object.values(status).some((value) => value);
-  const isFiltered = isPriorityFiltered || isStatusFiltered;
+  const isAreaFiltered = Object.values(area).some((value) => value);
+  const isGroupFiltered = Object.values(group).some((value) => value);
+  const isFiltered = isAreaFiltered || isGroupFiltered;
+  const clearAreaFilter = () => {
+    console.log('clearAreaFilter');
+    setArea({
+      hcmut1: false,
+      hcmut2: false
+    });
+  };
+  const clearGroupFilter = () => {
+    console.log('clearGroupFilter');
+    setGroup({
+      a3: false,
+      a5: false,
+      h1: false,
+      h6: false
+    });
+  };
   const clearFilters = () => {
-    setPriority({
-      high: false,
-      medium: false,
-      low: false
-    });
-    setStatus({
-      pending: false,
-      'in-progress': false,
-      resolved: false
-    });
-  };
-  const clearPriorityFilter = () => {
-    setPriority({
-      high: false,
-      medium: false,
-      low: false
-    });
-  };
-  const clearStatusFilter = () => {
-    setStatus({
-      pending: false,
-      'in-progress': false,
-      resolved: false
-    });
+    console.log('clearFilters');
+    clearAreaFilter();
+    clearGroupFilter();
   };
 
   return (
     <div>
       <div className='flex items-center py-4 gap-2'>
         <Input
-          placeholder='Tìm kiếm mã lỗi'
-          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
-          onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
+          placeholder='Tìm kiếm mã trụ đèn'
+          value={(table.getColumn('id')?.getFilterValue() as string) ?? ''}
+          onChange={(event) => table.getColumn('id')?.setFilterValue(event.target.value)}
           className='w-48 focus-visible:ring-none focus-visible:ring-offset-none focus-visible:ring-0'
         />
         <Popover>
           <PopoverTrigger asChild>
             <Button variant='outline' className='flex gap-1 border-dashed border-2 rounded'>
-              <img src={plusIcon} alt='squad' />
-              <p className='font-bold text-[12px]'>Độ ưu tiên</p>
-              {(priority['high'] || priority['medium'] || priority['low']) && (
-                <Separator orientation='vertical' className='mx-1' />
-              )}
-              {priority['high'] && (
-                <p className='font-small text-[12px] rounded px-1 bg-gray-300'>Cao</p>
-              )}
-              {priority['medium'] && (
-                <p className='font-small text-[12px] rounded px-1 bg-gray-300'>Trung bình</p>
-              )}
-              {priority['low'] && (
-                <p className='font-small text-[12px] rounded px-1 bg-gray-300'>Thấp</p>
-              )}
+              <img src={plusIcon} alt='plusIcon' />
+              <p className='font-bold text-[12px]'>Khu vực</p>
+              {isAreaFiltered && <Separator orientation='vertical' className='mx-1' />}
+              {AREA.map((a) => {
+                if (area[a.key]) {
+                  return (
+                    <p id={a.key} className='font-small text-[12px] rounded px-1 bg-gray-300'>
+                      {a.label}
+                    </p>
+                  );
+                }
+              })}
             </Button>
           </PopoverTrigger>
           <PopoverContent align='start' className='flex flex-col gap-2 w-48'>
-            {priorities.map((p) => (
+            {AREA.map((areaItem) => (
               <div className='flex flex-row items-center gap-2 w-full'>
                 <Checkbox
-                  id={p.value}
-                  checked={priority[p.value]}
+                  id={areaItem.key}
+                  checked={area[areaItem.key]}
                   onClick={() => {
-                    setPriority((prev) => ({
+                    setArea((prev) => ({
                       ...prev,
-                      [p.value]: !prev[p.value]
+                      [areaItem.key]: !prev[areaItem.key]
                     }));
                   }}
-                />
-                <img
-                  src={
-                    p.value === 'high'
-                      ? highPriorityIcon
-                      : p.value === 'medium'
-                      ? mediumPriorityIcon
-                      : lowPriorityIcon
-                  }
-                  alt='squad'
                 />
                 <label
                   htmlFor='terms'
                   className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
                 >
-                  {p.label}
+                  {areaItem.label}
                 </label>
-                <p className='text-[12px] font-medium ml-auto'>143</p>
+                <p className='text-[12px] font-medium ml-auto'>23</p>
               </div>
             ))}
-            {isPriorityFiltered && (
+            {isAreaFiltered && (
               <>
                 <Separator orientation='horizontal' />
                 <button
                   className='font-normal text-[14px] hover:bg-gray-100 rounded py-1'
-                  onClick={clearPriorityFilter}
+                  onClick={clearAreaFilter}
                 >
                   Xóa bộ lọc
                 </button>
@@ -217,66 +165,51 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         <Popover>
           <PopoverTrigger asChild>
             <Button variant='outline' className='flex gap-1 border-dashed border-2 rounded'>
-              <img src={plusIcon} alt='squad' />
-              <p className='font-bold text-[12px]'>Trạng thái</p>
-              {(status['pending'] || status['in-progress'] || status['resolved']) && (
-                <Separator orientation='vertical' className='mx-1' />
-              )}
-              {status['pending'] && (
-                <p className='font-small text-[12px] rounded px-1 bg-gray-300'>
-                  {statuses.filter((item) => item.value === 'pending')[0].label}
-                </p>
-              )}
-              {status['in-progress'] && (
-                <p className='font-small text-[12px] rounded px-1 bg-gray-300'>
-                  {statuses.filter((item) => item.value === 'in-progress')[0].label}
-                </p>
-              )}
-              {status['resolved'] && (
-                <p className='font-small text-[12px] rounded px-1 bg-gray-300'>
-                  {statuses.filter((item) => item.value === 'resolved')[0].label}
-                </p>
-              )}
+              <img src={plusIcon} alt='plusIcon' />
+              <p className='font-bold text-[12px]'>Nhóm</p>
+              {isGroupFiltered && <Separator orientation='vertical' className='mx-1' />}
+              {GROUP.map((groupItem) => {
+                if (group[groupItem.key]) {
+                  return (
+                    <p
+                      id={groupItem.key}
+                      className='font-small text-[12px] rounded px-1 bg-gray-300'
+                    >
+                      {groupItem.label}
+                    </p>
+                  );
+                }
+              })}
             </Button>
           </PopoverTrigger>
           <PopoverContent align='start' className='flex flex-col gap-2 w-48'>
-            {statuses.map((s) => (
+            {GROUP.map((groupItem) => (
               <div className='flex flex-row items-center gap-2 w-full'>
                 <Checkbox
-                  id={s.value}
-                  checked={status[s.value]}
+                  id={groupItem.key}
+                  checked={group[groupItem.key]}
                   onClick={() => {
-                    setStatus((prev) => ({
+                    setGroup((prev) => ({
                       ...prev,
-                      [s.value]: !prev[s.value]
+                      [groupItem.key]: !prev[groupItem.key]
                     }));
                   }}
-                />
-                <img
-                  src={
-                    s.value === 'pending'
-                      ? pendingStatusIcon
-                      : s.value === 'in-progress'
-                      ? inProgressStatusIcon
-                      : resolvedStatusIcon
-                  }
-                  alt='squad'
                 />
                 <label
                   htmlFor='terms'
                   className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
                 >
-                  {s.label}
+                  {groupItem.label}
                 </label>
-                <p className='text-[12px] font-medium ml-auto'>143</p>
+                <p className='text-[12px] font-medium ml-auto'>23</p>
               </div>
             ))}
-            {isStatusFiltered && (
+            {isGroupFiltered && (
               <>
                 <Separator orientation='horizontal' />
                 <button
                   className='font-normal text-[14px] hover:bg-gray-100 rounded py-1'
-                  onClick={clearStatusFilter}
+                  onClick={clearGroupFilter}
                 >
                   Xóa bộ lọc
                 </button>

@@ -13,6 +13,12 @@ export type TAreaData = {
   label: string;
 };
 
+export type TGroupData = {
+  area: TArea;
+  key: string;
+  label: string;
+};
+
 export type TAlarmStatusData = {
   key: TAlarmStatus;
   label: string;

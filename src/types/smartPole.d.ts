@@ -8,7 +8,7 @@ export type PairLocation = {
   end: Position;
 };
 
-export type SmartPole = {
+export type TPoleData = {
   id: string;
   area: string;
   position: Position;

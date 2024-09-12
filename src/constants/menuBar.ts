@@ -1,11 +1,22 @@
-export const MENU_BAR_NAME = {
-  dashboard: 'Dashboard',
-  map: 'View Map',
-  calendar: 'Calendar'
-};
-
-export const MENU_BAR_LABELS = {
-  dashboard: 'Bảng điều khiển',
-  map: 'Bản đồ',
-  calendar: 'Lịch'
-};
+export const MENU_ITEMS = [
+  {
+    key: 'dashboard',
+    label: 'Bảng điều khiển'
+  },
+  {
+    key: 'map',
+    label: 'Bản đồ'
+  },
+  {
+    key: 'calendar',
+    label: 'Lịch'
+  },
+  {
+    key: 'alarm',
+    label: 'Cảnh báo'
+  },
+  {
+    key: 'pole',
+    label: 'Trụ đèn'
+  }
+];

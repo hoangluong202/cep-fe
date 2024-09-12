@@ -61,7 +61,7 @@ export const Header: Component<{ menu: RouteMenu }> = ({ menu }) => {
         <DropdownMenuTrigger asChild>
           <Button variant='outline' size='icon' className='overflow-hidden rounded-full'>
             <Avatar>
-              <AvatarImage src='src/assets/logobk.png' />
+              <AvatarImage src='./../../assets/imgs/logobk.png' />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </Button>
