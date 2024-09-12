@@ -19,6 +19,8 @@ export * from './maps/types';
 export * from './maps/undo-redo-control';
 export * from './maps/undo-redo';
 export * from './maps/use-drawing-manager';
+export * from './poles/column';
+export * from './poles/data-table';
 export * from './ui/avatar';
 export * from './ui/badge';
 export * from './ui/breadcrumb';

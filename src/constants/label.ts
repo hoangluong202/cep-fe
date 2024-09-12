@@ -18,7 +18,7 @@ export const ALARM_ERROR: TAlarmErrorData[] = [
   },
   {
     key: 'uncontrolled',
-    label: 'Không kiểm soát'
+    label: 'Chiếu sáng sai lệch'
   },
   {
     key: 'power-lower',

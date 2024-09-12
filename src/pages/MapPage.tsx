@@ -3,11 +3,9 @@ import { useEffect, useState } from 'react';
 import greenLightBubIcon from '@assets/greenLightBub.svg';
 import redLightBubIcon from '@assets/redLightBub.svg';
 import yellowBub from '@assets/svg/yellow-bub.svg';
-import { AppSkeleton, ButtonIcon, UndoRedoControl } from '@components';
+import { ButtonIcon, UndoRedoControl } from '@components';
 import { useFilterSmartPoleStore } from '@states';
-import { useQuery } from '@tanstack/react-query';
-import { smartPoleService } from '@services';
-import { retryQueryFn } from '@utils';
+import { generateSmartPole } from '@utils';
 import {
   Select,
   SelectContent,
@@ -22,6 +20,7 @@ import smartPoleImage from '@assets/pole.png';
 import { Repeat1, History, ArrowLeft, FolderPen, Save } from 'lucide-react';
 import { useDrawingManager } from '@/components/maps/use-drawing-manager';
 import { CreateIcon } from '@/assets/icon';
+import { SmartPole } from '@/types/smartPole';
 
 const setUpViewMap = [
   {
@@ -120,7 +119,7 @@ const CardSmartPoleInfo: Component<{ smartPole?: SmartPole }> = ({ smartPole }) 
       <div className='flex flex-col pl-6 gap-1 py-2'>
         <p className='font-medium text-[22px]'>Đèn {smartPole?.id}</p>
         <p className='font-normal text-sm text-[#70757a] pb-4'>
-          Lắp đặt tại {smartPole?.road}, khu vực {smartPole?.area}
+          Lắp đặt tại Khu vực {smartPole?.area}
         </p>
 
         <div className='flex flex-row items-center gap-4'>
@@ -144,9 +143,10 @@ const CardSmartPoleInfo: Component<{ smartPole?: SmartPole }> = ({ smartPole }) 
     </div>
   );
 };
+const smartPoles = generateSmartPole();
 
 export function MapPage() {
-  const { area, status } = useFilterSmartPoleStore();
+  const { area } = useFilterSmartPoleStore();
   const [showCard, setShowCard] = useState(false);
   const [selectedSmartPoleId, setSelectedSmartPoleId] = useState<string | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -189,15 +189,6 @@ export function MapPage() {
     else setShowCard(true);
     setSelectedSmartPoleId(smartPoleId);
   };
-  const { data: smartPoles, isFetching } = useQuery({
-    queryKey: ['/api/poles', area, status],
-    queryFn: () => smartPoleService.getBy(area, status),
-    retry: retryQueryFn
-  });
-
-  if (isFetching) {
-    return <AppSkeleton />;
-  }
 
   return (
     <div className='relative h-full w-full px-4'>

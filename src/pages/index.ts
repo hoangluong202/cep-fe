@@ -7,4 +7,5 @@ export * from './CalendarPage';
 export * from './DashboardPage';
 export * from './LoginPage';
 export * from './MapPage';
+export * from './PolePage';
 export * from './TemplatePage';

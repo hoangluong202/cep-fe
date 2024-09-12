@@ -4,29 +4,20 @@ import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import { EditIcon, CrossIcon, DeleteIcon } from '@assets/icon';
 import { useEffect, useState } from 'react';
-import { ButtonIcon } from '@/components/common/ButtonIcon';
+import { MapPinned, CalendarCheck, ChevronDown, ChevronUp, X, Plus, Pencil } from 'lucide-react';
+import { formatDate, calculatePosition } from '@/utils';
+import { useNavigate } from 'react-router-dom';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog';
-import { MapPinned, CalendarCheck, ChevronDown, ChevronUp, X, Plus, Pencil } from 'lucide-react';
-
-import { formatDate } from '@/utils';
-import { CreateEvent } from '@/components/calendars/PopoverCreateEditEvent';
-import { calculatePosition } from '@/utils/caculatePositon';
-import { useNavigate } from 'react-router-dom';
-
-type TEventPopoverState = {
-  top: number;
-  left: number;
-  visibleView: boolean;
-  visibleCreate: boolean;
-  event: EventApi | null;
-};
+  DialogTrigger,
+  ButtonIcon,
+  CreateEvent
+} from '@/components';
+import { TEventPopoverState } from '@/types/event';
 
 export function CalendarPage() {
   const [events, setEvents] = useState<EventApi[]>([]);
