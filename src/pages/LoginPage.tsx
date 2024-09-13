@@ -40,7 +40,7 @@ export function LoginPage() {
   };
 
   return (
-    <div className="h-screen grid grid-cols-3 gap-8 bg-center bg-cover bg-fixed bg-no-repeat bg-[url('./../assets/imgs/bg-login.jpeg')]">
+    <div className="h-screen grid grid-cols-3 gap-8 bg-center bg-cover bg-fixed bg-no-repeat bg-[url('./../../src/assets/imgs/bg-login.jpeg')]">
       <div className='grid col-span-2 grid-rows-3 gap-4 ml-24'>
         <p className='row-span-2 font-sans text-3xl font-bold text-white self-end'>
           Hệ thống lập lịch chiếu sáng cho đèn đường thông minh

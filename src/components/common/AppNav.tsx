@@ -49,8 +49,8 @@ export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
   return (
     <aside className='fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex'>
       <nav className='flex flex-col items-center gap-4 px-2 sm:py-4'>
-        <Avatar>
-          <AvatarImage src='./../../assets/hcmut.png' />
+        <Avatar className='flex items-center justify-center'>
+          <AvatarImage src='./../../../src/assets/imgs/logobk.png' className='h-6 w-6' />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         {menuItems.map((item) => {

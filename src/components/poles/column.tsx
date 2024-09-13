@@ -103,7 +103,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     header: () => <div className='font-bold text-[15px]'>Cường độ sáng</div>,
     cell: ({ row }) => {
       const level = row.original.level;
-      return <div className='text-sm text-gray-500'>{level}%</div>;
+      return <div className='text-sm text-gray-500'>{level} %</div>;
     }
   },
 
@@ -112,7 +112,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     header: () => <div className='font-bold text-[15px]'>Tần suất</div>,
     cell: ({ row }) => {
       const frequency = row.original.frequency;
-      return <div className='text-sm text-gray-500'>{frequency}lần</div>;
+      return <div className='text-sm text-gray-500'>{frequency} lần</div>;
     }
   },
   {
@@ -120,7 +120,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     header: () => <div className='font-bold text-[15px]'>Thời lượng sáng</div>,
     cell: ({ row }) => {
       const burningHours = row.original.burningHours;
-      return <div className='text-sm text-gray-500'>{burningHours}giờ</div>;
+      return <div className='text-sm text-gray-500'>{burningHours} giờ</div>;
     }
   },
   {
@@ -128,7 +128,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     header: () => <div className='font-bold text-[15px]'>Dòng điện</div>,
     cell: ({ row }) => {
       const current = row.original.current;
-      return <div className='text-sm text-gray-500'>{current}A</div>;
+      return <div className='text-sm text-gray-500'>{current} A</div>;
     }
   },
   {
@@ -136,7 +136,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     header: () => <div className='font-bold text-[15px]'>Điện áp</div>,
     cell: ({ row }) => {
       const voltage = row.original.voltage;
-      return <div className='text-sm text-gray-500'>{voltage}V</div>;
+      return <div className='text-sm text-gray-500'>{voltage} V</div>;
     }
   },
   {
@@ -144,7 +144,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     header: () => <div className='font-bold text-[15px]'>Công suất</div>,
     cell: ({ row }) => {
       const power = row.original.power;
-      return <div className='text-sm text-gray-500'>{power}W</div>;
+      return <div className='text-sm text-gray-500'>{power} W</div>;
     }
   }
 ];

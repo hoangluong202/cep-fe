@@ -60,8 +60,8 @@ export const Header: Component<{ menu: RouteMenu }> = ({ menu }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant='outline' size='icon' className='overflow-hidden rounded-full'>
-            <Avatar>
-              <AvatarImage src='./../../assets/imgs/logobk.png' />
+            <Avatar className='flex items-center justify-center'>
+              <AvatarImage src='./../../../src/assets/imgs/logobk.png' className='h-6 w-6' />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </Button>

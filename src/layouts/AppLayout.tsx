@@ -9,15 +9,19 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const routeItems = menu;
 
   const { isAuth } = useAuth();
+  console.log('isAuth', isAuth);
 
   useEffect(() => {
     if (!isAuth) {
       navigate('/login');
     } else {
-      // if (pathname === '/' || pathname === '/login') {
-      //   navigate('/map');
-      // }
+      if (pathname === '/' || pathname === '/login') {
+        navigate('/map');
+      } else {
+        navigate(pathname);
+      }
     }
+    console.log('pathname:', pathname);
   }, [pathname, isAuth, navigate]);
 
   const AppLayout = () => {
@@ -29,7 +33,7 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
           <main className='w-full h-dvh'>
             <Routes>
               {routeItems.map((item) => {
-                if (item.path !== '/login')
+                if (item.type !== 'auth-item')
                   return <Route path={item.path} element={item.element} key={item.path} />;
               })}
             </Routes>
@@ -42,7 +46,7 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
     <div className='h-screen w-screen'>
       <Routes>
         {routeItems.map((item) => {
-          if (item.path === '/login')
+          if (item.type === 'auth-item')
             return <Route path={item.path} element={item.element} key={item.path} />;
         })}
       </Routes>
