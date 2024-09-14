@@ -3,6 +3,7 @@ import {
   TAlarmStatusData,
   TAreaData,
   TGroupData,
+  TLightStatusData,
   TPriorityData
 } from '@/types/alarm';
 
@@ -86,5 +87,20 @@ export const ALARM_STATUS: TAlarmStatusData[] = [
   {
     key: 'resolved',
     label: 'Đã xử lý'
+  }
+];
+
+export const LIGHT_STATUS: TLightStatusData[] = [
+  {
+    key: 'all',
+    label: 'Tất cả'
+  },
+  {
+    key: 'on',
+    label: 'Đang bật'
+  },
+  {
+    key: 'off',
+    label: 'Đang tắt'
   }
 ];

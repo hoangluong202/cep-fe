@@ -25,8 +25,8 @@ export function useDrawingManager(
         drawingModes: [google.maps.drawing.OverlayType.POLYGON]
       },
       polygonOptions: {
-        editable: true,
-        draggable: true
+        editable: false,
+        draggable: false
       }
     });
 

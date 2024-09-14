@@ -2,6 +2,7 @@ export type TAlarmError = 'disconnected' | 'uncontrolled' | 'power-lower' | 'pow
 export type TAlarmStatus = 'pending' | 'in-progress' | 'resolved';
 export type TPriority = 'low' | 'medium' | 'high';
 export type TArea = 'hcmut1' | 'hcmut2';
+export type TLightStatus = 'all' | 'on' | 'off';
 
 export type TAlarmErrorData = {
   key: TAlarmError;
@@ -26,6 +27,11 @@ export type TAlarmStatusData = {
 
 export type TPriorityData = {
   key: TPriority;
+  label: string;
+};
+
+export type TLightStatusData = {
+  key: TLightStatus;
   label: string;
 };
 
