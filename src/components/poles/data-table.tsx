@@ -80,14 +80,12 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
   const isGroupFiltered = Object.values(group).some((value) => value);
   const isFiltered = isAreaFiltered || isGroupFiltered;
   const clearAreaFilter = () => {
-    console.log('clearAreaFilter');
     setArea({
       hcmut1: false,
       hcmut2: false
     });
   };
   const clearGroupFilter = () => {
-    console.log('clearGroupFilter');
     setGroup({
       a3: false,
       a5: false,
@@ -96,7 +94,6 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     });
   };
   const clearFilters = () => {
-    console.log('clearFilters');
     clearAreaFilter();
     clearGroupFilter();
   };

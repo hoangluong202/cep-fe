@@ -9,7 +9,6 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const routeItems = menu;
 
   const { isAuth } = useAuth();
-  console.log('isAuth', isAuth);
 
   useEffect(() => {
     if (!isAuth) {
@@ -21,7 +20,6 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
         navigate(pathname);
       }
     }
-    console.log('pathname:', pathname);
   }, [pathname, isAuth, navigate]);
 
   const AppLayout = () => {

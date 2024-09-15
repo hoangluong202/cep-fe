@@ -4,8 +4,12 @@
 
 export * from './alarms/columns';
 export * from './alarms/data-table';
+export * from './calendars/BackConfirm';
 export * from './calendars/Clock';
-export * from './calendars/PopoverCreateEditEvent';
+export * from './calendars/DeleteConfirm';
+export * from './calendars/PopoverEventCreate';
+export * from './calendars/PopoverEventView';
+export * from './calendars/Template';
 export * from './charts/LineChart';
 export * from './charts/PieChart';
 export * from './charts/PowerConsumption';
@@ -13,6 +17,7 @@ export * from './common/AppNav';
 export * from './common/AppSkeleton';
 export * from './common/ButtonIcon';
 export * from './common/Header';
+export * from './common/icon';
 export * from './common/useAuth';
 export * from './maps/CreateGroup';
 export * from './maps/PoleCard';
