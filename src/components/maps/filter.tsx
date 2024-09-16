@@ -19,12 +19,12 @@ const setUpViewMap = [
     zoom: 12
   },
   {
-    area: 'hcmut-1',
+    area: 'hcmut1',
     center: { lat: 10.77392998449525, lng: 106.65959695077382 },
     zoom: 17
   },
   {
-    area: 'hcmut-2',
+    area: 'hcmut2',
     center: { lat: 10.880852145509786, lng: 106.80538147754153 },
     zoom: 17.2
   }
@@ -40,14 +40,14 @@ const AreaSelect = ({
   const [, setGroup] = useState<string>('0');
   const areaData = [
     { value: 'all', label: 'Tất cả' },
-    { value: 'hcmut-1', label: 'BK Cơ sở 1' },
-    { value: 'hcmut-2', label: 'BK Cơ sở 2' }
+    { value: 'hcmut1', label: 'BK Cơ sở 1' },
+    { value: 'hcmut2', label: 'BK Cơ sở 2' }
   ];
   const groupData = [
-    { value: '1', area: 'hcmut-1', label: 'Sân A3' },
-    { value: '2', area: 'hcmut-1', label: 'Sân A5' },
-    { value: '3', area: 'hcmut-2', label: 'Sân H1' },
-    { value: '4', area: 'hcmut-2', label: 'Sân H6' }
+    { value: '1', area: 'hcmut1', label: 'Sân A3' },
+    { value: '2', area: 'hcmut1', label: 'Sân A5' },
+    { value: '3', area: 'hcmut2', label: 'Sân H1' },
+    { value: '4', area: 'hcmut2', label: 'Sân H6' }
   ];
   const filterGroupData = groupData.filter((item) => item.area === area);
   const handleAreaChange = (val: string) => {

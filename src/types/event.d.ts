@@ -1,22 +1,28 @@
-type TEventPopoverState = {
-  top: number;
-  left: number;
-  visibleView: boolean;
-  visibleCreate: boolean;
-  event: EventApi | null;
+type Resource = {
+  id: string;
+  title: string;
+  parentId: string;
+};
+
+type ExternalEventApi = {
+  resourceId: string;
+  templateId: string;
 };
 
 type EventStore = {
-  visibleCreate: boolean;
-  visibleView: boolean;
+  visible: boolean;
   clickX: number;
   clickY: number;
-  data: EventApi | null;
+  data: (EventApi & ExternalEventApi) | null;
 };
 
 type CalendarStore = {
   events: EventApi[];
-  event: EventStore;
+  eventView: EventStore;
+  eventCreate: EventStore;
   setEvents: (events: EventApi[]) => void;
-  setEvent: ({ visibleCreate, visibleView, data }: EventStore) => void;
+  setEventView: ({ visible, data }: EventStore) => void;
+  resetEventView: () => void;
+  setEventCreate: ({ visible, data }: EventStore) => void;
+  resetEventCreate: () => void;
 };

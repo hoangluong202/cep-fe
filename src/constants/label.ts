@@ -18,6 +18,33 @@ export const AREA: TAreaData[] = [
   }
 ];
 
+export const TEMPLATES: TTemplateData[] = [
+  {
+    id: '1',
+    name: 'Giờ Trái Đất',
+    color: '#f34523',
+    lightSettings: [
+      {
+        startTime: '18:00',
+        endTime: '22:00',
+        dimming: 0
+      }
+    ]
+  },
+  {
+    id: '2',
+    name: 'Giải bóng đá toàn trường',
+    color: '#163728',
+    lightSettings: [
+      {
+        startTime: '17:00',
+        endTime: '19:00',
+        dimming: 80
+      }
+    ]
+  }
+];
+
 export const GROUP: TGroupData[] = [
   {
     area: 'hcmut1',
@@ -26,8 +53,8 @@ export const GROUP: TGroupData[] = [
   },
   {
     area: 'hcmut1',
-    key: 'a5',
-    label: 'Sân A5'
+    key: 'b9',
+    label: 'Sân B9'
   },
   {
     area: 'hcmut2',
@@ -36,9 +63,36 @@ export const GROUP: TGroupData[] = [
   },
   {
     area: 'hcmut2',
+    key: 'h2',
+    label: 'Sân H2'
+  },
+  {
+    area: 'hcmut2',
+    key: 'h3',
+    label: 'Sân H3'
+  },
+  {
+    area: 'hcmut2',
     key: 'h6',
     label: 'Sân H6'
+  },
+  {
+    area: 'hcmut2',
+    key: 'td',
+    label: 'Sân thể dục'
   }
+];
+
+export const RESOURCES: Resource[] = [
+  { id: 'hcmut1', title: 'BK Cơ sở 1', parentId: '' },
+  { id: 'hcmut2', title: 'BK Cơ sở 2', parentId: '' },
+  { id: 'a3', title: 'Sân A3', parentId: 'hcmut1' },
+  { id: 'b9', title: 'Sân B9', parentId: 'hcmut1' },
+  { id: 'h6', title: 'Sân H6', parentId: 'hcmut2' },
+  { id: 'h1', title: 'Sân H1', parentId: 'hcmut2' },
+  { id: 'h2', title: 'Sân H2', parentId: 'hcmut2' },
+  { id: 'h3', title: 'Sân H3', parentId: 'hcmut2' },
+  { id: 'td', title: 'Sân thể dục', parentId: 'hcmut2' }
 ];
 
 export const ALARM_ERROR: TAlarmErrorData[] = [

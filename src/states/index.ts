@@ -5,3 +5,4 @@
 export * from './calendar.state';
 export * from './filterSmartPole.state';
 export * from './menuBar.state';
+export * from './template.state';

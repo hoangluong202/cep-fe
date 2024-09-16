@@ -4,17 +4,20 @@ import { ButtonIcon } from '@/components';
 import { DeleteConfirm } from '@/components/calendars/DeleteConfirm';
 import { useCalendarStore } from '@/states';
 import { useTemplateStore } from '@/states/template.state';
+import { TEMPLATES } from '@/constants';
+
+const templates = TEMPLATES;
 
 export const Template = () => {
-  const { event, setEvent } = useCalendarStore();
-  const { visibleView, setVisibleView, templates } = useTemplateStore();
+  const { eventView, setEventView } = useCalendarStore();
+  const { visibleView, setVisibleView } = useTemplateStore();
 
   const navigate = useNavigate();
   const handleCreateTemplate = () => {
     navigate('/template');
   };
   const handleDeleteTemplate = () => {
-    setEvent({ ...event, visibleCreate: false });
+    setEventView({ ...eventView, visible: false });
   };
 
   return (

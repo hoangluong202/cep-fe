@@ -3,6 +3,7 @@
  */
 
 export * from './caculatePositon';
+export * from './calendar';
 export * from './dateFormat';
 export * from './generateSmartPole';
 export * from './getLabel';

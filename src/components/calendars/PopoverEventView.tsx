@@ -2,14 +2,15 @@ import { CalendarCheck, MapPinned } from 'lucide-react';
 import { ButtonIcon } from '../common/ButtonIcon';
 import { CrossIcon, DeleteIcon, EditIcon } from '../common/icon';
 import { DeleteConfirm } from './DeleteConfirm';
-import { calculatePosition, formatDate } from '@/utils';
+import { calculatePosition, formatDate, getLabel } from '@/utils';
 import { useCalendarStore } from '@/states';
+import { AREA, TEMPLATES } from '@/constants';
 
 export const PopoverEventView = () => {
-  const { event, setEvent } = useCalendarStore();
-  const { xR, yR } = setUpPosition({ clickX: event.clickX, clickY: event.clickY });
+  const { eventView, resetEventView } = useCalendarStore();
+  const { xR, yR } = setUpPosition({ clickX: eventView.clickX, clickY: eventView.clickY });
   const handleClose = () => {
-    setEvent({ ...event, visibleView: false });
+    resetEventView();
   };
   const handleDeleteEvent = () => {
     //TODO: call api to delete event
@@ -17,9 +18,10 @@ export const PopoverEventView = () => {
   const handleEditEvent = () => {
     //TODO: navigate to edit event page
   };
+  const resource = eventView.data?.getResources()[0]._resource;
 
   return (
-    event.visibleView && (
+    eventView.visible && (
       <div
         className='flex flex-col gap-y-3 pr-2 pl-6 pt-2 pb-6 absolute w-72 rounded-lg border-2 z-10 bg-white shadow-2xl'
         style={{
@@ -35,23 +37,38 @@ export const PopoverEventView = () => {
         <div className='flex flex-row justify-items-start justify-start gap-2'>
           <div
             className='rounded-lg w-5 h-5 mt-2'
-            style={{ backgroundColor: event?.data?.backgroundColor }}
+            style={{
+              backgroundColor: getColorTemplate(eventView?.data?.extendedProps?.templateId)
+            }}
           ></div>
           <div className='flex flex-col items-start'>
-            <p className='text-[22px] font-normal break-words'>{event?.data?.title}</p>
+            <p className='text-[22px] font-normal break-words'>{eventView?.data?.title}</p>
             <p className='text-[14px] font-normal break-words'>
-              {formatDate({ date: event?.data?.start, type: 'start' })} - {''}
-              {formatDate({ date: event?.data?.end, type: 'end' })}
+              {formatDate({ date: eventView?.data?.start, type: 'start' })}
+
+              {formatDate({ date: eventView?.data?.start, type: 'start' }) ===
+                formatDate({ date: eventView?.data?.end, type: 'end' }) || !eventView?.data?.end
+                ? ''
+                : ` - ${formatDate({ date: eventView?.data?.end, type: 'end' })}`}
             </p>
           </div>
         </div>
-        <div className='flex flex-row justify-items-center justify-start gap-2'>
+        <div className='flex flex-row items-center justify-start gap-1'>
           <MapPinned className='h-5 w-5' />
-          <p className='border-2 rounded-lg bg-blue-300 px-1 py-[2px] text-sm'>Hcmut-1</p>
+          <p className='border-2 rounded-lg bg-blue-300 px-1 py-[2px] text-sm ml-1'>
+            {resource.parentId ? getLabel(resource.parentId, AREA) : resource.title}
+          </p>
+          {resource.parentId && (
+            <p className='border-2 rounded-lg bg-blue-300 px-1 py-[2px] text-sm'>
+              {resource.title}
+            </p>
+          )}
         </div>
-        <div className='flex flex-row justify-items-center justify-start gap-2'>
+        <div className='flex flex-row items-center justify-start gap-2'>
           <CalendarCheck className='h-5 w-5' />
-          <p className='border-2 rounded-lg bg-blue-300 px-1 py-[2px] text-sm'>Chiếu sáng lễ hội</p>
+          <p className='border-2 rounded-lg bg-blue-300 px-1 py-[2px] text-sm'>
+            {getLabelTemplate(eventView?.data?.extendedProps?.templateId) ?? '0'}
+          </p>
         </div>
       </div>
     )
@@ -74,4 +91,14 @@ const setUpPosition = ({ clickX, clickY }: { clickX: number; clickY: number }) =
     yCurElement
   });
   return { xR, yR };
+};
+
+const getColorTemplate = (id: string) => {
+  const template = TEMPLATES.find((t) => t.id === id);
+  return template?.color;
+};
+
+const getLabelTemplate = (id: string) => {
+  const template = TEMPLATES.find((t) => t.id === id);
+  return template?.name;
 };
