@@ -1,4 +1,9 @@
-import { DateSelectArg, EventClickArg, EventContentArg } from '@fullcalendar/core';
+import {
+  DateSelectArg,
+  EventClickArg,
+  EventContentArg
+  // NowIndicatorContentArg
+} from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/react';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
@@ -14,6 +19,7 @@ export function CalendarPage() {
   const { events, setEventView, resetEventView, setEventCreate } = useCalendarStore();
   const { visibleView } = useTemplateStore();
   const draggableInitialized = useRef(false);
+  const calendarRef = useRef(null);
   const resources = RESOURCES;
 
   const handleDateSelect = (selectInfo: DateSelectArg) => {
@@ -32,7 +38,6 @@ export function CalendarPage() {
   };
 
   const handleClickEvent = (clickInfo: EventClickArg) => {
-    console.log(clickInfo.event);
     setEventView({
       visible: true,
       clickX: clickInfo.jsEvent.clientX,
@@ -61,6 +66,13 @@ export function CalendarPage() {
     }
   }, [visibleView]);
 
+  useEffect(() => {
+    if (calendarRef.current) {
+      const calendarApi = (calendarRef.current as FullCalendar).getApi();
+      calendarApi.changeView('resourceTimelineMonth');
+    }
+  }, []);
+
   return (
     <div className='flex h-screen w-full'>
       <div className='flex w-1/6 flex-col mx-1 gap-2'>
@@ -68,27 +80,48 @@ export function CalendarPage() {
       </div>
       <div className='relative w-5/6 h-screen px-4'>
         <FullCalendar
+          ref={calendarRef}
           height='auto'
           schedulerLicenseKey='CC-Attribution-NonCommercial-NoDerivatives'
           plugins={[resourceTimelinePlugin, interactionPlugin]}
-          initialView='resourceTimelineMonth'
+          initialView='resourceTimelineDay'
           resources={resources}
-          // initialEvents={initialEvents}
           events={events}
           nowIndicator={true}
+          now={now}
           resourcesInitiallyExpanded={true}
-          initialDate={now}
-          resourceAreaWidth='15%'
-          buttonText={{
-            today: 'Tháng này'
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'resourceTimelineWeek,resourceTimelineMonth'
           }}
+          views={{
+            resourceTimelineMonth: {
+              type: 'resourceTimeline',
+              duration: { months: 1 },
+              slotDuration: { days: 1 },
+              slotLabelFormat: { weekday: 'short', day: 'numeric' }
+            },
+            resourceTimelineWeek: {
+              type: 'resourceTimeline',
+              duration: { weeks: 1 },
+              slotDuration: { days: 1 },
+              slotLabelFormat: { weekday: 'short', day: 'numeric' }
+            }
+          }}
+          buttonText={{
+            today: 'Hôm nay',
+            month: 'Tháng',
+            week: 'Tuần'
+          }}
+          resourceAreaWidth='15%'
           editable={true}
           selectable={true}
           select={handleDateSelect}
-          // eventsSet={handleEvents}
           eventContent={renderEventContent}
           eventClick={handleClickEvent}
           droppable={true}
+          scrollTime={{ days: now.getDate() > 15 ? 10 : 0 }}
         />
         <PopoverEventView />
         <PopoverEventCreate />
@@ -101,7 +134,6 @@ const now = new Date();
 function renderEventContent(eventContent: EventContentArg) {
   return (
     <>
-      <b>{eventContent.timeText}</b>
       <i>{eventContent.event.title}</i>
     </>
   );

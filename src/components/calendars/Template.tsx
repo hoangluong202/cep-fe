@@ -43,6 +43,7 @@ export const Template = () => {
               <div
                 draggable
                 id={item.id}
+                key={item.id}
                 data-event={JSON.stringify(item)}
                 className='draggable-item group w-full flex justify-between hover:bg-gray-100 items-center h-10 rounded-lg px-1'
               >

@@ -12,7 +12,6 @@ export function useUserQuery() {
     },
     enabled: false
   });
-  console.log('info', info.data);
 
   return {
     info: info

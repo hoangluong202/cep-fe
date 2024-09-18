@@ -58,7 +58,6 @@ export function PopoverEventCreate() {
     resolver: zodResolver(FormEventCreateSchema)
   });
   useEffect(() => {
-    console.log('useEffect');
     if (eventCreate.data?.start && eventCreate.data?.end) {
       setDisplayEndDate(!isSameDayEvent);
       form.setValue('area', areaKey);
@@ -77,7 +76,6 @@ export function PopoverEventCreate() {
     resetEventCreate();
   };
   const handleSubmit = () => {
-    console.log('template', form.getValues('template'));
     onSubmit(form.getValues());
     setEvents([
       ...events,
@@ -97,7 +95,6 @@ export function PopoverEventCreate() {
   };
 
   function onSubmit(data: z.infer<typeof FormEventCreateSchema>) {
-    console.log(data);
     toast({
       title: 'You submitted the following values:',
       description: (

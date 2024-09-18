@@ -54,7 +54,14 @@ export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         {menuItems.map((item) => {
-          return <AppNavItem path={item.path} icon={AppNavItemIcon(item.path)} label={item.name} />;
+          return (
+            <AppNavItem
+              key={item.path}
+              path={item.path}
+              icon={AppNavItemIcon(item.path)}
+              label={item.name}
+            />
+          );
         })}
       </nav>
       <nav className='mt-auto flex flex-col items-center gap-4 px-2 sm:py-4'>

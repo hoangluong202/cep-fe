@@ -126,7 +126,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
           </PopoverTrigger>
           <PopoverContent align='start' className='flex flex-col gap-2 w-48'>
             {AREA.map((areaItem) => (
-              <div className='flex flex-row items-center gap-2 w-full'>
+              <div key={areaItem.key} className='flex flex-row items-center gap-2 w-full'>
                 <Checkbox
                   id={areaItem.key}
                   checked={area[areaItem.key]}
@@ -181,7 +181,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
           </PopoverTrigger>
           <PopoverContent align='start' className='flex flex-col gap-2 w-48'>
             {GROUP.map((groupItem) => (
-              <div className='flex flex-row items-center gap-2 w-full'>
+              <div key={groupItem.key} className='flex flex-row items-center gap-2 w-full'>
                 <Checkbox
                   id={groupItem.key}
                   checked={group[groupItem.key]}

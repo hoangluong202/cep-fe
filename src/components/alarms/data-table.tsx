@@ -171,7 +171,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
           </PopoverTrigger>
           <PopoverContent align='start' className='flex flex-col gap-2 w-48'>
             {priorities.map((p) => (
-              <div className='flex flex-row items-center gap-2 w-full'>
+              <div key={p.value} className='flex flex-row items-center gap-2 w-full'>
                 <Checkbox
                   id={p.value}
                   checked={priority[p.value]}
@@ -241,7 +241,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
           </PopoverTrigger>
           <PopoverContent align='start' className='flex flex-col gap-2 w-48'>
             {statuses.map((s) => (
-              <div className='flex flex-row items-center gap-2 w-full'>
+              <div key={s.value} className='flex flex-row items-center gap-2 w-full'>
                 <Checkbox
                   id={s.value}
                   checked={status[s.value]}

@@ -187,7 +187,7 @@ export const columns: ColumnDef<TAlarmData>[] = [
                     {ALARM_STATUS.map((s) => {
                       const stat = rowData.status;
                       return (
-                        <div className='flex flex-row gap-2 items-center'>
+                        <div key={s.key} className='flex flex-row gap-2 items-center'>
                           <button
                             id={s.key}
                             className='text-sm text-gray-500'
@@ -217,7 +217,7 @@ export const columns: ColumnDef<TAlarmData>[] = [
                     {PRIORITY.map((p) => {
                       const pri = rowData.priority;
                       return (
-                        <div className='flex flex-row gap-2 items-center'>
+                        <div key={p.key} className='flex flex-row gap-2 items-center'>
                           <button
                             id={p.key}
                             className='text-sm text-gray-500'
