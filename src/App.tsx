@@ -3,10 +3,12 @@ import {
   CalendarPage,
   MapPage,
   DashboardPage,
-  TemplatePage,
+  TemplateDetailPage,
   AlarmPage,
   LoginPage,
-  PolePage
+  PolePage,
+  TemplateCreatePage,
+  TemplateEditPage
 } from '@pages';
 import { MENU_ITEMS } from '@constants';
 
@@ -34,21 +36,33 @@ export default function App() {
         },
         {
           type: 'menu-item',
-          path: '/alarm',
+          path: '/alarms',
           name: MENU_ITEMS.find((item) => item.key === 'alarm')?.label ?? '',
           element: <AlarmPage />
         },
         {
           type: 'menu-item',
-          path: '/pole',
+          path: '/poles',
           name: MENU_ITEMS.find((item) => item.key === 'pole')?.label ?? '',
           element: <PolePage />
         },
         {
           type: 'sub-menu-item',
-          path: '/template',
-          name: 'Template',
-          element: <TemplatePage />
+          path: '/templates/:id',
+          name: 'TemplateView',
+          element: <TemplateDetailPage />
+        },
+        {
+          type: 'sub-menu-item',
+          path: '/templates/:id/edit',
+          name: 'TemplateEdit',
+          element: <TemplateEditPage />
+        },
+        {
+          type: 'sub-menu-item',
+          path: '/templates/create',
+          name: 'TemplateCreate',
+          element: <TemplateCreatePage />
         },
         {
           type: 'auth-item',

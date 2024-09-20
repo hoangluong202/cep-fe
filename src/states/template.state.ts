@@ -19,12 +19,17 @@ export const useTemplateStore = create<TemplateStore>()((set) => ({
     {
       id: '2',
       name: 'Giải bóng đá toàn trường',
-      color: '#163728',
+      color: '#b1a1a1',
       lightSettings: [
         {
           startTime: '17:00',
           endTime: '19:00',
           dimming: 80
+        },
+        {
+          startTime: '19:00',
+          endTime: '21:00',
+          dimming: 90
         }
       ]
     }

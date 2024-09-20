@@ -8,4 +8,6 @@ export * from './DashboardPage';
 export * from './LoginPage';
 export * from './MapPage';
 export * from './PolePage';
-export * from './TemplatePage';
+export * from './TemplateCreatePage';
+export * from './TemplateDetailPage';
+export * from './TemplateEditPage';

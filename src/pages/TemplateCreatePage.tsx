@@ -21,7 +21,7 @@ const FormSchema = z.object({
   })
 });
 
-export function TemplatePage() {
+export function TemplateCreatePage() {
   const navigate = useNavigate();
   const handleSubmit = () => {
     navigate('/calendar');
@@ -50,11 +50,9 @@ export function TemplatePage() {
           render={({}) => (
             <FormItem className='flex flex-col gap-3 max-w-[600px]'>
               <div className='flex flex-col gap-1'>
-                <p className='text-[14px] font-bold'>TÊN MẪU CHIẾU SÁNG</p>
                 <div className='flex flex-row justify-between items-center mr-3'>
                   <textarea
                     className='w-[450px] text-[28px] font-normal tracking-[.00625em] resize-none overflow-hidden font-sans py-1 border-b-[1px] border-slate-500 focus:border-b-2 focus:border-blue-700 outline-none caret-blue-700'
-                    defaultValue={'Giờ Trái Đất'}
                     rows={1}
                     cols={10}
                     placeholder='Thêm tiêu đề'

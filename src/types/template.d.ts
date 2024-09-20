@@ -19,3 +19,5 @@ type TemplateStore = {
   setTemplate: (template: TTemplateData) => void;
   setTemplates: (templates: TTemplateData[]) => void;
 };
+
+type TView = 'view' | 'edit' | 'create';

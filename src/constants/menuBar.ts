@@ -12,11 +12,11 @@ export const MENU_ITEMS = [
     label: 'Lịch'
   },
   {
-    key: 'alarm',
+    key: 'alarms',
     label: 'Cảnh báo'
   },
   {
-    key: 'pole',
+    key: 'poles',
     label: 'Trụ đèn'
   }
 ];

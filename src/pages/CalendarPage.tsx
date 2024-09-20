@@ -1,9 +1,4 @@
-import {
-  DateSelectArg,
-  EventClickArg,
-  EventContentArg
-  // NowIndicatorContentArg
-} from '@fullcalendar/core';
+import { DateSelectArg, EventClickArg, EventContentArg } from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/react';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';

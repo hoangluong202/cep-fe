@@ -4,8 +4,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  ButtonIcon
+  DialogTrigger
 } from '@/components';
 
 const capitalizeFirstCharacter = (text: string) => {
@@ -24,7 +23,11 @@ export const DeleteConfirm = ({
   return (
     <Dialog>
       <DialogTrigger>
-        <ButtonIcon icon={icon} className='h-6 w-6' />
+        <div
+          className={`group/button flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100`}
+        >
+          {icon}
+        </div>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
