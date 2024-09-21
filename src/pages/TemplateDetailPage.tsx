@@ -15,7 +15,7 @@ export function TemplateDetailPage() {
   //mock fetch template by id
   const template = templates.find((template) => template.id === id);
   return (
-    <div className='space-y-8 pl-4 flex flex-col gap-4'>
+    <div className='space-y-8 p-8 flex flex-col gap-4'>
       <div className='flex flex-col gap-3 max-w-[600px]'>
         <div className='flex flex-row items-center w-full gap-2'>
           <div className='h-8 w-8 rounded' style={{ backgroundColor: template?.color }}></div>

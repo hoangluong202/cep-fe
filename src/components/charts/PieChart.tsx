@@ -33,7 +33,7 @@ const chartConfig = {
 
 export const MyPieChart = () => {
   return (
-    <Card className='flex flex-col'>
+    <Card className='flex flex-col min-h-[400px]'>
       <CardHeader className='items-center pb-0'>
         <CardTitle>Phân bổ tiêu thụ điện năng</CardTitle>
         <CardDescription>Tháng 8/2024</CardDescription>

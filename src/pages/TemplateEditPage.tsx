@@ -52,7 +52,7 @@ export function TemplateEditPage() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 pl-4 flex flex-col gap-4'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 p-8 flex flex-col gap-4'>
         <FormField
           control={form.control}
           name='dob'

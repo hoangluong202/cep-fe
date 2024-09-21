@@ -77,7 +77,7 @@ export function MapPage() {
   }, [isDrawing, drawingManager]);
 
   return (
-    <div className='relative h-full w-full px-4'>
+    <div className='relative h-screen w-full px-2'>
       <Map
         mapId='1'
         zoom={zoom}

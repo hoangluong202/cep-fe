@@ -1,10 +1,19 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Link, useLocation } from 'react-router-dom';
-import { Home, Settings, Map, Calendar, Bell, Lightbulb } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Home, Map, Calendar, Bell, Lightbulb, CirclePower, Info } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useAuth } from './useAuth';
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
+import { Button } from '../ui/button';
 
 export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const pathName = useLocation().pathname;
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
   const menuItems = menu.filter((item) => item.type === 'menu-item');
   const AppNavItemIcon = (key: string) => {
     switch (key) {
@@ -14,9 +23,9 @@ export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
         return <Map className='h-5 w-5' />;
       case '/calendar':
         return <Calendar className='h-5 w-5' />;
-      case '/alarm':
+      case '/alarms':
         return <Bell className='h-5 w-5' />;
-      case '/pole':
+      case '/poles':
         return <Lightbulb className='h-5 w-5' />;
       default:
         return <Home className='h-5 w-5' />;
@@ -65,18 +74,36 @@ export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
         })}
       </nav>
       <nav className='mt-auto flex flex-col items-center gap-4 px-2 sm:py-4'>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link
-              to='/settings'
-              className='flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8'
+        <Dialog>
+          <DialogTrigger>
+            <div
+              className={`group/button flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100`}
             >
-              <Settings className='h-5 w-5' />
-              <span className='sr-only'>Settings</span>
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent side='right'>Settings</TooltipContent>
-        </Tooltip>
+              <CirclePower color='#fb7185' />
+            </div>
+          </DialogTrigger>
+          <DialogContent>
+            <div className='flex flex-row gap-3'>
+              <div className='flex items-center'>
+                <Info color='#fb7185' />
+              </div>
+              <div className='flex flex-col'>
+                <div className='text-lg font-medium leading-6 text-gray-900'>
+                  Xác nhận đăng xuất
+                </div>
+                <div className='text-sm text-gray-500"'>
+                  Bạn có chắc muốn đăng xuất? Bạn sẽ cần đăng nhập lại để truy cập ứng dụng.
+                </div>
+              </div>
+            </div>
+            <div className='flex justify-end gap-x-2'>
+              <Button variant='outline'>Đóng</Button>
+              <Button variant='destructive' onClick={handleLogout}>
+                Đăng xuất
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </nav>
     </aside>
   );

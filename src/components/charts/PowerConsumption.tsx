@@ -118,8 +118,8 @@ const chartConfig = {
 } satisfies ChartConfig;
 export const DoubleBarChart = () => {
   return (
-    <Card>
-      <CardHeader className='flex flex-row justify-between '>
+    <Card className='min-h-[672px]'>
+      <CardHeader className='flex flex-row justify-between'>
         <div className='flex flex-col'>
           <CardTitle>Điện năng tiêu thụ của từng khu vực</CardTitle>
           <CardDescription>Năm 2023</CardDescription>

@@ -16,7 +16,6 @@ export * from './charts/PowerConsumption';
 export * from './common/AppNav';
 export * from './common/AppSkeleton';
 export * from './common/ButtonIcon';
-export * from './common/Header';
 export * from './common/icon';
 export * from './common/useAuth';
 export * from './maps/CreateGroup';

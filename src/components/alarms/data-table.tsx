@@ -89,7 +89,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
   });
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 6
+    pageSize: 7
   });
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);

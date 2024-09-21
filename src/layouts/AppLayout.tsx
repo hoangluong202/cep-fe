@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { AppNav, Header } from '@/components';
+import { AppNav } from '@/components';
 import { useAuth } from '@/components/common/useAuth';
 
 export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
@@ -24,19 +24,16 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
 
   const AppLayout = () => {
     return (
-      <div className='flex min-h-screen w-full flex-col bg-muted/40 font-cal'>
+      <div className='min-h-screen w-full bg-muted/40 font-cal'>
         <AppNav menu={menu} />
-        <div className='flex flex-col sm:gap-4 sm:py-4 sm:pl-14 h-screen'>
-          <Header menu={menu} />
-          <main className='w-full h-dvh'>
-            <Routes>
-              {routeItems.map((item) => {
-                if (item.type !== 'auth-item')
-                  return <Route path={item.path} element={item.element} key={item.path} />;
-              })}
-            </Routes>
-          </main>
-        </div>
+        <main className='w-dvh pl-12'>
+          <Routes>
+            {routeItems.map((item) => {
+              if (item.type !== 'auth-item')
+                return <Route path={item.path} element={item.element} key={item.path} />;
+            })}
+          </Routes>
+        </main>
       </div>
     );
   };

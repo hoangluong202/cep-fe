@@ -69,11 +69,11 @@ export function CalendarPage() {
   }, []);
 
   return (
-    <div className='flex h-screen w-full'>
+    <div className='flex p-3'>
       <div className='flex w-1/6 flex-col mx-1 gap-2'>
         <Template />
       </div>
-      <div className='relative w-5/6 h-screen px-4'>
+      <div className='relative w-5/6 h-full px-4'>
         <FullCalendar
           ref={calendarRef}
           height='auto'
@@ -116,7 +116,10 @@ export function CalendarPage() {
           eventContent={renderEventContent}
           eventClick={handleClickEvent}
           droppable={true}
-          scrollTime={{ days: now.getDate() > 15 ? 10 : 0 }}
+          scrollTime={{ days: now.getDate() - 4 }}
+          timeZone='GMT+7'
+          locale='vi'
+          resourceAreaHeaderContent='Khu vực'
         />
         <PopoverEventView />
         <PopoverEventCreate />
