@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { AppNav } from '@/components';
+import { AppNav, Toaster } from '@/components';
 import { useAuth } from '@/components/common/useAuth';
 
 export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
@@ -33,6 +33,7 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
                 return <Route path={item.path} element={item.element} key={item.path} />;
             })}
           </Routes>
+          <Toaster />
         </main>
       </div>
     );

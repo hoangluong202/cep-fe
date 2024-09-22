@@ -48,19 +48,19 @@ export default function App() {
         },
         {
           type: 'sub-menu-item',
-          path: '/templates/:id',
+          path: 'calendar/templates/:id',
           name: 'TemplateView',
           element: <TemplateDetailPage />
         },
         {
           type: 'sub-menu-item',
-          path: '/templates/:id/edit',
+          path: 'calendar/templates/:id/edit',
           name: 'TemplateEdit',
           element: <TemplateEditPage />
         },
         {
           type: 'sub-menu-item',
-          path: '/templates/create',
+          path: 'calendar/templates/create',
           name: 'TemplateCreate',
           element: <TemplateCreatePage />
         },

@@ -64,7 +64,7 @@ export function CalendarPage() {
   useEffect(() => {
     if (calendarRef.current) {
       const calendarApi = (calendarRef.current as FullCalendar).getApi();
-      calendarApi.changeView('resourceTimelineMonth');
+      calendarApi.changeView('resourceTimelineWeek');
     }
   }, []);
 
@@ -117,7 +117,6 @@ export function CalendarPage() {
           eventClick={handleClickEvent}
           droppable={true}
           scrollTime={{ days: now.getDate() - 4 }}
-          timeZone='GMT+7'
           locale='vi'
           resourceAreaHeaderContent='Khu vực'
         />

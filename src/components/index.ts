@@ -46,6 +46,7 @@ export * from './ui/label';
 export * from './ui/popover';
 export * from './ui/select';
 export * from './ui/separator';
+export * from './ui/slider';
 export * from './ui/table';
 export * from './ui/tabs';
 export * from './ui/toast';

@@ -9,7 +9,7 @@ export function TemplateDetailPage() {
   const { templates } = useTemplateStore();
   const navigate = useNavigate();
   const handleEdit = () => {
-    navigate(`/templates/${template?.id}/edit`);
+    navigate(`edit`);
   };
 
   //mock fetch template by id

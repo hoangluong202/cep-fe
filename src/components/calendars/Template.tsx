@@ -12,10 +12,10 @@ export const Template = () => {
 
   const navigate = useNavigate();
   const handleViewTemplate = (templateId: string) => {
-    navigate('/templates/' + templateId);
+    navigate('templates/' + templateId);
   };
   const handleCreateTemplate = () => {
-    navigate('/templates/create');
+    navigate('templates/create');
   };
   const handleDeleteTemplate = () => {
     setEventView({ ...eventView, visible: false });
