@@ -10,6 +10,7 @@ export * from './calendars/DeleteConfirm';
 export * from './calendars/PopoverEventCreate';
 export * from './calendars/PopoverEventView';
 export * from './calendars/Template';
+export * from './calendars/TemplateDetail';
 export * from './charts/LineChart';
 export * from './charts/PieChart';
 export * from './charts/PowerConsumption';

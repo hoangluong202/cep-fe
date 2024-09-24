@@ -10,8 +10,10 @@ export const useTemplateStore = create<TemplateStore>()((set) => ({
       color: '#f34523',
       lightSettings: [
         {
-          startTime: '18:00',
-          endTime: '22:00',
+          startHour: 20,
+          startMinute: 30,
+          endHour: 21,
+          endMinute: 30,
           dimming: 0
         }
       ]
@@ -22,13 +24,17 @@ export const useTemplateStore = create<TemplateStore>()((set) => ({
       color: '#b1a1a1',
       lightSettings: [
         {
-          startTime: '17:00',
-          endTime: '19:00',
+          startHour: 17,
+          startMinute: 30,
+          endHour: 18,
+          endMinute: 30,
           dimming: 80
         },
         {
-          startTime: '19:00',
-          endTime: '21:00',
+          startHour: 18,
+          startMinute: 30,
+          endHour: 22,
+          endMinute: 0,
           dimming: 90
         }
       ]

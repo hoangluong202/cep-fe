@@ -2,10 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
-import { Form, FormField, FormItem } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { toast } from '@/components/ui/use-toast';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Ban, CirclePlus, Settings } from 'lucide-react';
+import { ArrowLeftFromLine, Ban, CirclePlus } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -13,33 +13,31 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { ButtonIcon } from '@/components';
+import { ButtonIcon, Slider } from '@/components';
 import { useTemplateStore } from '@/states';
-
-const FormSchema = z.object({
-  dob: z.date({
-    required_error: 'A date of birth is required.'
-  })
-});
+import {
+  TemplateDescription,
+  TemplateLightSettingLabel
+} from '@/components/calendars/TemplateDetail';
+import { formTemplateSchema } from './TemplateCreatePage';
 
 export function TemplateEditPage() {
   const { id } = useParams();
-  const { templates } = useTemplateStore();
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    navigate(`/templates/${template?.id}`);
+  const { templates } = useTemplateStore();
+  const template = templates.find((template) => template.id === id);
+
+  const handleGoBack = () => {
+    navigate(`/calendar/templates/${template?.id}`);
   };
 
-  //mock fetch template by id
-  const template = templates.find((template) => template.id === id);
-  console.log('edit template', template);
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema)
+  const form = useForm<z.infer<typeof formTemplateSchema>>({
+    resolver: zodResolver(formTemplateSchema),
+    values: template
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof formTemplateSchema>) {
     toast({
       title: 'You submitted the following values:',
       description: (
@@ -51,213 +49,270 @@ export function TemplateEditPage() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 p-8 flex flex-col gap-4'>
-        <FormField
-          control={form.control}
-          name='dob'
-          render={({}) => (
-            <FormItem className='flex flex-col gap-3 max-w-[600px]'>
+    <div className='flex flex-col gap-4 w-[650px] pl-8 pt-2'>
+      <Button variant='ghost' className='gap-2 w-fit border-2' onClick={handleGoBack}>
+        <ArrowLeftFromLine />
+        <span>Trở lại</span>
+      </Button>
+      <TemplateDescription />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-4'>
+          <div className='flex flex-row justify-between items-start mr-3'>
+            <FormField
+              control={form.control}
+              name='name'
+              render={({ field }) => (
+                <FormItem className='flex flex-col gap-3 max-w-[600px]'>
+                  <FormControl>
+                    <textarea
+                      className='w-[450px] text-[28px] font-normal tracking-[.00625em] resize-none overflow-hidden font-sans py-1 border-b-[1px] border-slate-500 focus:border-b-2 focus:border-blue-700 outline-none caret-blue-700'
+                      rows={1}
+                      cols={10}
+                      wrap='off'
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='color'
+              render={({ field }) => (
+                <FormItem className='flex flex-col gap-3 max-w-[600px]'>
+                  <FormControl>
+                    <input type='color' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name='lightSettings'
+            render={({ field }) => (
               <div className='flex flex-col gap-1'>
-                <div className='flex flex-row justify-between items-center mr-3'>
-                  <textarea
-                    className='w-[450px] text-[28px] font-normal tracking-[.00625em] resize-none overflow-hidden font-sans py-1 border-b-[1px] border-slate-500 focus:border-b-2 focus:border-blue-700 outline-none caret-blue-700'
-                    defaultValue={template?.name}
-                    rows={1}
-                    cols={10}
-                    placeholder='Thêm tiêu đề'
-                    wrap='off'
-                  />
-                  <input type='color' defaultValue={template?.color} />
-                </div>
-              </div>
-              <div className='flex flex-col gap-1'>
-                <div className='flex flex-row items-center gap-4'>
-                  <Settings />
-                  <div className='flex flex-col'>
-                    <p className='text-[18px] font-[600] text-black'> Mẫu chiếu sáng trong ngày</p>
-                    <p className='text-[14px] font-[400] text-gray-500'>
-                      Thiết lập cường độ chiếu sáng theo từng khung giờ
-                    </p>
-                  </div>
-                </div>
-                <div className='flex flex-row gap-24'>
-                  <p className='pl-2 font-bold text-[14px]'>Bắt đầu từ</p>
-                  <p className='pl-6 font-bold text-[14px]'> Kết thúc vào</p>
-                  <p className='font-bold text-[14px]'>Độ sáng</p>
-                </div>
-                <div className='flex flex-row gap-24'>
-                  <p className='pl-2 text-[14px] font-[400] text-gray-500'>(hh:mm)</p>
-                  <p className='pl-10 text-[14px] font-[400] text-gray-500'>(hh:mm)</p>
-                  <p className='pl-10 text-[14px] font-[400] text-gray-500'>%</p>
-                </div>
-                <div className='flex flex-col gap-1 h-auto overflow-y-auto bg-gray-100 p-2 rounded-lg'>
-                  {template?.lightSettings.map((setting, index) => (
+                <TemplateLightSettingLabel />
+                <div className='flex flex-col gap-1 overflow-y-auto max-h-[320px] bg-gray-100 p-2 rounded-lg'>
+                  {field.value.map((_, index) => (
                     <div key={index} className='flex flex-row items-center'>
-                      <Select>
-                        <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
-                          <SelectValue placeholder={setting.startTime.split(':')[0]} />
-                        </SelectTrigger>
-                        <SelectContent className='max-h-[200px]'>
-                          {Array.from({ length: 24 }, (_, i) => (
-                            <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-                              {i.toString().padStart(2, '0')}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <p> : </p>
-                      <Select>
-                        <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
-                          <SelectValue placeholder={setting.startTime.split(':')[1]} />
-                        </SelectTrigger>
-                        <SelectContent className='max-h-[200px]'>
-                          {Array.from({ length: 60 }, (_, i) => (
-                            <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-                              {i.toString().padStart(2, '0')}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <p className='mx-3'> - </p>
-                      <Select>
-                        <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
-                          <SelectValue placeholder={setting.endTime.split(':')[0]} />
-                        </SelectTrigger>
-                        <SelectContent className='max-h-[200px]'>
-                          {Array.from({ length: 24 }, (_, i) => (
-                            <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-                              {i.toString().padStart(2, '0')}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <p> : </p>
-                      <Select>
-                        <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
-                          <SelectValue placeholder={setting.endTime.split(':')[1]} />
-                        </SelectTrigger>
-                        <SelectContent className='max-h-[200px]'>
-                          {Array.from({ length: 60 }, (_, i) => (
-                            <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-                              {i.toString().padStart(2, '0')}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <Select>
-                        <SelectTrigger className='w-[150px] mx-4 focus:outline-white focus:rounded-none'>
-                          <SelectValue placeholder={setting.dimming} />
-                        </SelectTrigger>
-                        <SelectContent className='max-h-[150px]'>
-                          {Array.from({ length: 101 }, (_, i) => (
-                            <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-                              {i.toString()}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <ButtonIcon
-                        icon={<Ban className='text-gray-500 group-hover/button:text-red-500' />}
-                        className='h-6 w-6 mx-2'
+                      <FormField
+                        control={form.control}
+                        name={`lightSettings.${index}.startHour`}
+                        render={({ field }) => (
+                          <FormItem className='w-[80px]'>
+                            <Select
+                              value={field.value?.toString()}
+                              onValueChange={(val) => {
+                                const updatedValue = parseInt(val);
+                                field.onChange(updatedValue); //not trigger re-render
+                                // update to trigger re-render
+                              }}
+                            >
+                              <FormControl>
+                                <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
+                                  <SelectValue placeholder='Giờ' />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent className='max-h-[200px]'>
+                                {Array.from({ length: 24 }, (_, i) => (
+                                  <SelectItem className='w-[100px]' key={i} value={i.toString()}>
+                                    {i.toString().padStart(2, '0')}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <p className='pt-2'> : </p>
+                      <FormField
+                        control={form.control}
+                        name={`lightSettings.${index}.startMinute`}
+                        render={({ field }) => (
+                          <FormItem className='w-[80px]'>
+                            <Select
+                              value={field.value?.toString()}
+                              onValueChange={(val) => {
+                                const updatedValue = parseInt(val);
+                                field.onChange(updatedValue); //not trigger re-render
+                              }}
+                            >
+                              <FormControl>
+                                <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
+                                  <SelectValue placeholder='Phút' {...field} />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent className='max-h-[200px]'>
+                                {Array.from({ length: 60 }, (_, i) => (
+                                  <SelectItem className='w-[100px]' key={i} value={i.toString()}>
+                                    {i.toString().padStart(2, '0')}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <p className='pt-2 px-3'> - </p>
+                      <FormField
+                        control={form.control}
+                        name={`lightSettings.${index}.endHour`}
+                        render={({ field }) => (
+                          <FormItem className='w-[80px]'>
+                            <Select
+                              value={field.value?.toString()}
+                              onValueChange={(val) => {
+                                const updatedValue = parseInt(val);
+                                field.onChange(updatedValue); // Update the form's internal state
+                                // update to trigger re-render
+                                const updatedLightSettings = [...form.getValues('lightSettings')];
+                                updatedLightSettings[index].startMinute = updatedValue;
+                                form.setValue('lightSettings', updatedLightSettings);
+                              }}
+                            >
+                              <FormControl>
+                                <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
+                                  <SelectValue placeholder='Giờ' {...field} />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent className='max-h-[200px]'>
+                                {Array.from({ length: 24 }, (_, i) => (
+                                  <SelectItem className='w-[100px]' key={i} value={i.toString()}>
+                                    {i.toString().padStart(2, '0')}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <p className='pt-2'> : </p>
+                      <FormField
+                        control={form.control}
+                        name={`lightSettings.${index}.endMinute`}
+                        render={({ field }) => (
+                          <FormItem className='w-[80px]'>
+                            <Select
+                              value={field.value?.toString()}
+                              onValueChange={(val) => {
+                                field.onChange(parseInt(val));
+                              }}
+                            >
+                              <FormControl>
+                                <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
+                                  <SelectValue placeholder='Phút' {...field} />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent className='max-h-[200px]'>
+                                {Array.from({ length: 60 }, (_, i) => (
+                                  <SelectItem className='w-[100px]' key={i} value={i.toString()}>
+                                    {i.toString().padStart(2, '0')}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name={`lightSettings.${index}.dimming`}
+                        render={({ field }) => (
+                          <FormItem className='flex flex-row w-32 pt-1 mx-2 gap-2 items-center'>
+                            <FormControl>
+                              <Slider
+                                className='w-32'
+                                min={0}
+                                max={100}
+                                step={1}
+                                value={[field.value ?? 0]}
+                                onValueChange={(value) => field.onChange(value[0])}
+                              />
+                            </FormControl>
+                            <div className='text-sm pb-2'>{field.value ?? 0}</div>
+                            <br />
+                          </FormItem>
+                        )}
                       />
                       <ButtonIcon
                         icon={
-                          <CirclePlus className='text-gray-500 group-hover/button:text-black' />
+                          <Ban
+                            className={`${
+                              field.value.length <= 1 ? 'text-gray-300' : 'text-red-500'
+                            }`}
+                          />
                         }
                         className='h-6 w-6 mx-2'
+                        disabled={field.value.length <= 1}
+                        type='button'
+                        onClick={() => {
+                          field.value.splice(index, 1);
+                          form.setValue('lightSettings', field.value);
+                        }}
                       />
+                      {index === 0 && (
+                        <ButtonIcon
+                          icon={
+                            <CirclePlus
+                              className={`${
+                                field.value[field.value.length - 1].endHour === 0
+                                  ? 'text-gray-500'
+                                  : 'text-black'
+                              } `}
+                            />
+                          }
+                          className='h-6 w-6 mx-2'
+                          disabled={field.value[field.value.length - 1].endHour === 0}
+                          type='button'
+                          onClick={() => {
+                            const last = field.value[field.value.length - 1];
+                            field.value.push({
+                              startHour: last.endHour,
+                              startMinute: last.endMinute,
+                              endHour: 0,
+                              endMinute: 0,
+                              dimming: 50
+                            });
+                            form.setValue('lightSettings', field.value);
+                          }}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
               </div>
-            </FormItem>
-          )}
-        />
-        <Button className='w-20 mt-0' type='submit' onClick={handleSubmit}>
-          Lưu
-        </Button>
-      </form>
-    </Form>
+            )}
+          />
+
+          <div className='flex flex-row justify-end items-center gap-2'>
+            <Button
+              variant='outline'
+              className='border-2'
+              type='button'
+              onClick={() => {
+                form.reset();
+              }}
+            >
+              Hủy bỏ
+            </Button>
+            <Button
+              className='w-20 mt-0'
+              type='submit'
+              disabled={!form.formState.isValid || form.formState.isSubmitting}
+            >
+              Lưu
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }
-
-// export const TemplateLightSettingEdit = ({ template }: { template: TTemplateData | undefined }) => (
-//   <div className='flex flex-col gap-1 h-auto overflow-y-auto bg-gray-100 p-2 rounded-lg'>
-//     {template?.lightSettings.map((setting, index) => (
-//       <div key={index} className='flex flex-row items-center'>
-//         <Select>
-//           <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
-//             <SelectValue defaultValue={setting.startTime.split(':')[0]} />
-//           </SelectTrigger>
-//           <SelectContent className='max-h-[200px]'>
-//             {Array.from({ length: 24 }, (_, i) => (
-//               <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-//                 {i.toString().padStart(2, '0')}
-//               </SelectItem>
-//             ))}
-//           </SelectContent>
-//         </Select>
-//         <p> : </p>
-//         <Select>
-//           <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
-//             <SelectValue placeholder='Phút' defaultValue={setting.startTime.split(':')[1]} />
-//           </SelectTrigger>
-//           <SelectContent className='max-h-[200px]'>
-//             {Array.from({ length: 60 }, (_, i) => (
-//               <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-//                 {i.toString().padStart(2, '0')}
-//               </SelectItem>
-//             ))}
-//           </SelectContent>
-//         </Select>
-//         <p className='mx-3'> - </p>
-//         <Select>
-//           <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
-//             <SelectValue placeholder='Giờ' defaultValue={setting.endTime.split(':')[0]} />
-//           </SelectTrigger>
-//           <SelectContent className='max-h-[200px]'>
-//             {Array.from({ length: 24 }, (_, i) => (
-//               <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-//                 {i.toString().padStart(2, '0')}
-//               </SelectItem>
-//             ))}
-//           </SelectContent>
-//         </Select>
-//         <p> : </p>
-//         <Select>
-//           <SelectTrigger className='w-[80px] focus:outline-white focus:rounded-none'>
-//             <SelectValue placeholder='Phút' defaultValue={setting.endTime.split(':')[1]} />
-//           </SelectTrigger>
-//           <SelectContent className='max-h-[200px]'>
-//             {Array.from({ length: 60 }, (_, i) => (
-//               <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-//                 {i.toString().padStart(2, '0')}
-//               </SelectItem>
-//             ))}
-//           </SelectContent>
-//         </Select>
-//         <Select>
-//           <SelectTrigger className='w-[150px] mx-4 focus:outline-white focus:rounded-none'>
-//             <SelectValue placeholder='Độ sáng' defaultValue={setting.dimming} />
-//           </SelectTrigger>
-//           <SelectContent className='max-h-[150px]'>
-//             {Array.from({ length: 101 }, (_, i) => (
-//               <SelectItem className='w-[100px]' key={i} value={i.toString()}>
-//                 {i.toString()}
-//               </SelectItem>
-//             ))}
-//           </SelectContent>
-//         </Select>
-//         <ButtonIcon
-//           icon={<Ban className='text-gray-500 group-hover/button:text-red-500' />}
-//           className='h-6 w-6 mx-2'
-//         />
-//         <ButtonIcon
-//           icon={<CirclePlus className='text-gray-500 group-hover/button:text-black' />}
-//           className='h-6 w-6 mx-2'
-//         />
-//       </div>
-//     ))}
-//   </div>
-// );

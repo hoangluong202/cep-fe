@@ -11,7 +11,7 @@ export const Template = () => {
   const { eventView, setEventView } = useCalendarStore();
 
   const navigate = useNavigate();
-  const handleViewTemplate = (templateId: string) => {
+  const handleViewTemplate = (templateId?: string) => {
     navigate('templates/' + templateId);
   };
   const handleCreateTemplate = () => {

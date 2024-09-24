@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { toast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeftFromLine, Ban, CirclePlus, Settings } from 'lucide-react';
+import { ArrowLeftFromLine, Ban, CirclePlus } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -14,8 +14,11 @@ import {
   SelectValue
 } from '@/components/ui/select';
 import { ButtonIcon } from '@/components';
-import { useState } from 'react';
 import { Slider } from '@/components/ui/slider';
+import {
+  TemplateDescription,
+  TemplateLightSettingLabel
+} from '@/components/calendars/TemplateDetail';
 
 const lightSettingSchema = z.object({
   startHour: z.number().min(0).max(23),
@@ -25,38 +28,37 @@ const lightSettingSchema = z.object({
   dimming: z.number().min(0).max(100)
 });
 
-const formSchema = z.object({
-  templateName: z.string().min(1, { message: 'Tên mẫu không được để trống' }),
+export const formTemplateSchema = z.object({
+  name: z.string(),
   color: z.string(),
   lightSettings: z.array(lightSettingSchema)
 });
 
+const defaultValues: TTemplateData = {
+  id: '',
+  name: '',
+  color: '#00ff00',
+  lightSettings: [
+    {
+      startHour: 20,
+      startMinute: 0,
+      endHour: 21,
+      endMinute: 30,
+      dimming: 50
+    }
+  ]
+};
+
 export function TemplateCreatePage() {
-  const [lightSettings, setLightSettings] = useState([
-    { startHour: 0, startMinute: 0, endHour: 0, endMinute: 0, dimming: 0 }
-  ]);
-  const addLightSetting = () => {
-    setLightSettings([
-      ...lightSettings,
-      { startHour: 0, startMinute: 0, endHour: 0, endMinute: 0, dimming: 0 }
-    ]);
-  };
-  const removeLightSetting = (index: number) => {
-    if (lightSettings.length === 1) return;
-    setLightSettings(lightSettings.filter((_, i) => i !== index));
-  };
   const navigate = useNavigate();
-  const handleCancel = () => {
-    navigate('/calendar');
-  };
   const handleGoBack = () => {
     navigate('/calendar');
   };
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema)
+  const form = useForm<z.infer<typeof formTemplateSchema>>({
+    resolver: zodResolver(formTemplateSchema),
+    defaultValues: defaultValues
   });
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log('onSubmit', data);
+  function onSubmit(data: z.infer<typeof formTemplateSchema>) {
     toast({
       title: 'You submitted the following values:',
       description: (
@@ -73,21 +75,13 @@ export function TemplateCreatePage() {
         <ArrowLeftFromLine />
         <span>Trở lại</span>
       </Button>
-      <div className='flex flex-row items-center gap-4'>
-        <Settings />
-        <div className='flex flex-col'>
-          <p className='text-[18px] font-[600] text-black'>Mẫu chiếu sáng trong ngày</p>
-          <p className='text-[14px] font-[400] text-gray-500'>
-            Thiết lập cường độ chiếu sáng theo từng khung giờ
-          </p>
-        </div>
-      </div>
+      <TemplateDescription />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-4'>
           <div className='flex flex-row justify-between items-start mr-3'>
             <FormField
               control={form.control}
-              name='templateName'
+              name='name'
               render={({ field }) => (
                 <FormItem className='flex flex-col gap-3 max-w-[600px]'>
                   <FormControl>
@@ -121,18 +115,19 @@ export function TemplateCreatePage() {
           <FormField
             control={form.control}
             name='lightSettings'
-            render={({}) => (
+            render={({ field }) => (
               <div className='flex flex-col gap-1'>
-                <LightSettingLabel />
+                <TemplateLightSettingLabel />
                 <div className='flex flex-col gap-1 overflow-y-auto max-h-[320px] bg-gray-100 p-2 rounded-lg'>
-                  {lightSettings.map((lightSetting, index) => (
-                    <div key={index} className='flex flex-row items-start'>
+                  {field.value.map((lightSetting, index) => (
+                    <div key={index} className='flex flex-row items-center'>
                       <FormField
                         control={form.control}
                         name={`lightSettings.${index}.startHour`}
                         render={({ field }) => (
                           <FormItem className='w-[80px]'>
                             <Select
+                              value={field.value?.toString()}
                               onValueChange={(val) => {
                                 field.onChange(parseInt(val));
                               }}
@@ -163,7 +158,8 @@ export function TemplateCreatePage() {
                             <Select
                               value={field.value?.toString()}
                               onValueChange={(val) => {
-                                field.onChange(parseInt(val));
+                                const updatedValue = parseInt(val);
+                                field.onChange(updatedValue); //not trigger re-render
                               }}
                             >
                               <FormControl>
@@ -192,7 +188,12 @@ export function TemplateCreatePage() {
                             <Select
                               value={field.value?.toString()}
                               onValueChange={(val) => {
-                                field.onChange(parseInt(val));
+                                const updatedValue = parseInt(val);
+                                field.onChange(updatedValue); // Update the form's internal state
+                                // update to trigger re-render
+                                const updatedLightSettings = [...form.getValues('lightSettings')];
+                                updatedLightSettings[index].startMinute = updatedValue;
+                                form.setValue('lightSettings', updatedLightSettings);
                               }}
                             >
                               <FormControl>
@@ -262,17 +263,48 @@ export function TemplateCreatePage() {
                         )}
                       />
                       <ButtonIcon
-                        icon={<Ban className='text-gray-500 group-hover/button:text-red-500' />}
-                        className='h-6 w-6 mx-2'
-                        onClick={() => removeLightSetting(index)}
-                      />
-                      <ButtonIcon
                         icon={
-                          <CirclePlus className='text-gray-500 group-hover/button:text-black' />
+                          <Ban
+                            className={`${
+                              field.value.length <= 1 ? 'text-gray-300' : 'text-red-500'
+                            }`}
+                          />
                         }
                         className='h-6 w-6 mx-2'
-                        onClick={addLightSetting}
+                        disabled={field.value.length <= 1}
+                        type='button'
+                        onClick={() => {
+                          field.value.splice(index, 1);
+                          form.setValue('lightSettings', field.value);
+                        }}
                       />
+                      {index === 0 && (
+                        <ButtonIcon
+                          icon={
+                            <CirclePlus
+                              className={`${
+                                field.value[field.value.length - 1].endHour === 0
+                                  ? 'text-gray-500'
+                                  : 'text-black'
+                              } `}
+                            />
+                          }
+                          className='h-6 w-6 mx-2'
+                          disabled={field.value[field.value.length - 1].endHour === 0}
+                          type='button'
+                          onClick={() => {
+                            const last = field.value[field.value.length - 1];
+                            field.value.push({
+                              startHour: last.endHour,
+                              startMinute: last.endMinute,
+                              endHour: 0,
+                              endMinute: 0,
+                              dimming: 50
+                            });
+                            form.setValue('lightSettings', field.value);
+                          }}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
@@ -281,10 +313,21 @@ export function TemplateCreatePage() {
           />
 
           <div className='flex flex-row justify-end items-center gap-2'>
-            <Button variant='outline' className='border-2' onClick={handleCancel}>
-              Hủy bỏ
+            <Button
+              variant='outline'
+              className='border-2'
+              type='button'
+              onClick={() => {
+                form.reset(defaultValues);
+              }}
+            >
+              Làm mới
             </Button>
-            <Button className='w-20 mt-0' type='submit'>
+            <Button
+              className='w-20 mt-0'
+              type='submit'
+              disabled={!form.formState.isValid || form.formState.isSubmitting}
+            >
               Lưu
             </Button>
           </div>
@@ -293,14 +336,3 @@ export function TemplateCreatePage() {
     </div>
   );
 }
-
-export const LightSettingLabel = () => (
-  <div className='grid grid-cols-[200px_180px_100px] pl-3'>
-    <p className='font-bold text-[14px]'>Bắt đầu từ</p>
-    <p className='font-bold text-[14px]'> Kết thúc vào</p>
-    <p className='font-bold text-[14px]'>Độ sáng</p>
-    <p className='text-[14px] font-[400] text-gray-500'>(hh:mm)</p>
-    <p className='text-[14px] font-[400] text-gray-500'>(hh:mm)</p>
-    <p className='text-[14px] font-[400] text-gray-500'>%</p>
-  </div>
-);

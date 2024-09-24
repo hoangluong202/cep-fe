@@ -1,13 +1,15 @@
 type TLightSetting = {
-  startTime: string;
-  endTime: string;
+  startHour: number;
+  startMinute: number;
+  endHour: number;
+  endMinute: number;
   dimming: number;
 };
 
 type TTemplateData = {
-  id: string;
+  id?: string;
   name: string;
-  color?: string;
+  color: string;
   lightSettings: TLightSetting[];
 };
 
@@ -19,5 +21,3 @@ type TemplateStore = {
   setTemplate: (template: TTemplateData) => void;
   setTemplates: (templates: TTemplateData[]) => void;
 };
-
-type TView = 'view' | 'edit' | 'create';
