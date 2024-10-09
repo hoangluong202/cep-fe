@@ -2,13 +2,13 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Home, Map, Calendar, Bell, Lightbulb, CirclePower, Info } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { useAuth } from './useAuth';
+import { useAuthProvider } from './useAuthProvider';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
 import { Button } from '../ui/button';
 
 export const AppNav: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const pathName = useLocation().pathname;
-  const { logout } = useAuth();
+  const { deleteToken: logout } = useAuthProvider();
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();

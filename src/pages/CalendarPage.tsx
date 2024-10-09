@@ -3,7 +3,7 @@ import FullCalendar from '@fullcalendar/react';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import { useEffect, useRef } from 'react';
-import { PopoverEventCreate } from '@/components';
+import { PopoverEventCreate, Separator } from '@/components';
 import { PopoverEventView } from '@/components/calendars/PopoverEventView';
 import { useCalendarStore } from '@/states';
 import { Template } from '@/components/calendars/Template';
@@ -69,11 +69,12 @@ export function CalendarPage() {
   }, []);
 
   return (
-    <div className='flex p-3'>
-      <div className='flex w-1/6 flex-col mx-1 gap-2'>
+    <div className='flex h-screen p-3'>
+      <div className='flex w-1/6 flex-row mx-1 gap-2 '>
         <Template />
+        <Separator orientation='vertical' />
       </div>
-      <div className='relative w-5/6 h-full px-4'>
+      <div className='relative w-dvw h-full'>
         <FullCalendar
           ref={calendarRef}
           height='auto'

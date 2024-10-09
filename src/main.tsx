@@ -11,7 +11,7 @@ import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import { TooltipProvider } from './components';
-import { AuthProvider } from './components/common/useAuth';
+import { AuthProvider } from './components/common/useAuthProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {

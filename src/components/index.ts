@@ -18,7 +18,7 @@ export * from './common/AppNav';
 export * from './common/AppSkeleton';
 export * from './common/ButtonIcon';
 export * from './common/icon';
-export * from './common/useAuth';
+export * from './common/useAuthProvider';
 export * from './maps/CreateGroup';
 export * from './maps/PoleCard';
 export * from './maps/filter';

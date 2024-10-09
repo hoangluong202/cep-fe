@@ -49,6 +49,13 @@ const AreaSelect = ({
     { value: '3', area: 'hcmut2', label: 'Sân H1' },
     { value: '4', area: 'hcmut2', label: 'Sân H6' }
   ];
+  [
+    {
+      id: 1,
+      area: 'BK Cơ sở 1',
+      groups: ['Sân A3', 'Sân A5']
+    }
+  ];
   const filterGroupData = groupData.filter((item) => item.area === area);
   const handleAreaChange = (val: string) => {
     setArea(val);

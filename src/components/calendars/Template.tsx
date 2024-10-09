@@ -1,6 +1,6 @@
 import { Plus, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { ButtonIcon } from '@/components';
+import { ButtonIcon, Separator } from '@/components';
 import { DeleteConfirm } from '@/components/calendars/DeleteConfirm';
 import { useCalendarStore } from '@/states';
 import { TEMPLATES } from '@/constants';
@@ -22,17 +22,8 @@ export const Template = () => {
   };
 
   return (
-    <div className=''>
-      <div className='flex justify-between items-center px-2 py-1 rounded-lg bg-inherit hover:bg-gray-100 active:bg-gray-200 w-full'>
-        <p className='text-[16px] font-medium'>Mẫu chiếu sáng</p>
-        <div className='flex items-center'>
-          <ButtonIcon
-            icon={<Plus className='text-gray-500 group-hover/button:text-black' />}
-            className='h-6 w-6'
-            onClick={handleCreateTemplate}
-          />
-        </div>
-      </div>
+    <div className='flex flex-col gap-1'>
+      <p className='text-[22px] text-center font-medium'>Mẫu chiếu sáng</p>
       <div id='external-events' className='draggable-container flex flex-col px-1 w-full'>
         {templates.map((item) => {
           return (
@@ -68,6 +59,12 @@ export const Template = () => {
           );
         })}
       </div>
+      <Separator orientation='horizontal'></Separator>
+      <ButtonIcon
+        icon={<Plus className='text-gray-500 group-hover/button:text-black' />}
+        className='bg-slate-200 w-full rounded-sm h-9'
+        onClick={handleCreateTemplate}
+      ></ButtonIcon>
     </div>
   );
 };

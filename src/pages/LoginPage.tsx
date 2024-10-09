@@ -1,41 +1,36 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { authService, server } from '@services';
-import { useUserQuery } from '@hooks';
-import { useMutation } from '@tanstack/react-query';
+import { useAuth } from '@hooks';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/components/common/useAuth';
+import { useAuthProvider } from '@/components/common/useAuthProvider';
+import { toast } from '@/components/ui/use-toast';
 
 export function LoginPage() {
   const navigate: NavigateFunction = useNavigate();
-  const { login } = useAuth();
+  const { saveToken } = useAuthProvider();
   const {
-    info: { refetch }
-  } = useUserQuery();
-
+    login,
+    me: { refetch }
+  } = useAuth();
   const { register, handleSubmit } = useForm<LoginFormData>();
-
-  const loginNormal = useMutation({
-    mutationKey: ['loginNormal'],
-    mutationFn: async (data: LoginFormData) => {
-      const response = await authService.login(data);
-      const { access_token } = response;
-      login(access_token);
-      server.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-      return response;
-    }
-  });
-  const submit: SubmitHandler<LoginFormData> = async (data) => {
+  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     try {
-      await loginNormal.mutateAsync(data);
+      const response = await login.mutateAsync(data);
+      saveToken(response.token);
       await refetch();
-      toast.success('Login successfully!');
+      toast({
+        title: 'Đăng nhập thành công!',
+        description: 'Chào mừng bạn quay trở lại'
+      });
       navigate('/map');
     } catch (err) {
       const errorMessage = (err as ResponseError).message;
-      toast.error(errorMessage);
+      //TODO: Show error message toasts, it's not working
+      toast({
+        title: 'Đăng nhập thất bại!',
+        description: errorMessage
+      });
     }
   };
 
@@ -55,7 +50,7 @@ export function LoginPage() {
       <div className='mt-24'>
         <p className='text-white text-2xl font-bold'>Đăng nhập</p>
         <p className='mt-1 font-normal text-white'>Nhập tài khoản và mật khẩu để đăng nhập</p>
-        <form className='mt-8 mb-2 w-72 md:w-80 max-w-screen-lg' onSubmit={handleSubmit(submit)}>
+        <form className='mt-8 mb-2 w-72 md:w-80 max-w-screen-lg' onSubmit={handleSubmit(onSubmit)}>
           <div className='mb-4 flex flex-col gap-4'>
             <div className='grid gap-2'>
               <p className='text-white font-bold'>Tài khoản</p>

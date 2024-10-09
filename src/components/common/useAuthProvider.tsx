@@ -1,9 +1,10 @@
+import { server } from '@/services';
 import React from 'react';
 
 interface AuthContextType {
   isAuth: boolean;
-  login: (token: string) => void;
-  logout: () => void;
+  saveToken: (token: string) => void;
+  deleteToken: () => void;
 }
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
 
@@ -19,19 +20,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  const login = (token: string) => {
+  const saveToken = (token: string) => {
     localStorage.setItem('authToken', token);
+    server.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setIsAuth(true);
   };
 
-  const logout = () => {
+  const deleteToken = () => {
     localStorage.removeItem('authToken');
     setIsAuth(false);
   };
-  return <AuthContext.Provider value={{ isAuth, login, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ isAuth, saveToken, deleteToken }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export const useAuth = (): AuthContextType => {
+export const useAuthProvider = (): AuthContextType => {
   const context = React.useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');

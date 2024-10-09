@@ -1,14 +1,14 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { AppNav, Toaster } from '@/components';
-import { useAuth } from '@/components/common/useAuth';
+import { useAuthProvider } from '@/components/common/useAuthProvider';
 
 export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const routeItems = menu;
 
-  const { isAuth } = useAuth();
+  const { isAuth } = useAuthProvider();
 
   useEffect(() => {
     if (!isAuth) {
