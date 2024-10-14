@@ -1,13 +1,39 @@
+import { TPoleData } from '@/types/smartPole';
 import { server, invoke } from './common';
 
+type TSmartPoleResponse = {
+  data: TPoleData[];
+  hasNextPage: boolean;
+};
+
 export const smartPoleService = {
-  getById: (id: string) => invoke<SmartPole>(server.get(`/api/poles/${id}`)),
-  getBy: (area: string, status: string) => {
-    return invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&status=${status}`));
-  },
-  getSmartPoleNameByAreaAndRoad: async (area?: string, road?: string) => {
-    const poles = await invoke<SmartPole[]>(server.get(`/api/poles?area=${area}&road=${road}`));
-    const smartPoleNames = poles.map((pole) => 'Pole-' + pole.id);
-    return [...new Set(smartPoleNames)];
+  getById: (id: string) => invoke<TPoleData>(server.get(`/api/smartpoles/${id}`)),
+  getMany: async (
+    filters?: { areaKey?: string; groupKey?: string; status?: boolean },
+    paginate?: {
+      page?: number;
+      limit?: number;
+    },
+    sorts?: {
+      orderBy?: string;
+      order?: 'asc' | 'desc';
+    }[]
+  ) => {
+    const res = await invoke<TSmartPoleResponse>(
+      server.get(`/api/smartpoles`, {
+        params: {
+          filters: JSON.stringify(filters),
+          paginate: JSON.stringify(paginate),
+          sorts: JSON.stringify(sorts)
+        }
+      })
+    );
+    res.data.forEach((pole) => {
+      pole.position = {
+        lat: parseFloat(pole.position.lat.toString()),
+        lng: parseFloat(pole.position.lng.toString())
+      };
+    });
+    return res;
   }
 };

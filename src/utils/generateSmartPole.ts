@@ -78,14 +78,14 @@ export const generateSmartPole = (): TPoleData[] => {
         const voltage = 220;
         const pole: TPoleData = {
           id: poleId.toString(),
-          area: area,
+          areaKey: area,
           position: {
             lat: ((amount - i) * pairLocation.start.lat + i * pairLocation.end.lat) / amount,
             lng: ((amount - i) * pairLocation.start.lng + i * pairLocation.end.lng) / amount
           },
           status: status,
-          level: lightLevel,
-          burningHours: faker.number.int({
+          dimming: lightLevel,
+          burningDuration: faker.number.int({
             min: 0,
             max: 1000
           }),

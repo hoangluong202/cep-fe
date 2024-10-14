@@ -10,13 +10,13 @@ export type PairLocation = {
 
 export type TPoleData = {
   id: string;
-  area: string;
+  areaKey: string;
   position: Position;
   status: boolean;
-  level: number;
-  burningHours: number;
+  dimming: number;
+  burningDuration: number;
   frequency: number;
-  group?: string;
+  groupKey?: string;
   current?: number;
   voltage?: number;
   power?: number;

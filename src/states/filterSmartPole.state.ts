@@ -6,6 +6,7 @@ export const useFilterSmartPoleStore = create<FilterSmartPoleStore>()(
     center: { lat: 10.880852145509786, lng: 106.80538147754153 },
     zoom: 17,
     areaSelected: 'hcmut2',
+    statusSelected: 'all',
     setCenter: (center) => {
       set({ center });
     },

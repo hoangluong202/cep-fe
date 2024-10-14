@@ -72,7 +72,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     accessorKey: 'area',
     header: () => <div className='font-bold text-[15px]'>Khu vực</div>,
     cell: ({ row }) => {
-      const area = row.original.area;
+      const area = row.original.areaKey;
       const areaLabel = getLabel(area, AREA);
       return <div className='text-sm text-gray-500'>{areaLabel}</div>;
     }
@@ -81,7 +81,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     accessorKey: 'group',
     header: () => <div className='font-bold text-[15px]'>Nhóm</div>,
     cell: ({ row }) => {
-      const group = row.original.group;
+      const group = row.original.groupKey;
       return <div className='text-sm text-gray-500'>{group ?? 'Không'}</div>;
     }
   },
@@ -102,7 +102,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     accessorKey: 'level',
     header: () => <div className='font-bold text-[15px]'>Cường độ sáng</div>,
     cell: ({ row }) => {
-      const level = row.original.level;
+      const level = row.original.dimming;
       return <div className='text-sm text-gray-500'>{level} %</div>;
     }
   },
@@ -119,7 +119,7 @@ export const columns: ColumnDef<TPoleData>[] = [
     accessorKey: 'burningHours',
     header: () => <div className='font-bold text-[15px]'>Thời lượng sáng</div>,
     cell: ({ row }) => {
-      const burningHours = row.original.burningHours;
+      const burningHours = row.original.burningDuration;
       return <div className='text-sm text-gray-500'>{burningHours} giờ</div>;
     }
   },

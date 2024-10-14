@@ -120,7 +120,7 @@ const StatusFilter = () => {
             <TabsTrigger
               key={stat.key}
               value={stat.key}
-              onClick={(val) => setStatusSelected(val ? stat.key : 'none')}
+              onClick={(val) => setStatusSelected(val ? stat.key : 'all')}
             >
               {stat.label}
             </TabsTrigger>

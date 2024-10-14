@@ -4,12 +4,14 @@ import lightOnIcon from '@assets/svg/light-on.svg';
 import lightOffIcon from '@assets/svg/light-off.svg';
 import lightChooseIcon from '@assets/svg/light-choose.svg';
 import { UndoRedoControl } from '@components';
-import { generateSmartPole } from '@utils';
+// import { generateSmartPole } from '@utils';
 import { MapSmartPoleFilter } from '@/components/maps/filter';
 import { useDrawingManager } from '@/components/maps/use-drawing-manager';
 import { CardSmartPoleInfo } from '@/components/maps/pole-info';
 import { CreateGroup } from '@/components/maps/CreateGroup';
 import { useFilterSmartPoleStore } from '@/states';
+import { useQuery } from '@tanstack/react-query';
+import { smartPoleService } from '@/services';
 
 const CreateIcon = (
   <svg width='36' height='36' viewBox='0 0 36 36'>
@@ -21,7 +23,7 @@ const CreateIcon = (
   </svg>
 );
 
-const smartPoles = generateSmartPole();
+// const smartPoles = generateSmartPole();
 
 export function MapPage() {
   const [showCard, setShowCard] = useState(false);
@@ -29,7 +31,11 @@ export function MapPage() {
   const [isDrawing, setIsDrawing] = useState(false);
   const drawingManager = useDrawingManager(isDrawing);
   const { center, setCenter, zoom, setZoom, areaSelected } = useFilterSmartPoleStore();
-  console.log('areaSelected', areaSelected);
+
+  const { data: res } = useQuery({
+    queryKey: ['smartpoles', areaSelected],
+    queryFn: () => smartPoleService.getMany({ areaKey: areaSelected })
+  });
 
   const handleMarkerClick = (smartPoleId: string) => {
     if (selectedSmartPoleId === smartPoleId) setShowCard(!showCard);
@@ -60,7 +66,7 @@ export function MapPage() {
           const polygonPoints = new google.maps.Polygon({
             paths: getPolygonPoints()
           });
-          smartPoles?.filter((pole) => {
+          res?.data?.filter((pole) => {
             if (google.maps.geometry.poly.containsLocation(pole.position, polygonPoints)) {
               pole.color = 'selected';
             }
@@ -83,7 +89,7 @@ export function MapPage() {
           setZoom(ev.detail.zoom);
         }}
       >
-        {smartPoles?.map((smartPole) => (
+        {res?.data?.map((smartPole) => (
           <AdvancedMarker
             key={smartPole.id}
             position={smartPole.position}
@@ -121,7 +127,7 @@ export function MapPage() {
       <div className='absolute left-4 top-1 z-0 h-full'>
         {showCard && (
           <CardSmartPoleInfo
-            smartPole={smartPoles?.find((item) => item.id === selectedSmartPoleId)}
+            smartPole={res?.data?.find((item) => item.id === selectedSmartPoleId)}
           />
         )}
       </div>

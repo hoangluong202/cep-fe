@@ -11,7 +11,7 @@ export const CardSmartPoleInfo: Component<{ smartPole?: TPoleData }> = ({ smartP
       <div className='flex flex-col pl-6 gap-1 py-2'>
         <p className='font-medium text-[22px]'>Đèn {smartPole?.id}</p>
         <p className='font-normal text-sm text-[#70757a] pb-4'>
-          Lắp đặt tại Khu vực {smartPole?.area}
+          Lắp đặt tại Khu vực {smartPole?.areaKey}
         </p>
 
         <div className='flex flex-row items-center gap-4'>
@@ -25,7 +25,7 @@ export const CardSmartPoleInfo: Component<{ smartPole?: TPoleData }> = ({ smartP
 
         <div className='flex flex-row items-center gap-4'>
           <History color='blue' />
-          <p>Đã hoạt động {smartPole?.burningHours} giờ chiếu sáng</p>
+          <p>Đã hoạt động {smartPole?.burningDuration} giờ chiếu sáng</p>
         </div>
       </div>
     </div>
