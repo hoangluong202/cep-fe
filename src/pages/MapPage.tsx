@@ -5,17 +5,11 @@ import lightOffIcon from '@assets/svg/light-off.svg';
 import lightChooseIcon from '@assets/svg/light-choose.svg';
 import { UndoRedoControl } from '@components';
 import { generateSmartPole } from '@utils';
-import { AreaSelect, StatusFilter } from '@/components/maps/filter';
+import { MapSmartPoleFilter } from '@/components/maps/filter';
 import { useDrawingManager } from '@/components/maps/use-drawing-manager';
-import { Position } from '@/types/smartPole';
 import { CardSmartPoleInfo } from '@/components/maps/pole-info';
 import { CreateGroup } from '@/components/maps/CreateGroup';
-
-const setUpViewMap = {
-  area: 'all',
-  center: { lat: 10.826846427727276, lng: 106.68068577543532 },
-  zoom: 12
-};
+import { useFilterSmartPoleStore } from '@/states';
 
 const CreateIcon = (
   <svg width='36' height='36' viewBox='0 0 36 36'>
@@ -34,8 +28,8 @@ export function MapPage() {
   const [selectedSmartPoleId, setSelectedSmartPoleId] = useState<string | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const drawingManager = useDrawingManager(isDrawing);
-  const [center, setCenter] = useState<Position | undefined>();
-  const [zoom, setZoom] = useState<number | undefined>();
+  const { center, setCenter, zoom, setZoom, areaSelected } = useFilterSmartPoleStore();
+  console.log('areaSelected', areaSelected);
 
   const handleMarkerClick = (smartPoleId: string) => {
     if (selectedSmartPoleId === smartPoleId) setShowCard(!showCard);
@@ -88,8 +82,6 @@ export function MapPage() {
           setCenter(ev.detail.center);
           setZoom(ev.detail.zoom);
         }}
-        defaultCenter={setUpViewMap.center}
-        defaultZoom={setUpViewMap.zoom}
       >
         {smartPoles?.map((smartPole) => (
           <AdvancedMarker
@@ -113,10 +105,7 @@ export function MapPage() {
       </Map>
       {!isDrawing && (
         <>
-          <div className='flex items-stretch gap-2 absolute top-4 left-8 z-10'>
-            <AreaSelect setZoom={setZoom} setCenter={setCenter} />
-            <StatusFilter />
-          </div>
+          <MapSmartPoleFilter />
           <button
             className='absolute top-4 right-10 z-10 bg-white p-2 rounded-lg flex flex-col items-center gap-1'
             onClick={() => {

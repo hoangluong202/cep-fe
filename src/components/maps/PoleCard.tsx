@@ -81,7 +81,7 @@ const MapIcon = () => {
   );
 };
 
-type Position = {
+type TPoint = {
   lat: number;
   lng: number;
 };
@@ -90,7 +90,7 @@ type SmartPole = {
   id: string;
   area: string;
   road: string;
-  position: Position;
+  position: TPoint;
   status: boolean;
   level: number;
   burningHours: number;

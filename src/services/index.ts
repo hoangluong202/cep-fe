@@ -4,6 +4,7 @@
 
 export * from './auth.service';
 export * from './common';
+export * from './location.service';
 export * from './scheduler.service';
 export * from './smartPole.service';
 export * from './user.service';

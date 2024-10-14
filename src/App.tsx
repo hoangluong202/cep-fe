@@ -12,6 +12,8 @@ import {
 } from '@pages';
 import { MENU_ITEMS } from '@constants';
 
+//TODO: fix the warning no route for /
+
 export default function App() {
   return (
     <Layout

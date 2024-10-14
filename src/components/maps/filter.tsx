@@ -4,115 +4,123 @@ import {
   SelectGroup,
   SelectItem,
   SelectLabel,
+  SelectSeparator,
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LIGHT_STATUS } from '@/constants';
+import { locationService } from '@/services';
 import { useFilterSmartPoleStore } from '@/states';
-import { SetStateAction, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Button } from '../ui/button';
+import { useEffect, useState } from 'react';
 
-const setUpViewMap = [
-  {
-    area: 'all',
-    center: { lat: 10.826846427727276, lng: 106.68068577543532 },
-    zoom: 12
-  },
-  {
-    area: 'hcmut1',
-    center: { lat: 10.77392998449525, lng: 106.65959695077382 },
-    zoom: 17
-  },
-  {
-    area: 'hcmut2',
-    center: { lat: 10.880852145509786, lng: 106.80538147754153 },
-    zoom: 17.2
-  }
-];
-const AreaSelect = ({
-  setZoom,
-  setCenter
-}: {
-  setZoom: React.Dispatch<SetStateAction<number | undefined>>;
-  setCenter: React.Dispatch<SetStateAction<{ lat: number; lng: number } | undefined>>;
-}) => {
-  const { area, setArea } = useFilterSmartPoleStore();
-  const [, setGroup] = useState<string>('0');
-  const areaData = [
-    { value: 'all', label: 'Tất cả' },
-    { value: 'hcmut1', label: 'BK Cơ sở 1' },
-    { value: 'hcmut2', label: 'BK Cơ sở 2' }
-  ];
-  const groupData = [
-    { value: '1', area: 'hcmut1', label: 'Sân A3' },
-    { value: '2', area: 'hcmut1', label: 'Sân A5' },
-    { value: '3', area: 'hcmut2', label: 'Sân H1' },
-    { value: '4', area: 'hcmut2', label: 'Sân H6' }
-  ];
-  [
-    {
-      id: 1,
-      area: 'BK Cơ sở 1',
-      groups: ['Sân A3', 'Sân A5']
-    }
-  ];
-  const filterGroupData = groupData.filter((item) => item.area === area);
-  const handleAreaChange = (val: string) => {
-    setArea(val);
-    setZoom(setUpViewMap.find((item) => item.area === val)?.zoom);
-    setCenter(setUpViewMap.find((item) => item.area === val)?.center);
-  };
-  const handleGroupChange = (val: string) => {
-    setGroup(val);
+const AreaSelect = () => {
+  const { areaSelected, setAreaSelected, setCenter, setGroupSelected, resetZoom } =
+    useFilterSmartPoleStore();
+  const { refetch } = useQuery({
+    queryKey: ['currentArea', areaSelected],
+    queryFn: () => locationService.getAreaByKey(areaSelected)
+  });
+  const { data: areasData } = useQuery({
+    queryKey: ['areas'],
+    queryFn: () => locationService.getAllAreas()
+  });
+  const handleAreaChange = async (val: string) => {
+    setAreaSelected(val);
+    setGroupSelected(undefined);
+    resetZoom();
+    const { data: newCurAreaData } = await refetch();
+    //TODO: initial with numeric value from API
+    setCenter({
+      lat: parseFloat(newCurAreaData?.latitude.toString() || '0'),
+      lng: parseFloat(newCurAreaData?.longitude.toString() || '0')
+    });
   };
   return (
-    <div className='flex flex-row items-center gap-2'>
-      <Select onValueChange={handleAreaChange}>
-        <SelectTrigger className='w-[150px]'>
-          <SelectValue placeholder='Chọn khu vực' />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Khu vực</SelectLabel>
-            {areaData.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+    <Select onValueChange={handleAreaChange} value={areaSelected}>
+      <SelectTrigger className='w-[150px]'>
+        <SelectValue placeholder='Chọn khu vực' />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Khu vực</SelectLabel>
+          {areasData?.map((item) => (
+            <SelectItem key={item.id} value={item.areaKey}>
+              {item.areaName}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
+};
 
-      <Select onValueChange={handleGroupChange}>
-        <SelectTrigger className='w-[150px]' disabled={filterGroupData.length === 0}>
-          <SelectValue placeholder='Chọn nhóm' />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Nhóm</SelectLabel>
-            {filterGroupData.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    </div>
+const GroupSelect = () => {
+  const { areaSelected, groupSelected, setGroupSelected } = useFilterSmartPoleStore();
+  const [magicKey, setMagicKey] = useState<string>('1');
+  const { data: groupsData } = useQuery({
+    queryKey: ['groups', areaSelected],
+    queryFn: () => locationService.getGroupsByArea(areaSelected),
+    enabled: !!areaSelected
+  });
+
+  useEffect(() => {
+    if (areaSelected) {
+      setMagicKey(new Date().getTime().toString());
+    }
+  }, [areaSelected]);
+
+  const handleResetGroup = () => {
+    setGroupSelected(undefined);
+  };
+  const handleGroupChange = (val: string) => {
+    setGroupSelected(val);
+  };
+
+  return (
+    <Select key={magicKey} value={groupSelected} onValueChange={handleGroupChange}>
+      <SelectTrigger className='w-[150px]' disabled={!groupsData || groupsData.length === 0}>
+        <SelectValue placeholder='Chọn nhóm' />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Nhóm</SelectLabel>
+          {groupsData?.map((item) => (
+            <SelectItem key={item.id} value={item.groupKey}>
+              {item.groupName}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+        <SelectSeparator />
+        <Button
+          className='w-full px-2'
+          variant='secondary'
+          size='sm'
+          onClick={() => {
+            setMagicKey(new Date().getTime().toString());
+            handleResetGroup();
+          }}
+        >
+          Clear
+        </Button>
+      </SelectContent>
+    </Select>
   );
 };
 
 const StatusFilter = () => {
-  const { status, setStatus } = useFilterSmartPoleStore();
+  const { statusSelected, setStatusSelected } = useFilterSmartPoleStore();
   return (
-    <Tabs value={status}>
+    <Tabs value={statusSelected}>
       <TabsList>
         {LIGHT_STATUS.map((stat) => {
           return (
             <TabsTrigger
               key={stat.key}
               value={stat.key}
-              onClick={(val) => setStatus(val ? stat.key : 'none')}
+              onClick={(val) => setStatusSelected(val ? stat.key : 'none')}
             >
               {stat.label}
             </TabsTrigger>
@@ -123,4 +131,16 @@ const StatusFilter = () => {
   );
 };
 
-export { AreaSelect, StatusFilter };
+export const MapSmartPoleFilter = () => {
+  console.log('render MapSmartPoleFilter');
+  return (
+    <div className='flex items-stretch gap-2 absolute top-4 left-8 z-10'>
+      <div className='flex flex-row items-center gap-2'>
+        <AreaSelect />
+        <GroupSelect />
+      </div>
+      <StatusFilter />
+      <></>
+    </div>
+  );
+};

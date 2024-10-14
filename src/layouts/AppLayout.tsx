@@ -10,6 +10,9 @@ export const Layout: Component<{ menu: RouteMenu }> = ({ menu }) => {
 
   const { isAuth } = useAuthProvider();
 
+  //TODO: Remove number of render
+  //.............................
+
   useEffect(() => {
     if (!isAuth) {
       navigate('/login');

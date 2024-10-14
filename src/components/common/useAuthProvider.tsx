@@ -12,8 +12,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuth, setIsAuth] = React.useState(false);
 
   React.useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken) {
+    const token = localStorage.getItem('token');
+    if (token) {
       setIsAuth(true);
     } else {
       setIsAuth(false);
@@ -21,13 +21,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const saveToken = (token: string) => {
-    localStorage.setItem('authToken', token);
+    localStorage.setItem('token', token);
     server.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setIsAuth(true);
   };
 
   const deleteToken = () => {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('token');
     setIsAuth(false);
   };
   return (

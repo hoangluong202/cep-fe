@@ -7,11 +7,7 @@ export const authService = {
   },
   me: () => {
     console.log('api/auth/me');
-    return invoke(
-      server.get('api/auth/me', {
-        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` }
-      })
-    );
+    return invoke(server.get('api/auth/me'));
   },
   logout: () => invoke(server.delete('api/auth/logout'))
 };
