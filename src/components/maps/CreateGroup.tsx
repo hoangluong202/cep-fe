@@ -2,10 +2,15 @@ import { Button } from '@components';
 import { ArrowLeft, FolderPen, Save } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useState } from 'react';
+import { useLocation } from '@/hooks/useLocation.hook';
+import { useFilterSmartPoleStore } from '@/states';
+import { useNavigate } from 'react-router-dom';
 export const CreateGroup = ({
-  sendDataToParent
+  sendDataToParent,
+  smartPoleIds
 }: {
   sendDataToParent: (isDrawing: boolean) => void;
+  smartPoleIds: number[];
 }) => {
   const closeDrawing = () => {
     sendDataToParent(false);
@@ -14,6 +19,11 @@ export const CreateGroup = ({
   const handleGroupNameChange = (newName: string) => {
     setGroupName(newName);
   };
+
+  const { createGroup } = useLocation();
+  const { center, areaSelected } = useFilterSmartPoleStore();
+  const navigate = useNavigate();
+
   return (
     <>
       <Button
@@ -44,8 +54,18 @@ export const CreateGroup = ({
       </Popover>
       <Button
         className='absolute bottom-6 right-6'
-        onClick={() => {
+        onClick={async () => {
           closeDrawing();
+          await createGroup.mutateAsync({
+            areaKey: areaSelected ?? '',
+            data: {
+              groupName: groupName,
+              latitude: center.lat,
+              longitude: center.lng,
+              smartPoleIds: smartPoleIds
+            }
+          });
+          navigate('/map');
         }}
       >
         <Save className='mr-2 h-4 w-4' /> Lưu

@@ -132,7 +132,6 @@ const StatusFilter = () => {
 };
 
 export const MapSmartPoleFilter = () => {
-  console.log('render MapSmartPoleFilter');
   return (
     <div className='flex items-stretch gap-2 absolute top-4 left-8 z-10'>
       <div className='flex flex-row items-center gap-2'>

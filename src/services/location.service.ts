@@ -12,5 +12,11 @@ export const locationService = {
   getAreaByKey: (areaKey?: string) => {
     console.log('/api/locations/areas/' + areaKey);
     return invoke<AreaResponse>(server.get(`/api/locations/areas/${areaKey}`));
+  },
+  createGroup: (areaKey: string, createGroupData: CreateGroupData) => {
+    console.log('/api/locations/areas/' + areaKey + '/groups');
+    return invoke<GroupResponse>(
+      server.post(`/api/locations/areas/${areaKey}/groups`, createGroupData)
+    );
   }
 };

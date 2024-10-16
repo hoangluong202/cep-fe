@@ -16,3 +16,10 @@ type GroupResponse = {
   latitude: number;
   longitude: number;
 };
+
+type CreateGroupData = {
+  groupName: string;
+  latitude: number;
+  longitude: number;
+  smartPoleIds: number[];
+};

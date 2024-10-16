@@ -4,4 +4,5 @@
 
 export * from './useAuth.hook';
 export * from './useEvent';
+export * from './useLocation.hook';
 export * from './useScreenSize';

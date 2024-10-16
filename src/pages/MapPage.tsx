@@ -4,7 +4,6 @@ import lightOnIcon from '@assets/svg/light-on.svg';
 import lightOffIcon from '@assets/svg/light-off.svg';
 import lightChooseIcon from '@assets/svg/light-choose.svg';
 import { UndoRedoControl } from '@components';
-// import { generateSmartPole } from '@utils';
 import { MapSmartPoleFilter } from '@/components/maps/filter';
 import { useDrawingManager } from '@/components/maps/use-drawing-manager';
 import { CardSmartPoleInfo } from '@/components/maps/pole-info';
@@ -23,21 +22,26 @@ const CreateIcon = (
   </svg>
 );
 
-// const smartPoles = generateSmartPole();
-
 export function MapPage() {
   const [showCard, setShowCard] = useState(false);
-  const [selectedSmartPoleId, setSelectedSmartPoleId] = useState<string | null>(null);
+  const [selectedSmartPoleId, setSelectedSmartPoleId] = useState<number | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const drawingManager = useDrawingManager(isDrawing);
-  const { center, setCenter, zoom, setZoom, areaSelected } = useFilterSmartPoleStore();
+  const { center, setCenter, zoom, setZoom, areaSelected, groupSelected, statusSelected } =
+    useFilterSmartPoleStore();
+  const [filteredSmartPoles, setFilteredSmartPoles] = useState<number[]>([]);
 
-  const { data: res } = useQuery({
-    queryKey: ['smartpoles', areaSelected],
-    queryFn: () => smartPoleService.getMany({ areaKey: areaSelected })
+  const { data: smartPoles } = useQuery({
+    queryKey: ['smartpoles', areaSelected, groupSelected, statusSelected],
+    queryFn: () =>
+      smartPoleService.getMany({
+        areaKey: areaSelected,
+        groupKey: groupSelected,
+        status: statusSelected === 'on' ? true : statusSelected === 'off' ? false : undefined
+      })
   });
 
-  const handleMarkerClick = (smartPoleId: string) => {
+  const handleMarkerClick = (smartPoleId: number) => {
     if (selectedSmartPoleId === smartPoleId) setShowCard(!showCard);
     else setShowCard(true);
     setSelectedSmartPoleId(smartPoleId);
@@ -66,11 +70,13 @@ export function MapPage() {
           const polygonPoints = new google.maps.Polygon({
             paths: getPolygonPoints()
           });
-          res?.data?.filter((pole) => {
+          smartPoles?.data?.filter((pole) => {
             if (google.maps.geometry.poly.containsLocation(pole.position, polygonPoints)) {
               pole.color = 'selected';
             }
           });
+          const filtered = smartPoles?.data?.filter((pole) => pole.color === 'selected');
+          setFilteredSmartPoles(filtered?.map((pole) => pole.id) || []);
         }
       });
     }
@@ -89,7 +95,7 @@ export function MapPage() {
           setZoom(ev.detail.zoom);
         }}
       >
-        {res?.data?.map((smartPole) => (
+        {smartPoles?.data?.map((smartPole) => (
           <AdvancedMarker
             key={smartPole.id}
             position={smartPole.position}
@@ -114,7 +120,7 @@ export function MapPage() {
           <MapSmartPoleFilter />
           <button
             className='absolute top-4 right-10 z-10 bg-white p-2 rounded-lg flex flex-col items-center gap-1'
-            onClick={() => {
+            onClick={async () => {
               setIsDrawing(true);
             }}
           >
@@ -123,11 +129,13 @@ export function MapPage() {
           </button>
         </>
       )}
-      {isDrawing && <CreateGroup sendDataToParent={handleDataFromChild} />}
+      {isDrawing && (
+        <CreateGroup sendDataToParent={handleDataFromChild} smartPoleIds={filteredSmartPoles} />
+      )}
       <div className='absolute left-4 top-1 z-0 h-full'>
         {showCard && (
           <CardSmartPoleInfo
-            smartPole={res?.data?.find((item) => item.id === selectedSmartPoleId)}
+            smartPole={smartPoles?.data?.find((item) => item.id === selectedSmartPoleId)}
           />
         )}
       </div>

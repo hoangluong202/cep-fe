@@ -9,7 +9,7 @@ export type PairLocation = {
 };
 
 export type TPoleData = {
-  id: string;
+  id: number;
   areaKey: string;
   position: Position;
   status: boolean;
